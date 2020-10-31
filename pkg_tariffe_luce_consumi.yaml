@@ -3,7 +3,7 @@ homeassistant:
     package.node_anchors:
       customize: &customize
         package: 'tariffe luce consumi'
-        author: 'domenico ceccarelli'
+        author: 'domenico ceccarelli from mauro cimino'
         reference: 'riddik14 - github'
         site: 
 
@@ -16,8 +16,13 @@ homeassistant:
     ##--------------------- IMPOSTAZIONI DEL PACKAGE ---------------------##
       setting:
 
-        Sensore: &sensore_misura_energia sensor.tuo_sensore_kWh
-        
+        Sensore: &sensore_misura_energia sensor.tuosensore
+        TariffaF1: &tariffaf1 0.0869847 
+        TariffaF2: &tariffaf2 0.0869847
+        TariffaF3: &tariffaf3 0.0869847
+        Accisa: &accisa 0.0227
+        Iva: &iva 10
+        trasporto: &trasporto 0.07224
     ##--------------------- IMPOSTAZIONI DEL PACKAGE ---------------------##            
 utility_meter:
   consumo_giornaliero:
@@ -438,13 +443,13 @@ input_datetime:
     has_date: false
     has_time: true
     initial: '23:00'
-input_number:   ########cambiare qui le tariffe
+input_number:   
   costo_f1:
     name: Costo Energia elettrica Fascia 1
     min: 0.0000001
     max: 0.5000000
     unit_of_measurement: '€'
-    initial: 0.0869847
+    initial: *tariffaf1
     mode: box
     icon: mdi:currency-eur
   
@@ -453,7 +458,7 @@ input_number:   ########cambiare qui le tariffe
     min: 0.0000001
     max: 0.5000000
     unit_of_measurement: '€'
-    initial: 0.0869847
+    initial: *tariffaf2
     mode: box
     icon: mdi:currency-eur
 
@@ -462,7 +467,7 @@ input_number:   ########cambiare qui le tariffe
     min: 0.0000001
     max: 0.5000000
     unit_of_measurement: '€'
-    initial: 0.0869847
+    initial: *tariffaf3
     mode: box
     icon: mdi:currency-eur
   accise:
@@ -470,7 +475,7 @@ input_number:   ########cambiare qui le tariffe
     min: 0.0000001
     max: 0.5000000
     unit_of_measurement: '€'
-    initial: 0.0227
+    initial: *accisa
     mode: box
     icon: mdi:currency-eur
   iva:
@@ -478,7 +483,7 @@ input_number:   ########cambiare qui le tariffe
     min: 0.0000001
     max: 23
     unit_of_measurement: '%'
-    initial: 10
+    initial: *iva
     mode: box
     icon: mdi:percent
   trasporto:
@@ -486,7 +491,7 @@ input_number:   ########cambiare qui le tariffe
     min: 0.0000001
     max: 0.9
     unit_of_measurement: '€'
-    initial: 0.07224
+    initial: *trasporto
     mode: box
     icon: mdi:currency-eur 
   lettura:
