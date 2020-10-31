@@ -5,7 +5,7 @@ cards:
     cards:
       - type: 'custom:mini-graph-card'
         entities:
-          - entity: sensor.energy_voltage
+          - entity: sensor.volt_in
         line_width: 10
         font_size: 150
         hours_to_show: 24
@@ -28,7 +28,7 @@ cards:
           name: false
       - type: 'custom:mini-graph-card'
         entities:
-          - entity: sensor.energy_power
+          - entity: sensor.watt
         line_width: 10
         font_size: 150
         hours_to_show: 24
@@ -252,7 +252,7 @@ cards:
         direction: up
         columns: '3'
         entity_row: true
-        color: blue
+        color: yellow
       - style:
           background-color: var(--primary-color)
           height: 1px
@@ -350,6 +350,7 @@ cards:
                   - input_number.accise
                   - input_number.trasporto
                   - input_number.iva
+                  - input_select.fatturazione
           calibra:
             type: vertical-stack
             cards:
