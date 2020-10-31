@@ -1,6 +1,7 @@
 # hassio-package-consumi
 package consumi
-
+il progetto si basa sul lavoro di Mauro Cimino https://hassiohelp.eu/2019/03/02/controllo-consumi-costi/
+con implementazione della fascia F3 e calcolo bolletta 
 -
 - il file pkg_tariffe_luce_consumi.yaml va copiato nella cartella "/config/packages"
 - il file lovelace-dash copiarne il contenuto in una card manuale
