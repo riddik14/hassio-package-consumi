@@ -16,7 +16,7 @@ homeassistant:
     ##--------------------- IMPOSTAZIONI DEL PACKAGE ---------------------##
       setting:
 
-        Sensore: &sensore_misura_energia sensor.ripostiglio_energy_today
+        Sensore: &sensore_misura_energia sensor.tuo_sensore_kWh
         
     ##--------------------- IMPOSTAZIONI DEL PACKAGE ---------------------##            
 utility_meter:
@@ -156,7 +156,13 @@ sensor:
           {%set accise = ((states.sensor.consumo_totale_mensile.state | float) * (states.input_number.accise.state | float)) %}
           {%set iva = ( energia + trasporto * (states.input_number.iva.state | float) / 100) %}
             
-          {{  ( (energia) + (trasporto) - (accise) ) | round(2) + (iva) | int  }}
+          {% if is_state('input_select.fatturazione', 'mensile') %}
+            {{  ( (energia) + (trasporto) - (accise) ) | round(2) + (iva) | int  }}
+          {% elif is_state('input_select.fatturazione', 'bimestrale') %}
+            {{  ( (energia) + (trasporto) - (accise) ) | round(2) + (iva) | int *2 }}
+          {% elif is_state('input_select.fatturazione', 'trimestrale') %}
+            {{  ( (energia) + (trasporto) - (accise) ) | round(2) + (iva) | int *3 }}
+            {% endif %}
 
         unit_of_measurement: '€'
       bolletta_trasporto:
@@ -502,9 +508,15 @@ input_select:
       - sensor.consumo_annuale_f2
       - sensor.consumo_annuale_f3
     icon: mdi:chart-gantt
-######################################da ultimare
+  fatturazione:
+    name: fatturazione
+    options:
+      - mensile
+      - bimestrale
+      - trimestrale
+    icon: mdi:checkbox-marked-outline
 script:
-  calibra_letture:  
+  calibra_letture:  #da ultimare
     alias: calibra_letture
     sequence:
     - data:
