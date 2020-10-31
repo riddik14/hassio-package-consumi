@@ -2,13 +2,16 @@
 package consumi
 il progetto si basa sul lavoro di Mauro Cimino che approfitto per ringraziarlo
 
-https://hassiohelp.eu/2019/03/02/controllo-consumi-costi/
-https://hassiohelp.eu/author/legolas08/
+- https://hassiohelp.eu/2019/03/02/controllo-consumi-costi/
+
+- https://hassiohelp.eu/author/legolas08/
 
 
-Implementazione della fascia F3 e calcolo bolletta su giorno mensile e annuale
-hai bisogno di un sensore che indichi il consumo in kWh da inserire nella prima parte del package 
-esempio di sensori comaptibili - pzem - shellyPm
+Implementazione della fascia F3 e calcolo bolletta su giorno mensile e annuale, hai bisogno di un sensore che indichi il consumo in kWh da inserire nella prima parte del package - esempio di sensori comaptibili - pzem - shellyPm -
+-
+-
+- INSTALLAZIONE
+
 - copiare il file pkg_tariffe_luce_consumi.yaml nella cartella "/config/packages", 
 - aprire il file  lovelace-dash.txt e copiare il contenuto in una card manuale dalla dashbord del tuo assistente
 
