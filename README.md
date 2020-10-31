@@ -7,7 +7,7 @@ il progetto si basa sul lavoro di Mauro Cimino che approfitto per ringraziarlo
 - https://hassiohelp.eu/author/legolas08/
 
 
-Implementazione della fascia F3 e calcolo bolletta su giorno mensile e annuale, hai bisogno di un sensore che indichi il consumo in kWh da inserire nella prima parte del package - esempio di sensori comaptibili - pzem - shellyPm -
+- Implementazione della fascia F3 e calcolo bolletta su giorno mensile e annuale, hai bisogno di un sensore che indichi il consumo in kWh da inserire nella prima parte del package - esempio di sensori comaptibili - pzem - shellyPm -
 -
 -
 - INSTALLAZIONE
@@ -15,8 +15,8 @@ Implementazione della fascia F3 e calcolo bolletta su giorno mensile e annuale, 
 - copiare il file pkg_tariffe_luce_consumi.yaml nella cartella "/config/packages", 
 - aprire il file  lovelace-dash.txt e copiare il contenuto in una card manuale dalla dashbord del tuo assistente
 
-alla riga 8 cambiare il sensore sensor.volt_in con il tuo volt ingresso
-alla riga 31 cambiare il sensor sensor.watt con il tuo che misura i watt istanatanei
+- alla riga 8 cambiare il sensore sensor.volt_in con il tuo volt ingresso
+- alla riga 31 cambiare il sensor sensor.watt con il tuo che misura i watt istanatanei
 
 - installare dal menu frontend di hacs:
 
