@@ -156,7 +156,7 @@ sensor:
           {%set accise = ((states.sensor.consumo_totale_mensile.state | float) * (states.input_number.accise.state | float)) %}
           {%set iva = ( energia + trasporto * (states.input_number.iva.state | float) / 100) %}
             
-          {{  ( (energia| round(2)) + (trasporto| round(2)) - (accise| round(2)) ) + (iva| round(2)) | float | round(2)  }}
+          {{  ( (energia) + (trasporto) - (accise) ) | round(2) + (iva) | int  }}
 
         unit_of_measurement: '€'
       bolletta_trasporto:
