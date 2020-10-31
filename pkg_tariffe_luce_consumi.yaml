@@ -502,9 +502,9 @@ input_select:
       - sensor.consumo_annuale_f2
       - sensor.consumo_annuale_f3
     icon: mdi:chart-gantt
-
+######################################da ultimare
 script:
-  calibra_letture:  #da ultimare
+  calibra_letture:  
     alias: calibra_letture
     sequence:
     - data:
