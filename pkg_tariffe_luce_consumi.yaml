@@ -433,7 +433,7 @@ input_datetime:
     has_time: true
     initial: '23:00'
 input_number:   ########cambiare qui le tariffe
-  costo_f1:#vedere contratto 
+  costo_f1:
     name: Costo Energia elettrica Fascia 1
     min: 0.0000001
     max: 0.5000000
