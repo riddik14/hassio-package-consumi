@@ -11,6 +11,16 @@ Implementazione della fascia F3 e calcolo bolletta su giorno mensile e annuale
 - esempio di sensori comaptibili - pzem - shellyPm
 - il file pkg_tariffe_luce_consumi.yaml va copiato nella cartella "/config/packages"
 - il file lovelace-dash copiarne il contenuto in una card manuale
+da hacs https://hacs.xyz/ qui la guida di installazione
+installare:
+
+vertical-stack-in-card
+mini-graph-card
+banner-card
+paper-buttons-row
+state-switch
+
+
 
 
 <a href="https://www.buymeacoffee.com/T1Pqksy" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/arial-black.png" alt="Buy Me A Coffee" style="height: 51px !important;width: 217px !important;" ></a>
