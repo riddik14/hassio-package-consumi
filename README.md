@@ -13,7 +13,8 @@ il file pkg_tariffe_luce_consumi.yaml va copiato nella cartella "/config/package
 il file lovelace-dash copiare il contenuto in una card manuale
 
 - da hacs https://hacs.xyz/ qui la guida di installazione
-- installare:
+
+installare dal menu frontend:
 
 - vertical-stack-in-card
 - mini-graph-card
