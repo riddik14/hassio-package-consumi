@@ -2,7 +2,7 @@
 package consumi
 
 -
-- il file pkg_tariffe_luce_consumi.yaml va copiao nella cartella "/conf/package"
+- il file pkg_tariffe_luce_consumi.yaml va copiato nella cartella "/config/packages"
 - il file lovelace-dash copiarne il contenuto in una card manuale
 
 
