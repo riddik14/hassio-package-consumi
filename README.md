@@ -9,10 +9,11 @@ https://hassiohelp.eu/author/legolas08/
 Implementazione della fascia F3 e calcolo bolletta su giorno mensile e annuale
 hai bisogno di un sensore che indichi il consumo in kWh da inserire nella prima parte del package 
 esempio di sensori comaptibili - pzem - shellyPm
-il file pkg_tariffe_luce_consumi.yaml va copiato nella cartella "/config/packages"
-il file lovelace-dash copiarne il contenuto in una card manuale
-da hacs https://hacs.xyz/ qui la guida di installazione
-installare:
+il file pkg_tariffe_luce_consumi.yaml va copiato nella cartella "/config/packages", 
+il file lovelace-dash copiare il contenuto in una card manuale
+
+- da hacs https://hacs.xyz/ qui la guida di installazione
+- installare:
 
 - vertical-stack-in-card
 - mini-graph-card
