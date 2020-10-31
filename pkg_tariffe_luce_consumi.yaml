@@ -157,12 +157,12 @@ sensor:
           {%set iva = ( energia + trasporto * (states.input_number.iva.state | float) / 100) %}
             
           {% if is_state('input_select.fatturazione', 'mensile') %}
-            {{  ( (energia) + (trasporto) - (accise) ) | round(2) + (iva) | int  }}
+            {{ ( ( (energia) + (trasporto) - (accise) ) | round(2) + (iva) )| int  }},00
           {% elif is_state('input_select.fatturazione', 'bimestrale') %}
-            {{  ( (energia) + (trasporto) - (accise) ) | round(2) + (iva) | int *2 }}
+            {{ ( ( (energia) + (trasporto) - (accise) ) + (iva)) | int * 2}},00
           {% elif is_state('input_select.fatturazione', 'trimestrale') %}
-            {{  ( (energia) + (trasporto) - (accise) ) | round(2) + (iva) | int *3 }}
-            {% endif %}
+            {{ ( ( (energia) + (trasporto) - (accise) ) + (iva)) | int * 3}},00
+          {% endif %}
 
         unit_of_measurement: '€'
       bolletta_trasporto:
