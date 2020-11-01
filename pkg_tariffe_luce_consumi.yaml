@@ -16,8 +16,8 @@ homeassistant:
     ##--------------------- IMPOSTAZIONI DEL PACKAGE ---------------------##
       setting:
 
-        Sensore: &sensore_misura_energia sensor.tuosensore
-        TariffaF1: &tariffaf1 0.0869847 
+        Sensore: &sensore_misura_energia sensor.tuosensore_energy_today
+        TariffaF1: &tariffaf1 0.0869847
         TariffaF2: &tariffaf2 0.0869847
         TariffaF3: &tariffaf3 0.0869847
         Accisa: &accisa 0.0227
@@ -68,7 +68,7 @@ sensor:
       consumo_totale_oggi:
         friendly_name_template: " Consumo Oggi "
         icon_template: mdi:counter
-        value_template: "{{((states.sensor.consumo_giornaliero_f1.state | float) + (states.sensor.consumo_giornaliero_f2.state | float)) | round(3) }}"
+        value_template: "{{((states.sensor.consumo_giornaliero_f1.state | float) + (states.sensor.consumo_giornaliero_f2.state | float) + (states.sensor.consumo_giornaliero_f3.state | float)) | round(3) }}"
         unit_of_measurement: 'KWh'
 
 
