@@ -158,7 +158,7 @@ sensor:
         friendly_name_template: "Bolletta Stimata"
         icon_template: mdi:currency-eur
         value_template: >- 
-          {%set energia = (states.sensor.costo_consumo_mensile_totale.state) | int  %}
+          {%set energia = (states.sensor.costo_consumo_mensile_totale.state) | float  %}
           {%set trasporto = ((states.sensor.consumo_totale_mensile.state | float) * (states.input_number.trasporto.state | float)) |round (2) %}
           {%set accise = ((states.sensor.consumo_totale_mensile.state | float) * (states.input_number.accise.state | float)) %}
           {%set iva = ( energia + trasporto * (states.input_number.iva.state | float) / 100) %}
