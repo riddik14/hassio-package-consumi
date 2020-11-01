@@ -20,9 +20,10 @@ homeassistant:
         TariffaF1: &tariffaf1 0.0869847
         TariffaF2: &tariffaf2 0.0869847
         TariffaF3: &tariffaf3 0.0869847
-        Accisa: &accisa 0.0227
-        Iva: &iva 10
-        trasporto: &trasporto 0.07224
+        Accisa: &accisa 0.0227           #calcolo medio sulla bolletta
+        Iva: &iva 10                     #IVA
+        trasporto: &trasporto 0.07224    #calcolo medio sulla bolletta
+        
     ##--------------------- IMPOSTAZIONI DEL PACKAGE ---------------------##            
 utility_meter:
   consumo_giornaliero:
@@ -162,11 +163,11 @@ sensor:
           {%set iva = ( energia + trasporto * (states.input_number.iva.state | float) / 100) %}
             
           {% if is_state('input_select.fatturazione', 'mensile') %}
-            {{ ( ( (energia) + (trasporto) - (accise) ) | round(2) + (iva) )| int  }},00
+            {{ (  energia  + trasporto  + iva + accise  ) | round(2) }}
           {% elif is_state('input_select.fatturazione', 'bimestrale') %}
-            {{ ( ( (energia) + (trasporto) - (accise) ) + (iva)) | int * 2}},00
+            {{ (  energia  + trasporto  + iva + accise  ) | round(2) * 2 }}
           {% elif is_state('input_select.fatturazione', 'trimestrale') %}
-            {{ ( ( (energia) + (trasporto) - (accise) ) + (iva)) | int * 3}},00
+            {{ (  energia  + trasporto  + iva + accise  ) | round(2) * 3}}
           {% endif %}
 
         unit_of_measurement: '€'
