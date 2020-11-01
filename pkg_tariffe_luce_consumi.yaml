@@ -4,7 +4,7 @@ homeassistant:
       customize: &customize
         package: 'tariffe luce consumi'
         author: 'domenico ceccarelli from mauro cimino'
-        reference: 'riddik14 - github'
+        reference: 'riddik14 - github- telegram @riddik14'
         site: 
 
       expose: &expose
