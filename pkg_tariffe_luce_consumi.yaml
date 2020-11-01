@@ -152,7 +152,8 @@ sensor:
           {%set accise = ((states.sensor.consumo_totale_annuale.state | float) * (states.input_number.accise.state | float)) %}
           {%set iva = ( energia + trasporto * (states.input_number.iva.state | float) / 100) %}
             
-          {{  ( (energia| round(0)) + (trasporto| round(0)) - (accise| round(0)) ) + (iva| round(2)) }}
+          {{ (  energia  + trasporto  + iva + accise  ) | round(2) }}
+        unit_of_measurement: '€'
       bolletta_tot:
         friendly_name_template: "Bolletta Stimata"
         icon_template: mdi:currency-eur
@@ -526,6 +527,6 @@ script:
     alias: calibra_letture
     sequence:
     - data:
-        value: "{{ states('input_number.lettura') | int }}"
+        value: input_number.lettura
         entity_id: input_select.contatore
       service: utility_meter.calibrate
