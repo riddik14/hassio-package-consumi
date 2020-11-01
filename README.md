@@ -1,7 +1,7 @@
 # hassio-package-consumi
 package consumi
 il progetto si basa sul lavoro di Mauro Cimino che approfitto per ringraziarlo
-
+reference: 'riddik14 - github- telegram @riddik14'
 - https://hassiohelp.eu/2019/03/02/controllo-consumi-costi/
 
 - https://hassiohelp.eu/author/legolas08/
