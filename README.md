@@ -12,8 +12,8 @@ package consumi
 
 
 - Implementazione della fascia F3 e calcolo bolletta su giorno mensile e annuale, hai bisogno di un sensore 
-- che indichi il consumo in kWh da inserire nella prima parte del package - esempio di sensori comaptibili 
-- - pzem - shellyPm -
+- che indichi il consumo in kWh da inserire nella prima parte del package - esempio di sensori compatibili 
+- pzem - shellyPm - shellyem e altri compatibili con hassio
 -
 -
 - INSTALLAZIONE
@@ -30,7 +30,9 @@ package consumi
 
 - aprire il file  lovelace-dash.txt e 
 - copiare il contenuto in una card manuale dalla dashbord del tuo assistente
-
+-  alla riga 8 della card mettere il sensore volt
+-  alla riga 31 il proprio sensore watt
+-  infine salvare la card
 
 
 
