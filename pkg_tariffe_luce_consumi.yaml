@@ -15,15 +15,20 @@ homeassistant:
 
     ##--------------------- IMPOSTAZIONI DEL PACKAGE ---------------------##
       setting:
-
-        Sensore: &sensore_misura_energia sensor.tuosensore_energy_today
-        TariffaF1: &tariffaf1 0.0869847
-        TariffaF2: &tariffaf2 0.0869847
-        TariffaF3: &tariffaf3 0.0869847
+      
+        Sensore_wh_to_kwh: &sensore_misura_energia2 sensor.che_segna_watt # metti qui il tuo sensore. 
+        #esempio il tuo sensore si chiama sensor.watt compilerai cosi
+        Sensore_wh_to_kwh: &sensore_misura_energia2 sensor.watt
+        Sensore: &sensore_misura_energia sensor.energia_kwh
+        #imposta sotto gli importi fissi che al riavvio ritornano, nel caso di monooraria è possibile tmettere tutte e tre uguali
+        #il sistema pero divide le letture su tre fasce, cosi poi valutare un eventuale cambio tariffario in bolletta
+        TariffaF1: &tariffaf1 0.0869847 #tariffaF1
+        TariffaF2: &tariffaf2 0.0869847 #tariffaF2
+        TariffaF3: &tariffaf3 0.0869847 #tariffaF3
         Accisa: &accisa 0.0227           #calcolo medio sulla bolletta
         Iva: &iva 10                     #IVA
         trasporto: &trasporto 0.07224    #calcolo medio sulla bolletta
-        
+        ####ATTENZIONE il calcolo bolletta è stimato perche costi trasporto, accise e oneri si quantificano con calcoli particolari
     ##--------------------- IMPOSTAZIONI DEL PACKAGE ---------------------##            
 utility_meter:
   consumo_giornaliero:
@@ -48,6 +53,11 @@ utility_meter:
       - f2
       - f3
 sensor:
+  - platform: integration
+    source: *sensore_misura_energia2 
+    name: energia_kwh
+    unit_prefix: k
+    round: 2
   - platform: template
     sensors:
       costo_consumo_oggi_f1:
