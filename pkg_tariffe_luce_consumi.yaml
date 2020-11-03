@@ -18,7 +18,6 @@ homeassistant:
       
         Sensore_wh_to_kwh: &sensore_misura_energia2 sensor.che_segna_watt # metti qui il tuo sensore. 
         #esempio il tuo sensore si chiama sensor.watt compilerai cosi
-        Sensore_wh_to_kwh: &sensore_misura_energia2 sensor.watt
         Sensore: &sensore_misura_energia sensor.energia_kwh
         #imposta sotto gli importi fissi che al riavvio ritornano, nel caso di monooraria è possibile tmettere tutte e tre uguali
         #il sistema pero divide le letture su tre fasce, cosi poi valutare un eventuale cambio tariffario in bolletta
