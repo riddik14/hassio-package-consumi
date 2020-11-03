@@ -1,25 +1,26 @@
 # hassio-package-consumi
+
 package consumi
-il progetto si basa sul lavoro di Mauro Cimino che approfitto per ringraziarlo
-reference: 'riddik14 - github- telegram @riddik14'
+<img src="https://github.com/riddik14/hassio-package-consumi/blob/main/image_.png">
+
+- il progetto parte lavoro di Mauro Cimino che approfitto per ringraziarlo ed è esteso al calcolo tariffe
+- contatti: 'riddik14 - github- telegram @riddik14'
+
 - https://hassiohelp.eu/2019/03/02/controllo-consumi-costi/
 
 - https://hassiohelp.eu/author/legolas08/
 
 
-- Implementazione della fascia F3 e calcolo bolletta su giorno mensile e annuale, hai bisogno di un sensore che indichi il consumo in kWh da inserire nella prima parte del package - esempio di sensori comaptibili - pzem - shellyPm -
+- Implementazione della fascia F3 e calcolo bolletta su giorno mensile e annuale, hai bisogno di un sensore 
+- che indichi il consumo in kWh da inserire nella prima parte del package - esempio di sensori comaptibili 
+- - pzem - shellyPm -
 -
 -
 - INSTALLAZIONE
 
-- copiare il file pkg_tariffe_luce_consumi.yaml nella cartella "/config/packages", 
-- aprire il file  lovelace-dash.txt e 
+- 1. copiare il file pkg_tariffe_luce_consumi.yaml nella cartella "/config/packages" e aggiungere alla riga 19 il tuo sensore watt
 
-- alla riga 8 cambiare il sensore sensor.volt_in con il tuo volt ingresso
-- alla riga 31 cambiare il sensor sensor.watt con il tuo che misura i watt istanatanei
-
-- copiare il contenuto in una card manuale dalla dashbord del tuo assistente
-- installare dal menu frontend di hacs:
+- 2. installare dal menu frontend di hacs i seguenti:
 
 - vertical-stack-in-card
 - mini-graph-card
@@ -27,17 +28,15 @@ reference: 'riddik14 - github- telegram @riddik14'
 - paper-buttons-row
 - state-switch
 
+- aprire il file  lovelace-dash.txt e 
+- copiare il contenuto in una card manuale dalla dashbord del tuo assistente
+
+
 
 
 
 <a href="https://www.buymeacoffee.com/T1Pqksy" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/arial-black.png" alt="Buy Me A Coffee" style="height: 51px !important;width: 217px !important;" ></a>
-_____________________________________________________________
 
 
-
-<img src="https://github.com/riddik14/hassio-package-consumi/blob/main/image_.png">
--
--
--
 - Se il progetto ti è piaciuto clicca <a href="https://www.paypal.me/DomenicoCeccarelli">qui</a> per offrirmi un caffè
 
