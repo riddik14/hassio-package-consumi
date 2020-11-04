@@ -5,30 +5,47 @@ homeassistant:
         package: 'tariffe luce consumi'
         author: 'domenico ceccarelli from mauro cimino'
         reference: 'riddik14 - github- telegram @riddik14'
-        site: 
+  customize_glob:
+    "sensor.energia_kwh":
+      <<: *customize
+    "utility_meter.consumo_giornaliero":
+      <<: *customize
+    "utility_meter.consumo_.mensile":
+      <<: *customize
+    "utility_meter.consumo_annuale":
+      <<: *customize
 
-      expose: &expose
-        <<: *customize
-        haaska_hidden: false
-        homebridge_hidden: false
 
 
     ##--------------------- IMPOSTAZIONI DEL PACKAGE ---------------------##
       setting:
-      
-        Sensore_wh_to_kwh: &sensore_misura_energia2 sensor.che_segna_watt # metti qui il tuo sensore. 
-        #esempio il tuo sensore si chiama sensor.watt compilerai cosi
-        Sensore: &sensore_misura_energia sensor.energia_kwh
-        #imposta sotto gli importi fissi che al riavvio ritornano, nel caso di monooraria è possibile tmettere tutte e tre uguali
-        #il sistema pero divide le letture su tre fasce, cosi poi valutare un eventuale cambio tariffario in bolletta
-        TariffaF1: &tariffaf1 0.0869847 #tariffaF1
-        TariffaF2: &tariffaf2 0.0869847 #tariffaF2
-        TariffaF3: &tariffaf3 0.0869847 #tariffaF3
+
+        Sensore: &sensore_misura_energia sensor.tuosensore #sensor.energia_kwh
+        #nel caso di utilizzo di convertitore inserire qua su sensor.energia_kwh e qui sotto
+        # il sensore kw. nel caso si vuole la conversione inserire il sensore dopo &sensore_misura_energia2 qui sotto 
+        Sensore_wh_to_kwh: &sensore_misura_energia2 sensor.ripostiglio_energy_power
+        TariffaF1: &tariffaf1 0.0869847
+        TariffaF2: &tariffaf2 0.0869847
+        TariffaF3: &tariffaf3 0.0869847
         Accisa: &accisa 0.0227           #calcolo medio sulla bolletta
         Iva: &iva 10                     #IVA
         trasporto: &trasporto 0.07224    #calcolo medio sulla bolletta
-        ####ATTENZIONE il calcolo bolletta è stimato perche costi trasporto, accise e oneri si quantificano con calcoli particolari
-    ##--------------------- IMPOSTAZIONI DEL PACKAGE ---------------------##            
+        
+    ##--------------------- IMPOSTAZIONI DEL PACKAGE ---------------------##     
+    
+    
+    
+    
+    ##-------------------------------VARIE--------------------------------##               
+        # per impostare i contatori a valori personalizzati usare il comando da menu sviluppatori servizi
+        
+        # servizio "utility_meter.calibrate"
+        #
+        # entity_id: sensor.consumo_annuale_f1     usare i sensori consumi e non le entità suggerite
+        # value: 1000                              esempio per impostare il contatore annuale f1 a 1000kwh
+        
+        
+    ##-------------------------------VARIE--------------------------------##             
 utility_meter:
   consumo_giornaliero:
     source: *sensore_misura_energia
@@ -505,25 +522,7 @@ input_number:
     initial: *trasporto
     mode: box
     icon: mdi:currency-eur 
-  lettura:
-    name: lettura
-    min: 0
-    max: 1000000
-    #unit_of_measurement: 'KWh'
-    initial: 0
-    mode: box
-    icon: mdi:counter
 input_select:
-  contatore:
-    name: contatore
-    options:
-      - sensor.consumo_mensile_f1
-      - sensor.consumo_mensile_f2
-      - sensor.consumo_mensile_f3
-      - sensor.consumo_annuale_f1
-      - sensor.consumo_annuale_f2
-      - sensor.consumo_annuale_f3
-    icon: mdi:chart-gantt
   fatturazione:
     name: fatturazione
     options:
@@ -531,11 +530,3 @@ input_select:
       - bimestrale
       - trimestrale
     icon: mdi:checkbox-marked-outline
-script:
-  calibra_letture:  #da ultimare
-    alias: calibra_letture
-    sequence:
-    - data:
-        value: input_number.lettura
-        entity_id: input_select.contatore
-      service: utility_meter.calibrate
