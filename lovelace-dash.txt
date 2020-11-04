@@ -278,10 +278,7 @@ cards:
             tap_action:
               action: navigate
               navigation_path: '#imposte'
-          - icon: 'mdi:cog'
-            tap_action:
-              action: navigate
-              navigation_path: '#calibra'
+
         type: 'custom:paper-buttons-row'
       - type: 'custom:state-switch'
         entity: hash
@@ -351,16 +348,7 @@ cards:
                   - input_number.trasporto
                   - input_number.iva
                   - input_select.fatturazione
-          calibra:
-            type: vertical-stack
-            cards:
-              - type: entities
-                state_color: true
-                show_header_toggle: false
-                entities:
-                  - input_select.contatore
-                  - input_number.lettura
-                  - script.calibra_letture
+
       - style:
           background-color: var(--primary-color)
           height: 1px
