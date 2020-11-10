@@ -1,7 +1,7 @@
 # homeassistant-package-consumi
 
 package consumi
-<img src="https://github.com/robertopiumatti/hameassistant-package-consumi/blob/main/consumi-gif.gif">
+<img src="https://github.com/robertopiumatti/hassio-package-consumi/blob/main/consumi-gif.gif">
 
 **Contributi:**
 - il progetto parte lavoro di Mauro Cimino (https://hassiohelp.eu/2019/03/02/controllo-consumi-costi/, https://hassiohelp.eu/author/legolas08/)
