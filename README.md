@@ -31,6 +31,7 @@ Come prima cosa scegliere il numero di fasce orarie da considerare (al fondo del
 Tutte le altre opzioni le trovate sia nel file del package (da riga 31 a 46) che al fondo della card cliccando sui simboli (F1 F2 F3 €).
 
 **Materia Energia**
+
 Potete trovare le tariffe (F1,F2,F3) sulla bolletta. 
 Invece la quota fissa della materia energia dovrebbe essere sul contratto con il vostro fornitore (di norma intorno ai 50€) o sulla bolletta.
  - Materia Energia Quota Fissa Annua 
@@ -38,19 +39,23 @@ Invece la quota fissa della materia energia dovrebbe essere sul contratto con il
  - TariffaF2
  - TariffaF3
 
-**Trasporto costi unitari**
+**Trasporto**
+
 - KwContatore: inserire i KW del proprio contatore (di norma 3kW)
 - TrasportoQuotaFissaAnnua: 20.4000€ (valore preso dal sito ARERA)
 - TrasportoQuotaPotenzaAnnua: 20.8800€ (valore preso dal sito ARERA)
 - TrasportoQuotaEnergia: 0.00833000€ (valore preso dal sito ARERA)
 
-**Oneri Di Sistema costi unitari **
+**Oneri Di Sistema**
+
 - OneriDiSistemaQuotaEnergia:  0.041817€ (valore preso dal sito ARERA)
 
-**Accisa costi unitari  **
+**Accisa**
+
 - Accise: 0.0227€ (valore preso dal sito ARERA)
 
-** IVA**
+**IVA**
+
 - Iva: 10%
 
 
