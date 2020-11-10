@@ -11,12 +11,12 @@ package consumi
 - Implementazione gestione dei tre tipi di tariffazione (monoraria F1, bioraria F1-F23, trioraria F1-F2-F3)
 - calcolo della stima bolletta italiana con la maggior precisione possibile: inseriti i calcoli precisi trasporto, oneri di sistema e accise presi dal sito isitituzionale ARERA
 
-**INSTALLAZIONE**
+### INSTALLAZIONE
 1. copiare il file *pkg_tariffe_luce_consumi.yaml* nella cartella '/config/packages'
 2. modifare il file *pkg_tariffe_luce_consumi.yaml*  alla riga 21 per inserire il sensore di energia
 (Solo nel caso non si abbia un sensore di energia, ma solo quello di potenza instantanea seguire le istruzioni dalla riga 23 in poi)
 
-**CREAZIONE LOVELANCE CARD**
+### CREAZIONE LOVELANCE CARD
 1. installare dal menu frontend di hacs i seguenti:
 	- vertical-stack-in-card
 	- mini-graph-card
@@ -25,8 +25,10 @@ package consumi
 	- state-switch
 2. creare card manuale su lovelance e copiare il contenuto del file lovelace-dash.yaml
 
-**SETTING**
-Trovate sia nel package che al fondo della card tutti i parametri da configurare.
+### SETTING
+Come prima cosa scegliere il numero di fasce orarie da considerare (al fondo della card cliccando sul simbolo del calendario).
+
+Tutte le altre opzioni le trovate sia nel file del package (da riga 31 a 46) che al fondo della card cliccando sui simboli (F1 F2 F3 €).
 
 **Materia Energia**
 Potete trovare le tariffe (F1,F2,F3) sulla bolletta. 
