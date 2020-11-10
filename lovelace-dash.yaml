@@ -1,0 +1,300 @@
+type: 'custom:vertical-stack-in-card'
+theme: default
+cards:
+  - type: entities
+    entities:
+      - heading:
+          - Consumi
+        type: 'custom:banner-card'
+      - type: 'custom:vertical-stack-in-card'
+        cards:
+          - type: glance
+            entities:
+              - sensor.bolletta_energia
+              - sensor.bolletta_trasporto
+              - sensor.bolletta_oneri_di_sistema
+              - sensor.bolletta_iva
+          - type: glance
+            entities:
+              - sensor.bolletta_tot
+              - sensor.bolletta_tot_anno
+      - animation:
+          speed: '5'
+          state: 'on'
+        entities:
+          - animation:
+              speed: '5'
+              state: 'on'
+            direction: right
+            name: ' '
+            icon: 'mdi:keyboard-f1'
+            positions:
+              icon: inside
+            entity: sensor.consumo_giornaliero_f1
+          - animation:
+              speed: '5'
+              state: 'on'
+            direction: right
+            name: ' '
+            icon: 'mdi:keyboard-f2'
+            positions:
+              icon: inside
+            entity: sensor.consumo_giornaliero_f2
+          - animation:
+              speed: '5'
+              state: 'on'
+            direction: right
+            name: ' '
+            icon: 'mdi:keyboard-f3'
+            positions:
+              icon: inside
+            entity: sensor.consumo_giornaliero_f3
+          - animation:
+              speed: '5'
+              state: 'on'
+            direction: right
+            name: ' '
+            positions:
+              icon: inside
+            entity: sensor.costo_consumo_oggi_totale
+          - animation:
+              speed: '5'
+              state: 'on'
+            direction: right
+            name: Totale
+            positions:
+              icon: inside
+            entity: sensor.consumo_totale_oggi
+        positions:
+          icon: inside
+          indicator: inside
+          minmax: 'off'
+          name: inside
+        title: Consumo Oggi
+        type: 'custom:bar-card'
+        direction: up
+        columns: '3'
+        entity_row: true
+        color: green
+      - style:
+          background-color: var(--primary-color)
+          height: 1px
+        type: divider
+      - animation:
+          speed: '5'
+          state: 'on'
+        entities:
+          - animation:
+              speed: '5'
+              state: 'on'
+            direction: right
+            name: ' '
+            icon: 'mdi:keyboard-f1'
+            positions:
+              icon: inside
+            entity: sensor.consumo_mensile_f1
+          - animation:
+              speed: '5'
+              state: 'on'
+            direction: right
+            name: ' '
+            icon: 'mdi:keyboard-f2'
+            positions:
+              icon: inside
+            entity: sensor.consumo_mensile_f2
+          - animation:
+              speed: '5'
+              state: 'on'
+            direction: right
+            name: ' '
+            icon: 'mdi:keyboard-f3'
+            positions:
+              icon: inside
+            entity: sensor.consumo_mensile_f3
+          - animation:
+              speed: '5'
+              state: 'on'
+            direction: right
+            name: ' '
+            positions:
+              icon: inside
+            entity: sensor.costo_consumo_mensile_totale
+          - animation:
+              speed: '5'
+              state: 'on'
+            direction: right
+            name: Totale
+            positions:
+              icon: inside
+            entity: sensor.consumo_totale_mensile
+        positions:
+          icon: inside
+          indicator: inside
+          minmax: 'off'
+          name: inside
+        title: Consumo Mensile
+        type: 'custom:bar-card'
+        direction: up
+        columns: '3'
+        entity_row: true
+        color: red
+      - style:
+          background-color: var(--primary-color)
+          height: 1px
+        type: divider
+      - animation:
+          speed: '5'
+          state: 'on'
+        entities:
+          - animation:
+              speed: '5'
+              state: 'on'
+            direction: right
+            name: ' '
+            icon: 'mdi:keyboard-f1'
+            positions:
+              icon: inside
+            entity: sensor.consumo_annuale_f1
+          - animation:
+              speed: '5'
+              state: 'on'
+            direction: right
+            name: ' '
+            icon: 'mdi:keyboard-f2'
+            positions:
+              icon: inside
+            entity: sensor.consumo_annuale_f2
+          - animation:
+              speed: '5'
+              state: 'on'
+            direction: right
+            name: ' '
+            icon: 'mdi:keyboard-f3'
+            positions:
+              icon: inside
+            entity: sensor.consumo_annuale_f3
+          - animation:
+              speed: '5'
+              state: 'on'
+            direction: right
+            name: ' '
+            positions:
+              icon: inside
+            entity: sensor.costo_consumo_annuale_totale
+          - animation:
+              speed: '5'
+              state: 'on'
+            direction: right
+            name: Totale
+            positions:
+              icon: inside
+            entity: sensor.consumo_totale_annuale
+        positions:
+          icon: inside
+          indicator: inside
+          minmax: 'off'
+          name: inside
+        title: Consumo Annuale
+        type: 'custom:bar-card'
+        direction: up
+        columns: '3'
+        entity_row: true
+        color: yellow
+      - style:
+          background-color: var(--primary-color)
+          height: 1px
+        type: divider
+      - buttons:
+          - icon: 'mdi:close-box'
+            tap_action:
+              action: navigate
+              navigation_path: '#chiudi-impostazioni-tariffe'
+          - icon: 'mdi:calendar-weekend'
+            tap_action:
+              action: navigate
+              navigation_path: '#tariffe'
+          - icon: 'mdi:keyboard-f1'
+            tap_action:
+              action: navigate
+              navigation_path: '#tariffa-f1'
+          - icon: 'mdi:keyboard-f2'
+            tap_action:
+              action: navigate
+              navigation_path: '#tariffa-f2'
+          - icon: 'mdi:keyboard-f3'
+            tap_action:
+              action: navigate
+              navigation_path: '#tariffa-f3'
+          - icon: 'mdi:currency-eur'
+            tap_action:
+              action: navigate
+              navigation_path: '#imposte'
+        type: 'custom:paper-buttons-row'
+      - type: 'custom:state-switch'
+        entity: hash
+        default: chiudi-impostazioni-tariffe
+        states:
+          setting-off:
+            type: null
+          tariffe:
+            type: vertical-stack
+            cards:
+              - type: vertical-stack
+                cards:
+                  - type: entities
+                    state_color: true
+                    show_header_toggle: false
+                    entities:
+                      - input_select.numero_di_fasce
+          tariffa-f1:
+            type: vertical-stack
+            cards:
+              - type: vertical-stack
+                cards:
+                  - type: entities
+                    state_color: true
+                    show_header_toggle: false
+                    entities:
+                      - input_number.costo_f1
+                      - input_datetime.f1_ora_inizio
+          tariffa-f2:
+            type: vertical-stack
+            cards:
+              - type: entities
+                state_color: true
+                show_header_toggle: false
+                entities:
+                  - input_number.costo_f2
+                  - input_datetime.f2_ora_inizio_mattino
+                  - input_datetime.f2_ora_inizio_sera
+          tariffa-f3:
+            type: vertical-stack
+            cards:
+              - type: entities
+                state_color: true
+                show_header_toggle: false
+                entities:
+                  - input_number.costo_f3
+                  - input_datetime.f3_ora_inizio
+          imposte:
+            type: vertical-stack
+            cards:
+              - type: entities
+                state_color: true
+                show_header_toggle: false
+                entities:
+                  - input_number.materia_energia_quota_fissa_annua
+                  - type: divider
+                  - input_number.kw_contatore
+                  - input_number.trasporto_quota_fissa_annua
+                  - input_number.trasporto_quota_potenza_annua
+                  - input_number.trasporto_quota_energia
+                  - type: divider
+                  - input_number.oneri_di_sistema_quota_energia
+                  - type: divider
+                  - input_number.accise
+                  - input_number.iva
+      - style:
+          background-color: var(--primary-color)
+          height: 1px
+        type: divider

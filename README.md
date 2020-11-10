@@ -1,44 +1,58 @@
-# hassio-package-consumi
+# homeassistant-package-consumi
 
 package consumi
-<img src="https://github.com/riddik14/hassio-package-consumi/blob/main/image_.png">
+<img src="https://github.com/robertopiumatti/hameassistant-package-consumi/blob/main/consumi-gif.gif">
 
-- il progetto parte lavoro di Mauro Cimino che approfitto per ringraziarlo ed è esteso al calcolo tariffe
-- contatti: 'riddik14 - github- telegram @riddik14'
+**Contributi:**
+- il progetto parte lavoro di Mauro Cimino (https://hassiohelp.eu/2019/03/02/controllo-consumi-costi/, https://hassiohelp.eu/author/legolas08/)
+- poi modificato da Domenico Ceccarelli (https://github.com/riddik14/hassio-package-consumi)
 
-- https://hassiohelp.eu/2019/03/02/controllo-consumi-costi/
+**Implementazioni**
+- Implementazione gestione dei tre tipi di tariffazione (monoraria F1, bioraria F1-F23, trioraria F1-F2-F3)
+- calcolo della stima bolletta italiana con la maggior precisione possibile: inseriti i calcoli precisi trasporto, oneri di sistema e accise presi dal sito isitituzionale ARERA
 
-- https://hassiohelp.eu/author/legolas08/
+**INSTALLAZIONE**
+1. copiare il file *pkg_tariffe_luce_consumi.yaml* nella cartella '/config/packages'
+2. modifare il file *pkg_tariffe_luce_consumi.yaml*  alla riga 21 per inserire il sensore di energia
+(Solo nel caso non si abbia un sensore di energia, ma solo quello di potenza instantanea seguire le istruzioni dalla riga 23 in poi)
+
+**CREAZIONE LOVELANCE CARD**
+1. installare dal menu frontend di hacs i seguenti:
+	- vertical-stack-in-card
+	- mini-graph-card
+	- banner-card
+	- paper-buttons-row
+	- state-switch
+2. creare card manuale su lovelance e copiare il contenuto del file lovelace-dash.yaml
+
+**SETTING**
+Trovate sia nel package che al fondo della card tutti i parametri da configurare.
+
+**Materia Energia**
+Potete trovare le tariffe (F1,F2,F3) sulla bolletta. 
+Invece la quota fissa della materia energia dovrebbe essere sul contratto con il vostro fornitore (di norma intorno ai 50€) o sulla bolletta.
+ - Materia Energia Quota Fissa Annua 
+ - TariffaF1
+ - TariffaF2
+ - TariffaF3
+
+**Trasporto costi unitari**
+- KwContatore: inserire i KW del proprio contatore (di norma 3kW)
+- TrasportoQuotaFissaAnnua: 20.4000€ (valore preso dal sito ARERA)
+- TrasportoQuotaPotenzaAnnua: 20.8800€ (valore preso dal sito ARERA)
+- TrasportoQuotaEnergia: 0.00833000€ (valore preso dal sito ARERA)
+
+**Oneri Di Sistema costi unitari **
+- OneriDiSistemaQuotaEnergia:  0.041817€ (valore preso dal sito ARERA)
+
+**Accisa costi unitari  **
+- Accise: 0.0227€ (valore preso dal sito ARERA)
+
+** IVA**
+- Iva: 10%
 
 
-- Implementazione della fascia F3 e calcolo bolletta su giorno mensile e annuale, hai bisogno di un sensore 
-- che indichi il consumo in kWh da inserire nella prima parte del package - esempio di sensori compatibili 
-- pzem - shellyPm - shellyem e altri compatibili con hassio
--
--
-- INSTALLAZIONE
-
-- 1. copiare il file pkg_tariffe_luce_consumi.yaml nella cartella "/config/packages" e aggiungere alla riga 19 il tuo sensore watt
-- se usi shelly ti consiglio di far passare il sensore che ti indica i watt attraverso il convertitore kwh
-- 2. installare dal menu frontend di hacs i seguenti:
-
-- vertical-stack-in-card
-- mini-graph-card
-- banner-card
-- paper-buttons-row
-- state-switch
-
-- aprire il file  lovelace-dash.txt e 
-- copiare il contenuto in una card manuale dalla dashbord del tuo assistente
--  alla riga 8 della card mettere il sensore volt
--  alla riga 31 il proprio sensore watt
--  infine salvare la card
 
 
 
-
-<a href="https://www.buymeacoffee.com/T1Pqksy" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/arial-black.png" alt="Buy Me A Coffee" style="height: 51px !important;width: 217px !important;" ></a>
-
-
-- Se il progetto ti è piaciuto clicca <a href="https://www.paypal.me/DomenicoCeccarelli">qui</a> per offrirmi un caffè
 
