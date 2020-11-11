@@ -19,7 +19,7 @@ package consumi
 ### CREAZIONE LOVELANCE CARD
 1. installare dal menu frontend di hacs i seguenti:
 	- vertical-stack-in-card
-	- mini-graph-card
+    - bar-card
 	- banner-card
 	- paper-buttons-row
 	- state-switch

@@ -234,8 +234,6 @@ cards:
         entity: hash
         default: chiudi-impostazioni-tariffe
         states:
-          setting-off:
-            type: null
           tariffe:
             type: vertical-stack
             cards:
