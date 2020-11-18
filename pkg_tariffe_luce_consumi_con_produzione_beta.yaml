@@ -222,35 +222,6 @@ sensor:
           {%set energia = (states.sensor.costo_consumo_annuale_totale.state) | int  %}
           {%set trasporto = ((states.sensor.consumo_totale_annuale.state | float) * (states.input_number.trasporto.state | float)) |round (2) %}
           {%set accise = ((states.sensor.consumo_totale_annuale.state | float) * (states.input_number.accise.state | float)) %}
-          {%set iva = ( energia + trasporto * (states.input_number.iva.state | float) / 100) %}
-            
-          {{ (  energia  + trasporto  + iva + accise  ) | round(2) }}
-        unit_of_measurement: '€'
-      bolletta_tot:
-        friendly_name_template: "Bolletta Stimata"
-        icon_template: mdi:currency-eur
-        value_template: >- 
-          {%set energia = (states.sensor.costo_consumo_mensile_totale.state) | float  %}
-          {%set trasporto = ((states.sensor.consumo_totale_mensile.state | float) * (states.input_number.trasporto.state | float)) |round (2) %}
-          {%set accise = ((states.sensor.consumo_totale_mensile.state | float) * (states.input_number.accise.state | float)) %}
-          {%set iva = ( energia + trasporto * (states.input_number.iva.state | float) / 100) %}
-            
-          {% if is_state('input_select.fatturazione', 'mensile') %}
-            {{ (  energia  + trasporto  + iva + accise  ) | round(2) }}
-          {% elif is_state('input_select.fatturazione', 'bimestrale') %}
-            {{ (  energia  + trasporto  + iva + accise  ) | round(2) * 2 }}
-          {% elif is_state('input_select.fatturazione', 'trimestrale') %}
-            {{ (  energia  + trasporto  + iva + accise  ) | round(2) * 3}}
-          {% endif %}
-
-        unit_of_measurement: '€'
-      bolletta_tot_anno:
-        friendly_name_template: "Stima Costo Annuale"
-        icon_template: mdi:currency-eur
-        value_template: >- 
-          {%set energia = (states.sensor.costo_consumo_annuale_totale.state) | int  %}
-          {%set trasporto = ((states.sensor.consumo_totale_annuale.state | float) * (states.input_number.trasporto.state | float)) |round (2) %}
-          {%set accise = ((states.sensor.consumo_totale_annuale.state | float) * (states.input_number.accise.state | float)) %}
           {%set iva = (( energia + trasporto) * (states.input_number.iva.state | float) / 100) %}
             
           {{ (  energia  + trasporto  + iva + accise  ) | round(2) }}
@@ -314,7 +285,7 @@ sensor:
           {%set accise = ((states.sensor.consumo_totale_mensile.state | float) * (states.input_number.accise.state | float)) %}
           {%set iva = (( energia + trasporto) * (states.input_number.iva.state | float) / 100) %}
           {{ accise | round(2) }}
-        unit_of_measurement: '€'             
+        unit_of_measurement: '€'                  
 automation:
   - alias: Cambio Tariffa F1 con festivi
     initial_state: on
