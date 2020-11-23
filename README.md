@@ -35,6 +35,9 @@ package consumi
 -  infine salvare la card
 
 
+- per chi ha pannelli solari posso suggerire questa repository https://github.com/riddik14/tesla-style-solar-power-card
+
+<img src="https://github.com/reptilex/tesla-style-solar-power-card/raw/master/tesla-style-card-animation.gif">
 
 
 <a href="https://www.buymeacoffee.com/T1Pqksy" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/arial-black.png" alt="Buy Me A Coffee" style="height: 51px !important;width: 217px !important;" ></a>
