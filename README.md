@@ -1,6 +1,8 @@
 # hassio-package-consumi
 
-**<img src="https://github.com/riddik14/hassio-package-consumi/blob/main/image_.png">**
+<img src="https://github.com/riddik14/hassio-package-consumi/blob/main/image_.png">
+
+---------------------------
 **Contributi:**
 il progetto parte lavoro di Mauro Cimino che approfitto per ringraziarlo ed è esteso al calcolo tariffe. contatti: 'riddik14 - github- telegram @riddik14' - e - robertopiumatti - github 
 
