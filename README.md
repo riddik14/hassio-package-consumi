@@ -25,10 +25,16 @@ package consumi
     ##--------------------- IMPOSTAZIONI DEL PACKAGE ---------------------##
       setting:
 
-        Sensore: &sensore_misura_energia sensor.energia_kwh #se usi un sensore diverso da shelly mettilo qui altrimenti lascia questo che è il convertitore
-        #nel caso di utilizzo di convertitore inserire su sensor.energia_kwh e qui sotto
-        # il sensore kw. nel caso si vuole la conversione inserire il sensore dopo &sensore_misura_energia2 qui sotto 
-        Sensore_wh_to_kwh: &sensore_misura_energia2 sensor.shelly_watt #il tuo sensore watt-shelly--
+        Sensore: &sensore_misura_energia sensor.energia_kwh 
+        #se usi un sensore diverso da shelly mettilo qui sopra (es PZEM) e salta 
+        #a configurare sotto le tariffe tralasciando la sezione "Sensore_wh_to_kwh"
+        
+        #altrimenti se hai shelly lascia la sezione su com'è, che è il convertitore, ma 
+        #compila sotto sostituendo "sensor.shelly_watt" con il tuo sensore shelly
+
+        Sensore_wh_to_kwh: &sensore_misura_energia2 sensor.shelly_watt
+        
+        
         TariffaF1: &tariffaf1 0.07
         TariffaF2: &tariffaf2 0.07
         TariffaF3: &tariffaf3 0.07
