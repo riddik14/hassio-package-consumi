@@ -1,4 +1,4 @@
-# hassio-package-consumi
+### homeassistant-package-consumi ###
 
 <img src="https://github.com/riddik14/hassio-package-consumi/blob/main/image_.png">
 
@@ -10,7 +10,7 @@ il progetto parte lavoro di Mauro Cimino che approfitto per ringraziarlo ed è e
 - https://hassiohelp.eu/author/legolas08/
 
 --------------------------
-Sensori compatibili:
+**Sensori compatibili:**
 - pzem 
 - shellyPm 
 - shellyem
@@ -18,7 +18,7 @@ Sensori compatibili:
 - altri (suggeritemi altri)
 
 
-** INSTALLAZIONE
+**INSTALLAZIONE**
 
 1. copiare il file pkg_tariffe_luce_consumi.yaml nella cartella "/config/packages" e modificarlo seguendo le istruzioni interne al file.
 
