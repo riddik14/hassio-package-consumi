@@ -37,6 +37,8 @@ package consumi
         trasporto: &trasporto 0.07224    #calcolo medio sulla bolletta
         
     ##--------------------- IMPOSTAZIONI DEL PACKAGE ---------------------##  
+    
+</xmp>
 - 2. installare dal menu frontend di hacs i seguenti:
 
 - vertical-stack-in-card
