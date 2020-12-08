@@ -24,7 +24,7 @@ contatti: 'riddik14 - github - telegram @riddik14 - e - robertopiumatti - github
 
 1. copiare il file pkg_tariffe_luce_consumi.yaml nella cartella "/config/packages" e modificarlo seguendo le istruzioni interne al file.
 
-<xmp>
+'
    
   ##--------------------- IMPOSTAZIONI DEL PACKAGE ---------------------##
   setting:
@@ -58,7 +58,7 @@ contatti: 'riddik14 - github - telegram @riddik14 - e - robertopiumatti - github
     Iva: &iva 10      
   ##--------------------- IMPOSTAZIONI DEL PACKAGE ---------------------##     
     
-</xmp>
+'
 
 
 2. installare dal menu frontend di hacs i seguenti:
