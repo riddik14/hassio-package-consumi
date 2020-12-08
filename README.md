@@ -82,9 +82,12 @@ ____________________________________
 
 in aggiunta suggerisco il seguente pacchetto di hassio help sempre di Mauro Cimino 
 _______________
-<img src="://hassiohelp.eu/wp-content/uploads/2020/10/new-controllo-carichi_00.jpg">
+<img src="https://hassiohelp.eu/wp-content/uploads/2020/10/new-controllo-carichi_00.jpg">
 _______________
 https://hassiohelp.eu/2020/10/14/nuovo-controllo-carichi/
+
+
+====================================
 
 Per chi ha pannelli solari posso suggerire questa repository https://github.com/riddik14/tesla-style-solar-power-card
 
