@@ -205,21 +205,21 @@ sensor:
           {% set energiaConsumo = states('sensor.costo_consumo_mensile_totale') | float %}
           {% set energiaFissa = ((states('input_number.materia_energia_quota_fissa_annua') | float) / 12) | round(2) %}
           {% set energia = energiaConsumo + energiaFissa %}
-           
           {% set trasportoConsumo = ((states('sensor.consumo_totale_mensile') | float) * (states('input_number.trasporto_quota_energia') | float)) |round (2) %}
           {% set trasportoFissa = ((states('input_number.trasporto_quota_fissa_annua') | float) / 12) | round(2) %}
           {% set trasportoPotenza =  (((states('input_number.trasporto_quota_potenza_annua') | float) * (states('input_number.kw_contatore') | float)) / 12) | round(2) %}
           {% set trasporto = trasportoConsumo + trasportoFissa + trasportoPotenza %}
-          
           {% set oneri = ((states('sensor.consumo_totale_mensile') | float) * (states('input_number.oneri_di_sistema_quota_energia') | float)) |round (2) %}
-
-          {%set accise = ((states('sensor.consumo_totale_mensile') | float) * (states('input_number.accise') | float)) %}
-          {%set iva = ((energia + trasporto + oneri + accise) * (states('input_number.iva') | float) / 100) %}
-
-          {{ (energia + trasporto + oneri + accise + iva ) | round(2) }}
-
+          {% set accise = ((states('sensor.consumo_totale_mensile') | float) * (states('input_number.accise') | float)) %}
+          {% set iva = ((energia + trasporto + oneri + accise) * (states('input_number.iva') | float) / 100) %}
+          {% if is_state('input_select.fatturazione', 'mensile') %}
+            {{ (energia + trasporto + oneri + accise + iva ) | round(2) }}
+          {% elif is_state('input_select.fatturazione', 'bimestrale') %}
+            {{ (energia + trasporto + oneri + accise + iva ) | round(2) * 2 }}
+          {% elif is_state('input_select.fatturazione', 'trimestrale') %}
+            {{ (energia + trasporto + oneri + accise + iva ) | round(2) * 3}}
+          {% endif %}
         unit_of_measurement: '€'
-
       bolletta_energia:
         friendly_name_template: "Quota Energia"
         icon_template: mdi:currency-eur
@@ -521,3 +521,11 @@ input_select:
       - 2
       - 3
     initial: 3
+input_select:
+  fatturazione:
+    name: fatturazione
+    options:
+      - mensile
+      - bimestrale
+      - trimestrale
+    icon: mdi:checkbox-marked-outline
