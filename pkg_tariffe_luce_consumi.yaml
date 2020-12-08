@@ -10,7 +10,7 @@ homeassistant:
       <<: *customize
     "utility_meter.consumo_giornaliero":
       <<: *customize
-    "utility_meter.consumo_.mensile":
+    "utility_meter.consumo_mensile":
       <<: *customize
     "utility_meter.consumo_annuale":
       <<: *customize
