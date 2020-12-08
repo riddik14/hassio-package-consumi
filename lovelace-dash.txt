@@ -5,7 +5,7 @@ cards:
     cards:
       - type: 'custom:mini-graph-card'
         entities:
-          - entity: sensor.volt_in
+          - entity: sensor.ripostiglio_energy_voltage
         line_width: 10
         font_size: 150
         hours_to_show: 24
@@ -14,13 +14,14 @@ cards:
         fill: true
         average: true
         extrema: true
+        animate: true
         name_adaptive_color: true
         color_thresholds:
           - value: 225
             color: orange
-          - value: 235
+          - value: 230
             color: green
-          - value: 245
+          - value: 240
             color: red
         show:
           graph: bar
@@ -28,7 +29,7 @@ cards:
           name: false
       - type: 'custom:mini-graph-card'
         entities:
-          - entity: sensor.watt
+          - entity: sensor.ripostiglio_energy_power
         line_width: 10
         font_size: 150
         hours_to_show: 24
@@ -65,7 +66,7 @@ cards:
             entities:
               - sensor.bolletta_energia
               - sensor.bolletta_trasporto
-              - sensor.bolletta_accise
+              - sensor.bolletta_oneri_di_sistema
               - sensor.bolletta_iva
           - type: glance
             entities:
@@ -252,7 +253,7 @@ cards:
         direction: up
         columns: '3'
         entity_row: true
-        color: yellow
+        color: orange
       - style:
           background-color: var(--primary-color)
           height: 1px
@@ -278,7 +279,6 @@ cards:
             tap_action:
               action: navigate
               navigation_path: '#imposte'
-
         type: 'custom:paper-buttons-row'
       - type: 'custom:state-switch'
         entity: hash
@@ -297,12 +297,6 @@ cards:
                     entities:
                       - input_number.costo_f1
                       - input_datetime.f1_ora_inizio
-                  - type: entities
-                    state_color: true
-                    show_header_toggle: false
-                    entities:
-                      - automation.cambio_tariffa_f1_con_festivi
-                      - automation.cambio_tariffa_f1_senza_festivi
           cambio-tariffa:
             type: vertical-stack
             cards:
@@ -311,15 +305,8 @@ cards:
                 show_header_toggle: false
                 entities:
                   - input_number.costo_f2
-                  - input_datetime.f2_ora_inizio
-              - type: entities
-                state_color: true
-                show_header_toggle: false
-                entities:
-                  - automation.cambio_tariffa_f2_giorni_festivi
-                  - automation.cambio_tariffa_f2_senza_festivi
-                  - automation.cambio_tariffa_f2_con_festivi
-                  - input_boolean.tariffa_weekend
+                  - input_datetime.f2_ora_inizio_mattino
+                  - input_datetime.f2_ora_inizio_sera
           cambio-tariffa-f3:
             type: vertical-stack
             cards:
@@ -329,14 +316,6 @@ cards:
                 entities:
                   - input_number.costo_f3
                   - input_datetime.f3_ora_inizio
-              - type: entities
-                state_color: true
-                show_header_toggle: false
-                entities:
-                  - automation.cambio_tariffa_f3_giorni_festivi
-                  - automation.cambio_tariffa_f3_senza_festivi
-                  - automation.cambio_tariffa_f3_con_festivi
-                  - input_boolean.tariffa_weekend
           imposte:
             type: vertical-stack
             cards:
@@ -344,12 +323,4 @@ cards:
                 state_color: true
                 show_header_toggle: false
                 entities:
-                  - input_number.accise
-                  - input_number.trasporto
                   - input_number.iva
-                  - input_select.fatturazione
-
-      - style:
-          background-color: var(--primary-color)
-          height: 1px
-        type: divider
