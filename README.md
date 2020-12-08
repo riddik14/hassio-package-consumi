@@ -4,7 +4,7 @@ package consumi
 <img src="https://github.com/riddik14/hassio-package-consumi/blob/main/image_.png">
 
 - il progetto parte lavoro di Mauro Cimino che approfitto per ringraziarlo ed è esteso al calcolo tariffe
-- contatti: 'riddik14 - github- telegram @riddik14'
+- contatti: 'riddik14 - github- telegram @riddik14' - e - robertopiumatti - github 
 
 - https://hassiohelp.eu/2019/03/02/controllo-consumi-costi/
 
@@ -18,30 +18,42 @@ package consumi
 -
 - INSTALLAZIONE
 
-- 1. copiare il file pkg_tariffe_luce_consumi.yaml nella cartella "/config/packages" e aggiungere alla riga 19 il tuo sensore watt
-- se usi shelly ti consiglio di far passare il sensore che ti indica i watt attraverso il convertitore kwh, qui un esempio
+- 1. copiare il file pkg_tariffe_luce_consumi.yaml nella cartella "/config/packages" e aggiungere alla riga 29 il tuo sensore watt
+- se usi shelly ti consiglio di far passare il sensore che ti indica i watt attraverso il convertitore kwh, qui un esempio di come 
+- è settata la riga 29 e alla riga 38 il sensore shelly
 <xmp>
    
-    ##--------------------- IMPOSTAZIONI DEL PACKAGE ---------------------##
-      setting:
+  ##--------------------- IMPOSTAZIONI DEL PACKAGE ---------------------##
+  setting:
 
-        Sensore: &sensore_misura_energia sensor.energia_kwh 
-        #se usi un sensore diverso da shelly mettilo qui sopra (es PZEM) e salta 
-        #a configurare sotto le tariffe tralasciando la sezione "Sensore_wh_to_kwh"
-        
-        #altrimenti se hai shelly lascia la sezione su com'è, che è il convertitore, ma 
-        #compila sotto sostituendo "sensor.shelly_watt" con il tuo sensore shelly
+    # nel caso si disponga di un sensore di energia (kWh) inserirlo qua
+    Sensore: &sensore_misura_energia sensor.pzem_energy_today #sensor.energia_kwh
 
-        Sensore_wh_to_kwh: &sensore_misura_energia2 sensor.shelly_watt
-        
-        
-        TariffaF1: &tariffaf1 0.07
-        TariffaF2: &tariffaf2 0.07
-        TariffaF3: &tariffaf3 0.07
-        Accisa: &accisa 0.0227
-        Iva: &iva 10
-        trasporto: &trasporto 0.07224
-    ##--------------------- IMPOSTAZIONI DEL PACKAGE ---------------------##   
+    # SOLO NEL CASO NON SI DISPONGA DI UN SENSORE DI ENERGIA, ma solo del sensore di potenza instantanea:
+    # 1. decommentare le riga sotto (riga 29)
+    # 2. inserire il nome del sensore di potenza instantanea (W)
+    # 3. decommentare sensore di integrazione (riga 84-88)
+    # 4. inserire il nome del sensore di integrazione sensor.energia_kwh nel sensore di energia sopra (riga 21)
+
+    #Sensore_w_to_kwh: &sensore_misura_energia2 sensor.ripostiglio_energy_power
+    
+    # Materia Energia
+    MateriaEnergiaQuotaFissaAnnua: &MateriaEnergiaQuotaFissaAnnua 65.4
+    TariffaF1: &tariffaf1 0.0869847
+    TariffaF2: &tariffaf2 0.0869847
+    TariffaF3: &tariffaf3 0.0869847
+    # Trasporto costi unitari
+    KwContatore: &KwContatore 6
+    TrasportoQuotaFissaAnnua: &TrasportoQuotaFissaAnnua 20.4000
+    TrasportoQuotaPotenzaAnnua: &TrasportoQuotaPotenzaAnnua 20.8800
+    TrasportoQuotaEnergia: &TrasportoQuotaEnergia 0.00833000
+    # Oneri Di Sistema costi unitari 
+    OneriDiSistemaQuotaEnergia: &OneriDiSistemaQuotaEnergia 0.041817
+    # Accisa costi unitari  
+    Accise: &accise 0.0227 
+    #IVA
+    Iva: &iva 10      
+  ##--------------------- IMPOSTAZIONI DEL PACKAGE ---------------------##     
     
 </xmp>
 
