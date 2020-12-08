@@ -3,8 +3,8 @@ homeassistant:
     package.node_anchors:
       customize: &customize
         package: 'tariffe luce consumi'
-        author: 'domenico ceccarelli from mauro cimino'
-        reference: 'riddik14 - github- telegram @riddik14'
+        author: ' Domenico Ceccarelli, Roberto Piumatti e Mauro Cimino'
+        reference: 'riddik14 - github- telegram @riddik14 ----- robertopiumatti - github -'
   customize_glob:
     "sensor.energia_kwh":
       <<: *customize
@@ -14,38 +14,50 @@ homeassistant:
       <<: *customize
     "utility_meter.consumo_annuale":
       <<: *customize
+  ##--------------------- IMPOSTAZIONI DEL PACKAGE ---------------------##
+  setting:
 
+    # nel caso si disponga di un sensore di energia (kWh) inserirlo qua
+    Sensore: &sensore_misura_energia sensor.pzem_energy_today #sensor.energia_kwh
 
+    # SOLO NEL CASO NON SI DISPONGA DI UN SENSORE DI ENERGIA, ma solo del sensore di potenza instantanea:
+    # 1. decommentare le riga sotto (riga 29)
+    # 2. inserire il nome del sensore di potenza instantanea (W)
+    # 3. decommentare sensore di integrazione (riga 84-88)
+    # 4. inserire il nome del sensore di integrazione sensor.energia_kwh nel sensore di energia sopra (riga 21)
 
-    ##--------------------- IMPOSTAZIONI DEL PACKAGE ---------------------##
-      setting:
-
-        Sensore: &sensore_misura_energia sensor.tuosensore #sensor.energia_kwh
-        #nel caso di utilizzo di convertitore inserire qua su sensor.energia_kwh e qui sotto
-        # il sensore kw. nel caso si vuole la conversione inserire il sensore dopo &sensore_misura_energia2 qui sotto 
-        Sensore_wh_to_kwh: &sensore_misura_energia2 sensor.ripostiglio_energy_power
-        TariffaF1: &tariffaf1 0.0869847
-        TariffaF2: &tariffaf2 0.0869847
-        TariffaF3: &tariffaf3 0.0869847
-        Accisa: &accisa 0.0227           #calcolo medio sulla bolletta
-        Iva: &iva 10                     #IVA
-        trasporto: &trasporto 0.07224    #calcolo medio sulla bolletta
-        
-    ##--------------------- IMPOSTAZIONI DEL PACKAGE ---------------------##     
+    #Sensore_w_to_kwh: &sensore_misura_energia2 sensor.ripostiglio_energy_power
+    
+    # Materia Energia
+    MateriaEnergiaQuotaFissaAnnua: &MateriaEnergiaQuotaFissaAnnua 65.4
+    TariffaF1: &tariffaf1 0.0869847
+    TariffaF2: &tariffaf2 0.0869847
+    TariffaF3: &tariffaf3 0.0869847
+    # Trasporto costi unitari
+    KwContatore: &KwContatore 6
+    TrasportoQuotaFissaAnnua: &TrasportoQuotaFissaAnnua 20.4000
+    TrasportoQuotaPotenzaAnnua: &TrasportoQuotaPotenzaAnnua 20.8800
+    TrasportoQuotaEnergia: &TrasportoQuotaEnergia 0.00833000
+    # Oneri Di Sistema costi unitari 
+    OneriDiSistemaQuotaEnergia: &OneriDiSistemaQuotaEnergia 0.041817
+    # Accisa costi unitari  
+    Accise: &accise 0.0227 
+    #IVA
+    Iva: &iva 10      
+##--------------------- IMPOSTAZIONI DEL PACKAGE ---------------------##     
     
     
     
-    
-    ##-------------------------------VARIE--------------------------------##               
-        # per impostare i contatori a valori personalizzati usare il comando da menu sviluppatori servizi
+##-------------------------------VARIE--------------------------------##               
+# per impostare i contatori a valori personalizzati usare il comando da menu sviluppatori servizi
+
+# servizio "utility_meter.calibrate"
+#
+# entity_id: sensor.consumo_annuale_f1     usare i sensori consumi e non le entità suggerite
+# value: 1000                              esempio per impostare il contatore annuale f1 a 1000kwh
         
-        # servizio "utility_meter.calibrate"
-        #
-        # entity_id: sensor.consumo_annuale_f1     usare i sensori consumi e non le entità suggerite
-        # value: 1000                              esempio per impostare il contatore annuale f1 a 1000kwh
         
-        
-    ##-------------------------------VARIE--------------------------------##             
+##-------------------------------VARIE--------------------------------##             
 utility_meter:
   consumo_giornaliero:
     source: *sensore_misura_energia
@@ -69,11 +81,11 @@ utility_meter:
       - f2
       - f3
 sensor:
-  - platform: integration
-    source: *sensore_misura_energia2 
-    name: energia_kwh
-    unit_prefix: k
-    round: 2
+  # - platform: integration
+  #   source: *sensore_misura_energia2 
+  #   name: energia_kwh
+  #   unit_prefix: k
+  #   round: 2
   - platform: template
     sensors:
       costo_consumo_oggi_f1:
@@ -98,7 +110,6 @@ sensor:
         value_template: "{{((states.sensor.consumo_giornaliero_f1.state | float) + (states.sensor.consumo_giornaliero_f2.state | float) + (states.sensor.consumo_giornaliero_f3.state | float)) | round(3) }}"
         unit_of_measurement: 'KWh'
 
-
       costo_consumo_oggi_totale:
         friendly_name_template: "Costo Consumo Oggi"
         icon_template: mdi:currency-eur
@@ -110,13 +121,11 @@ sensor:
         value_template: "{{((states.sensor.consumo_mensile_f1.state | float) * (states.input_number.costo_f1.state| float)) | round(2) }}"
         unit_of_measurement: '€'
 
-
       costo_consumo_mensile_f2:
         friendly_name_template: "Costo Consumo mensile fascia 2"
         icon_template: mdi:currency-eur
         value_template: "{{((states.sensor.consumo_mensile_f2.state | float) * (states.input_number.costo_f2.state| float)) | round(2) }}"
         unit_of_measurement: '€'
-
 
       costo_consumo_mensile_f3:
         friendly_name_template: "Costo Consumo mensile fascia 3"
@@ -129,7 +138,6 @@ sensor:
         icon_template: mdi:counter
         value_template: "{{((states.sensor.consumo_mensile_f1.state | float) + (states.sensor.consumo_mensile_f2.state | float) + (states.sensor.consumo_mensile_f3.state | float)) | round(3) }}"
         unit_of_measurement: 'KWh'
-
 
       costo_consumo_mensile_totale:
         friendly_name_template: "Costo Consumo mensile"
@@ -150,7 +158,6 @@ sensor:
         value_template: "{{((states.sensor.consumo_annuale_f2.state | float) * (states.input_number.costo_f2.state| float)) | round(2) }}"
         unit_of_measurement: '€'
 
-
       costo_consumo_annuale_f3:
         friendly_name_template: "Costo Consumo annuale fascia 3"
         icon_template: mdi:currency-eur
@@ -163,99 +170,129 @@ sensor:
         value_template: "{{((states.sensor.consumo_annuale_f1.state | float) + (states.sensor.consumo_annuale_f2.state | float) + (states.sensor.consumo_annuale_f3.state | float)) | round(3) }}"
         unit_of_measurement: 'KWh'
 
-
+      # Costi bolletta #
       costo_consumo_annuale_totale:
         friendly_name_template: "Costo Consumo annuale"
         icon_template: mdi:currency-eur
         value_template: "{{((states.sensor.costo_consumo_annuale_f1.state | float) + (states.sensor.costo_consumo_annuale_f2.state| float) + (states.sensor.costo_consumo_annuale_f3.state| float)) | round(2) }}"
         unit_of_measurement: '€'
+
       bolletta_tot_anno:
         friendly_name_template: "Stima Costo Annuale"
         icon_template: mdi:currency-eur
         value_template: >- 
-          {%set energia = (states.sensor.costo_consumo_annuale_totale.state) | int  %}
-          {%set trasporto = ((states.sensor.consumo_totale_annuale.state | float) * (states.input_number.trasporto.state | float)) |round (2) %}
-          {%set accise = ((states.sensor.consumo_totale_annuale.state | float) * (states.input_number.accise.state | float)) %}
-          {%set iva = ( energia + trasporto * (states.input_number.iva.state | float) / 100) %}
-            
-          {{ (  energia  + trasporto  + iva + accise  ) | round(2) }}
+          {% set energiaConsumo = states('sensor.costo_consumo_annuale_totale') | float %}
+          {% set energiaFissa = (states('input_number.materia_energia_quota_fissa_annua') | float) | round(2) %}
+          {% set energia = energiaConsumo + energiaFissa %}
+           
+          {% set trasportoConsumo = ((states('sensor.consumo_totale_annuale') | float) * (states('input_number.trasporto_quota_energia') | float)) |round (2) %}
+          {% set trasportoFissa = (states('input_number.trasporto_quota_fissa_annua') | float) | round(2) %}
+          {% set trasportoPotenza =  ((states('input_number.trasporto_quota_potenza_annua') | float) * (states('input_number.kw_contatore') | float)) | round(2) %}
+          {% set trasporto = trasportoConsumo + trasportoFissa + trasportoPotenza %}
+          
+          {% set oneri = ((states('sensor.consumo_totale_annuale') | float) * (states('input_number.oneri_di_sistema_quota_energia') | float)) |round (2) %}
+
+          {%set accise = ((states('sensor.consumo_totale_annuale') | float) * (states('input_number.accise') | float)) %}
+          {%set iva = ((energia + trasporto + oneri + accise) * (states('input_number.iva') | float) / 100) %}
+
+          {{ (energia + trasporto + oneri + accise + iva ) | round(2) }}
         unit_of_measurement: '€'
+
       bolletta_tot:
         friendly_name_template: "Bolletta Stimata"
         icon_template: mdi:currency-eur
         value_template: >- 
-          {%set energia = (states.sensor.costo_consumo_mensile_totale.state) | float  %}
-          {%set trasporto = ((states.sensor.consumo_totale_mensile.state | float) * (states.input_number.trasporto.state | float)) |round (2) %}
-          {%set accise = ((states.sensor.consumo_totale_mensile.state | float) * (states.input_number.accise.state | float)) %}
-          {%set iva = ( energia + trasporto * (states.input_number.iva.state | float) / 100) %}
-            
-          {% if is_state('input_select.fatturazione', 'mensile') %}
-            {{ (  energia  + trasporto  + iva + accise  ) | round(2) }}
-          {% elif is_state('input_select.fatturazione', 'bimestrale') %}
-            {{ (  energia  + trasporto  + iva + accise  ) | round(2) * 2 }}
-          {% elif is_state('input_select.fatturazione', 'trimestrale') %}
-            {{ (  energia  + trasporto  + iva + accise  ) | round(2) * 3}}
-          {% endif %}
+          {% set energiaConsumo = states('sensor.costo_consumo_mensile_totale') | float %}
+          {% set energiaFissa = ((states('input_number.materia_energia_quota_fissa_annua') | float) / 12) | round(2) %}
+          {% set energia = energiaConsumo + energiaFissa %}
+           
+          {% set trasportoConsumo = ((states('sensor.consumo_totale_mensile') | float) * (states('input_number.trasporto_quota_energia') | float)) |round (2) %}
+          {% set trasportoFissa = ((states('input_number.trasporto_quota_fissa_annua') | float) / 12) | round(2) %}
+          {% set trasportoPotenza =  (((states('input_number.trasporto_quota_potenza_annua') | float) * (states('input_number.kw_contatore') | float)) / 12) | round(2) %}
+          {% set trasporto = trasportoConsumo + trasportoFissa + trasportoPotenza %}
+          
+          {% set oneri = ((states('sensor.consumo_totale_mensile') | float) * (states('input_number.oneri_di_sistema_quota_energia') | float)) |round (2) %}
+
+          {%set accise = ((states('sensor.consumo_totale_mensile') | float) * (states('input_number.accise') | float)) %}
+          {%set iva = ((energia + trasporto + oneri + accise) * (states('input_number.iva') | float) / 100) %}
+
+          {{ (energia + trasporto + oneri + accise + iva ) | round(2) }}
 
         unit_of_measurement: '€'
-      bolletta_trasporto:
-        friendly_name_template: "Trasporto"
-        icon_template: mdi:currency-eur
-        value_template: >- 
-          {%set energia = (states.sensor.costo_consumo_mensile_totale.state) | int  %}
-          {%set trasporto = ((states.sensor.consumo_totale_mensile.state | float) * (states.input_number.trasporto.state | float)) |round (2) %}
-          {%set accise = ((states.sensor.consumo_totale_mensile.state | float) * (states.input_number.accise.state | float)) %}
-          {%set iva = ( energia + trasporto * (states.input_number.iva.state | float) / 100) %}
-             
-          {{ trasporto | round(2) }}
-              
-        unit_of_measurement: '€'        
+
       bolletta_energia:
         friendly_name_template: "Quota Energia"
         icon_template: mdi:currency-eur
         value_template: >- 
-          {%set energia = (states.sensor.costo_consumo_mensile_totale.state) | float  %}
-          {%set trasporto = ((states.sensor.consumo_totale_mensile.state | float) * (states.input_number.trasporto.state | float)) |round (2) %}
-          {%set accise = ((states.sensor.consumo_totale_mensile.state | float) * (states.input_number.accise.state | float)) %}
-          {%set iva = ( energia + trasporto * (states.input_number.iva.state | float) / 100) %}
+          {% set energiaConsumo = states('sensor.costo_consumo_mensile_totale') | float %}
+          {% set energiaFissa = ((states('input_number.materia_energia_quota_fissa_annua') | float) / 12) | round(2) %}
+          {% set energia = energiaConsumo + energiaFissa %}
+
           {{ energia | round(2) }}
-        unit_of_measurement: '€'        
+        unit_of_measurement: '€' 
+
+      bolletta_trasporto:
+        friendly_name_template: "Trasporto"
+        icon_template: mdi:currency-eur
+        value_template: >- 
+          {% set trasportoConsumo = ((states('sensor.consumo_totale_mensile') | float) * (states('input_number.trasporto_quota_energia') | float)) |round (2) %}
+          {% set trasportoFissa = ((states('input_number.trasporto_quota_fissa_annua') | float) / 12) | round(2) %}
+          {% set trasportoPotenza =  (((states('input_number.trasporto_quota_potenza_annua') | float) * (states('input_number.kw_contatore') | float)) / 12) | round(2) %}
+          {% set trasporto = trasportoConsumo + trasportoFissa + trasportoPotenza %}
+             
+          {{ trasporto | round(2) }}
+        unit_of_measurement: '€'  
+
+      bolletta_oneri_di_sistema:
+        friendly_name_template: "Oneri"
+        icon_template: mdi:currency-eur
+        value_template: >- 
+          {% set oneri = ((states('sensor.consumo_totale_mensile') | float) * (states('input_number.oneri_di_sistema_quota_energia') | float)) |round (2) %}
+
+          {{ oneri | round(2) }}
+        unit_of_measurement: '€'    
+
       bolletta_iva:
         friendly_name_template: "IVA"
         icon_template: mdi:currency-eur
         value_template: >- 
-          {%set energia = (states.sensor.costo_consumo_mensile_totale.state) | int  %}
-          {%set trasporto = ((states.sensor.consumo_totale_mensile.state | float) * (states.input_number.trasporto.state | float)) |round (2) %}
-          {%set accise = ((states.sensor.consumo_totale_mensile.state | float) * (states.input_number.accise.state | float)) %}
-          {%set iva = ( (energia + trasporto) * (states.input_number.iva.state | float) / 100) %}
-          {{ iva | round(2) }}
-        unit_of_measurement: '€'        
-      bolletta_accise:
-        friendly_name_template: "Accise/Oneri"
-        icon_template: mdi:currency-eur
-        value_template: >- 
-          {%set energia = (states.sensor.costo_consumo_mensile_totale.state) | int  %}
-          {%set trasporto = ((states.sensor.consumo_totale_mensile.state | float) * (states.input_number.trasporto.state | float)) |round (2) %}
-          {%set accise = ((states.sensor.consumo_totale_mensile.state | float) * (states.input_number.accise.state | float)) %}
-          {%set iva = ( energia + trasporto * (states.input_number.iva.state | float) / 100) %}
-          {{ accise | round(2) }}
-        unit_of_measurement: '€'        
+          {% set energiaConsumo = states('sensor.costo_consumo_mensile_totale') | float %}
+          {% set energiaFissa = ((states('input_number.materia_energia_quota_fissa_annua') | float) / 12) | round(2) %}
+          {% set energia = energiaConsumo + energiaFissa %}
+           
+          {% set trasportoConsumo = ((states('sensor.consumo_totale_mensile') | float) * (states('input_number.trasporto_quota_energia') | float)) |round (2) %}
+          {% set trasportoFissa = ((states('input_number.trasporto_quota_fissa_annua') | float) / 12) | round(2) %}
+          {% set trasportoPotenza =  (((states('input_number.trasporto_quota_potenza_annua') | float) * (states('input_number.kw_contatore') | float)) / 12) | round(2) %}
+          {% set trasporto = trasportoConsumo + trasportoFissa + trasportoPotenza %}
+          
+          {% set oneri = ((states('sensor.consumo_totale_mensile') | float) * (states('input_number.oneri_di_sistema_quota_energia') | float)) |round (2) %}
+
+          {%set accise = ((states('sensor.consumo_totale_mensile') | float) * (states('input_number.accise') | float)) %}
+          {%set iva = ((energia + trasporto + oneri + accise) * (states('input_number.iva') | float) / 100) %}
+
+          {{ (accise + iva) | round(2) }}
+        unit_of_measurement: '€'  
+              
+##--------------------AUTOMAZIONI PER CAMBIO FASCIA---------------------##      
 automation:
-  - alias: Cambio Tariffa F1 con festivi
+  - alias: Cambio Tariffa F1
     initial_state: on
     trigger:
-      platform: template
-      value_template: >-
-        {{ states('sensor.time') == (states.input_datetime.f1_ora_inizio.attributes.timestamp | int | timestamp_custom('%H:%M', False)) }}
+      - platform: state
+        entity_id: input_select.numero_di_fasce
+        to: '1'
+      - platform: template
+        value_template: >-
+          {{ states('sensor.time') == (states.input_datetime.f1_ora_inizio.attributes.timestamp | int | timestamp_custom('%H:%M', False)) }}
     condition:
-      condition: and
+      condition: or
       conditions:
-      - condition: state
-        entity_id: binary_sensor.giorni_fascia_elettrica
-        state: 'on'
-      - condition: state
-        entity_id: input_boolean.tariffa_weekend
-        state: 'on'
+        - condition: state
+          entity_id: input_select.numero_di_fasce
+          state: '1'
+        - condition: state
+          entity_id: binary_sensor.giorni_feriali
+          state: 'on'
     action:
     - service: utility_meter.select_tariff
       data:
@@ -269,164 +306,76 @@ automation:
       data:
         entity_id: utility_meter.consumo_annuale
         tariff: f1 
-  - alias: Cambio Tariffa F2 con festivi
+
+  - alias: Cambio Tariffa F2 - 2 fascie
     initial_state: on
     trigger:
-      platform: template
-      value_template: >-
-        {{ states('sensor.time') == (states.input_datetime.f2_ora_inizio.attributes.timestamp | int | timestamp_custom('%H:%M', False)) }}
+      - platform: template
+        value_template: >-
+          {{ states('sensor.time') == (states.input_datetime.f2_ora_inizio_sera.attributes.timestamp | int | timestamp_custom('%H:%M', False)) }}
     condition:
-      condition: and
-      conditions:
       - condition: state
-        entity_id: binary_sensor.giorni_fascia_elettrica
-        state: 'on'
-      - condition: state
-        entity_id: input_boolean.tariffa_weekend
-        state: 'on'
+        entity_id: input_select.numero_di_fasce
+        state: '2'
     action:
-    - service: utility_meter.select_tariff
-      data:
-        entity_id: utility_meter.consumo_giornaliero
-        tariff: f2
-    - service: utility_meter.select_tariff
-      data:
-        entity_id: utility_meter.consumo_mensile
-        tariff: f2
-    - service: utility_meter.select_tariff
-      data:
-        entity_id: utility_meter.consumo_annuale
-        tariff: f2
-  - alias: Cambio Tariffa F3 con festivi
+      - service: utility_meter.select_tariff
+        data:
+          entity_id: utility_meter.consumo_giornaliero
+          tariff: f2
+      - service: utility_meter.select_tariff
+        data:
+          entity_id: utility_meter.consumo_mensile
+          tariff: f2
+      - service: utility_meter.select_tariff
+        data:
+          entity_id: utility_meter.consumo_annuale
+          tariff: f2
+
+  - alias: Cambio Tariffa F2 - 3 fascie
+    initial_state: on
+    trigger:
+      - platform: template
+        value_template: >-
+          {{ states('sensor.time') == (states.input_datetime.f2_ora_inizio_mattino.attributes.timestamp | int | timestamp_custom('%H:%M', False)) }}
+      - platform: template
+        value_template: >-
+          {{ states('sensor.time') == (states.input_datetime.f2_ora_inizio_sera.attributes.timestamp | int | timestamp_custom('%H:%M', False)) }}
+    condition:
+      - condition: state
+        entity_id: input_select.numero_di_fasce
+        state: '3'
+      - condition: or
+        conditions:
+          - condition: state
+            entity_id: binary_sensor.sabato
+            state: 'on'
+          - condition: state
+            entity_id: binary_sensor.giorni_feriali
+            state: 'on'
+    action:
+      - service: utility_meter.select_tariff
+        data:
+          entity_id: utility_meter.consumo_giornaliero
+          tariff: f2
+      - service: utility_meter.select_tariff
+        data:
+          entity_id: utility_meter.consumo_mensile
+          tariff: f2
+      - service: utility_meter.select_tariff
+        data:
+          entity_id: utility_meter.consumo_annuale
+          tariff: f2
+
+  - alias: Cambio Tariffa F3
     initial_state: on
     trigger:
       platform: template
       value_template: >-
         {{ states('sensor.time') == (states.input_datetime.f3_ora_inizio.attributes.timestamp | int | timestamp_custom('%H:%M', False)) }}
     condition:
-      condition: and
-      conditions:
       - condition: state
-        entity_id: binary_sensor.giorni_fascia_elettrica
-        state: 'on'
-      - condition: state
-        entity_id: input_boolean.tariffa_weekend
-        state: 'on'
-    action:
-    - service: utility_meter.select_tariff
-      data:
-        entity_id: utility_meter.consumo_giornaliero
-        tariff: f3
-    - service: utility_meter.select_tariff
-      data:
-        entity_id: utility_meter.consumo_mensile
-        tariff: f3
-    - service: utility_meter.select_tariff
-      data:
-        entity_id: utility_meter.consumo_annuale
-        tariff: f3
-  - alias: cambio tariffa f2 giorni festivi
-    initial_state: 'on'
-    trigger:
-      platform: state
-      entity_id: binary_sensor.giorni_fascia_elettrica
-      to: 'off'
-    condition:
-    - condition: state
-      entity_id: input_boolean.tariffa_weekend
-      state: 'on'
-    action:
-    - service: utility_meter.select_tariff
-      data:
-        entity_id: utility_meter.consumo_giornaliero
-        tariff: f2
-    - service: utility_meter.select_tariff
-      data:
-        entity_id: utility_meter.consumo_mensile
-        tariff: f2
-    - service: utility_meter.select_tariff
-      data:
-        entity_id: utility_meter.consumo_annuale
-        tariff: f2 
-  - alias: cambio tariffa f3 giorni festivi
-    initial_state: 'on'
-    trigger:
-      platform: state
-      entity_id: binary_sensor.giorni_fascia_elettrica
-      to: 'off'
-    condition:
-    - condition: state
-      entity_id: input_boolean.tariffa_weekend
-      state: 'on'
-    action:
-    - service: utility_meter.select_tariff
-      data:
-        entity_id: utility_meter.consumo_giornaliero
-        tariff: f3
-    - service: utility_meter.select_tariff
-      data:
-        entity_id: utility_meter.consumo_mensile
-        tariff: f3
-    - service: utility_meter.select_tariff
-      data:
-        entity_id: utility_meter.consumo_annuale
-        tariff: f3 
-  - alias: Cambio Tariffa F1 senza festivi
-    initial_state: on
-    trigger:
-      platform: template
-      value_template: >-
-        {{ states('sensor.time') == (states.input_datetime.f1_ora_inizio.attributes.timestamp | int | timestamp_custom('%H:%M', False)) }}
-    condition:
-    - condition: state
-      entity_id: input_boolean.tariffa_weekend
-      state: 'off'
-    action:
-    - service: utility_meter.select_tariff
-      data:
-        entity_id: utility_meter.consumo_giornaliero
-        tariff: f1
-    - service: utility_meter.select_tariff
-      data:
-        entity_id: utility_meter.consumo_mensile
-        tariff: f1
-    - service: utility_meter.select_tariff
-      data:
-        entity_id: utility_meter.consumo_annuale
-        tariff: f1 
-  - alias: Cambio Tariffa F2 senza festivi
-    initial_state: on
-    trigger:
-      platform: template
-      value_template: >-
-        {{ states('sensor.time') == (states.input_datetime.f2_ora_inizio.attributes.timestamp | int | timestamp_custom('%H:%M', False)) }}
-    condition:
-    - condition: state
-      entity_id: input_boolean.tariffa_weekend
-      state: 'off'
-    action:
-    - service: utility_meter.select_tariff
-      data:
-        entity_id: utility_meter.consumo_giornaliero
-        tariff: f2
-    - service: utility_meter.select_tariff
-      data:
-        entity_id: utility_meter.consumo_mensile
-        tariff: f2
-    - service: utility_meter.select_tariff
-      data:
-        entity_id: utility_meter.consumo_annuale
-        tariff: f2
-  - alias: Cambio Tariffa F3 senza festivi
-    initial_state: on
-    trigger:
-      platform: template
-      value_template: >-
-        {{ states('sensor.time') == (states.input_datetime.f3_ora_inizio.attributes.timestamp | int | timestamp_custom('%H:%M', False)) }}
-    condition:
-    - condition: state
-      entity_id: input_boolean.tariffa_weekend
-      state: 'off'
+        entity_id: input_select.numero_di_fasce
+        state: '3'
     action:
     - service: utility_meter.select_tariff
       data:
@@ -445,33 +394,42 @@ binary_sensor:
   - platform: workday
     country: IT
     workdays: [mon, tue, wed, thu, fri]
-    name: giorni fascia elettrica
-input_boolean:
-  tariffa_weekend:
-    name: Tariffa Week-end/festivi
-    icon: mdi:calendar-range
+    name: giorni feriali
+  - platform: workday
+    country: IT
+    workdays: [sat]
+    name: sabato
 input_datetime:
   f1_ora_inizio:
     name: "Orario Inizio Fascia 1"
     has_date: false
     has_time: true
     initial: '08:00'
-  f2_ora_inizio:
-    name: "Orario Inizio Fascia 2"
-    has_date: false
-    has_time: true
-    initial: '19:00'
-  f2_bis_ora_inizio:
-    name: "Orario Inizio Fascia 2 bis"
+  f2_ora_inizio_mattino:
+    name: "Orario Inizio Fascia 2 - Mattino"
     has_date: false
     has_time: true
     initial: '07:00'
+  f2_ora_inizio_sera:
+    name: "Orario Inizio Fascia 2 - Sera"
+    has_date: false
+    has_time: true
+    initial: '19:00'
   f3_ora_inizio:
     name: "Orario Inizio Fascia 3"
     has_date: false
     has_time: true
     initial: '23:00'
-input_number:   
+input_number: 
+  # Materia Energia
+  materia_energia_quota_fissa_annua:
+    name: Materia Energia Quota Fissa Annua
+    min: 0.00
+    max: 100.00
+    unit_of_measurement: '€'
+    initial: *MateriaEnergiaQuotaFissaAnnua
+    mode: box
+    icon: mdi:currency-eur
   costo_f1:
     name: Costo Energia elettrica Fascia 1
     min: 0.0000001
@@ -480,7 +438,6 @@ input_number:
     initial: *tariffaf1
     mode: box
     icon: mdi:currency-eur
-  
   costo_f2:
     name: Costo Energia elettrica Fascia 2
     min: 0.0000001
@@ -489,7 +446,6 @@ input_number:
     initial: *tariffaf2
     mode: box
     icon: mdi:currency-eur
-
   costo_f3:
     name: Costo Energia elettrica Fascia 3
     min: 0.0000001
@@ -498,14 +454,57 @@ input_number:
     initial: *tariffaf3
     mode: box
     icon: mdi:currency-eur
+  # Trasporto costi unitari
+  kw_contatore:
+    name: Kw Contatore
+    min: 1
+    max: 30
+    unit_of_measurement: 'Kw'
+    initial: *KwContatore
+    mode: box
+  trasporto_quota_fissa_annua:
+    name: Trasporto Quota Fissa Annua
+    min: 0.000
+    max: 100.000
+    unit_of_measurement: '€'
+    initial: *TrasportoQuotaFissaAnnua
+    mode: box
+    icon: mdi:currency-eur 
+  trasporto_quota_potenza_annua:
+    name: Trasporto Quota Potenza Annua
+    min: 0.000
+    max: 100.000
+    unit_of_measurement: '€'
+    initial: *TrasportoQuotaPotenzaAnnua
+    mode: box
+    icon: mdi:currency-eur
+  trasporto_quota_energia:
+    name: Trasporto Quota Energia
+    min: 0.0000001
+    max: 0.5000000
+    unit_of_measurement: '€'
+    initial: *TrasportoQuotaEnergia
+    mode: box
+    icon: mdi:currency-eur  
+  # Oneri Di Sistema costi unitari 
+  oneri_di_sistema_quota_energia:
+    name: Oneri Di Sistema Quota Energia
+    min: 0.0000001
+    max: 0.5000000
+    unit_of_measurement: '€'
+    initial: *OneriDiSistemaQuotaEnergia
+    mode: box
+    icon: mdi:currency-eur  
+  # Accisa costi unitari 
   accise:
     name: accise
     min: 0.0000001
     max: 0.5000000
     unit_of_measurement: '€'
-    initial: *accisa
+    initial: *accise
     mode: box
     icon: mdi:currency-eur
+  # IVA
   iva:
     name: IVA
     min: 0.0000001
@@ -514,19 +513,11 @@ input_number:
     initial: *iva
     mode: box
     icon: mdi:percent
-  trasporto:
-    name: trasporto
-    min: 0.0000001
-    max: 0.9
-    unit_of_measurement: '€'
-    initial: *trasporto
-    mode: box
-    icon: mdi:currency-eur 
 input_select:
-  fatturazione:
-    name: fatturazione
+  numero_di_fasce:
+    name: Numero di Fasce
     options:
-      - mensile
-      - bimestrale
-      - trimestrale
-    icon: mdi:checkbox-marked-outline
+      - 1
+      - 2
+      - 3
+    initial: 3
