@@ -21,6 +21,9 @@ package consumi
 - 1. copiare il file pkg_tariffe_luce_consumi.yaml nella cartella "/config/packages" e aggiungere alla riga 19 il tuo sensore watt
 - se usi shelly ti consiglio di far passare il sensore che ti indica i watt attraverso il convertitore kwh, qui un esempio
 https://github.com/riddik14/hassio-package-consumi/issues/5 
+
+![image](https://user-images.githubusercontent.com/37450907/101489414-347ab500-3961-11eb-87c9-168ef4e329fe.jpeg)
+
 - 2. installare dal menu frontend di hacs i seguenti:
 
 - vertical-stack-in-card
