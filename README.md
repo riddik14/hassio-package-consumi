@@ -25,18 +25,17 @@ package consumi
     ##--------------------- IMPOSTAZIONI DEL PACKAGE ---------------------##
       setting:
 
-        Sensore: &sensore_misura_energia sensor.energia_kwh #sensore che esce dal convertitore
+        Sensore: &sensore_misura_energia sensor.energia_kwh #se usi un sensore diverso da shelly mettilo qui altrimenti lascia questo che è il convertitore
         #nel caso di utilizzo di convertitore inserire su sensor.energia_kwh e qui sotto
         # il sensore kw. nel caso si vuole la conversione inserire il sensore dopo &sensore_misura_energia2 qui sotto 
-        Sensore_wh_to_kwh: &sensore_misura_energia2 sensor.ripostiglio_energy_power #<-- questo è il mio sensore
-        TariffaF1: &tariffaf1 0.0869847
-        TariffaF2: &tariffaf2 0.0869847
-        TariffaF3: &tariffaf3 0.0869847
-        Accisa: &accisa 0.0227           #calcolo medio sulla bolletta
-        Iva: &iva 10                     #IVA
-        trasporto: &trasporto 0.07224    #calcolo medio sulla bolletta
-        
-    ##--------------------- IMPOSTAZIONI DEL PACKAGE ---------------------##  
+        Sensore_wh_to_kwh: &sensore_misura_energia2 sensor.shelly_watt #il tuo sensore watt-shelly--
+        TariffaF1: &tariffaf1 0.07
+        TariffaF2: &tariffaf2 0.07
+        TariffaF3: &tariffaf3 0.07
+        Accisa: &accisa 0.0227
+        Iva: &iva 10
+        trasporto: &trasporto 0.07224
+    ##--------------------- IMPOSTAZIONI DEL PACKAGE ---------------------##   
     
 </xmp>
 
