@@ -21,14 +21,14 @@ package consumi
 - 1. copiare il file pkg_tariffe_luce_consumi.yaml nella cartella "/config/packages" e aggiungere alla riga 19 il tuo sensore watt
 - se usi shelly ti consiglio di far passare il sensore che ti indica i watt attraverso il convertitore kwh, qui un esempio
 <xmp>
-   ...code...
+   
     ##--------------------- IMPOSTAZIONI DEL PACKAGE ---------------------##
       setting:
 
-        Sensore: &sensore_misura_energia sensor.energia_kwh
+        Sensore: &sensore_misura_energia sensor.energia_kwh #sensore che esce dal convertitore
         #nel caso di utilizzo di convertitore inserire su sensor.energia_kwh e qui sotto
         # il sensore kw. nel caso si vuole la conversione inserire il sensore dopo &sensore_misura_energia2 qui sotto 
-        Sensore_wh_to_kwh: &sensore_misura_energia2 sensor.ripostiglio_energy_power
+        Sensore_wh_to_kwh: &sensore_misura_energia2 sensor.ripostiglio_energy_power #<-- questo è il mio sensore
         TariffaF1: &tariffaf1 0.0869847
         TariffaF2: &tariffaf2 0.0869847
         TariffaF3: &tariffaf3 0.0869847
