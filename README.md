@@ -4,7 +4,9 @@
 
 ---------------------------
 **Contributi:**
-il progetto parte lavoro di Mauro Cimino che approfitto per ringraziarlo ed è esteso al calcolo tariffe. contatti: 'riddik14 - github- telegram @riddik14' - e - robertopiumatti - github 
+Il progetto è parte lavoro di Mauro Cimino che approfitto per ringraziarlo ed è esteso al calcolo tariffe.
+Roberto Piumatti lo ha adeguato a quanto stabilisce la legge sul calcolo della bolletta. 
+contatti: 'riddik14 - github - telegram @riddik14 - e - robertopiumatti - github'
 
 - https://hassiohelp.eu/2019/03/02/controllo-consumi-costi/
 - https://hassiohelp.eu/author/legolas08/
