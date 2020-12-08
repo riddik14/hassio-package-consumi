@@ -61,15 +61,15 @@ Sensori compatibili:
 
 2. installare dal menu frontend di hacs i seguenti:
 
-**- vertical-stack-in-card
+- vertical-stack-in-card
 
-**- mini-graph-card
+- mini-graph-card
 
-**- banner-card
+- banner-card
 
-**- paper-buttons-row
+- paper-buttons-row
 
-**- state-switch
+- state-switch
 
 
 
