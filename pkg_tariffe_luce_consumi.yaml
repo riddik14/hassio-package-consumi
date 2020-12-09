@@ -27,7 +27,7 @@ homeassistant:
     # 4. inserire il nome del sensore di integrazione sensor.energia_kwh nel sensore di energia sopra (riga 21)
 
     #Sensore_w_to_kwh: &sensore_misura_energia2 sensor.ripostiglio_energy_power
-    
+     
     # Materia Energia
     MateriaEnergiaQuotaFissaAnnua: &MateriaEnergiaQuotaFissaAnnua 65.4
     TariffaF1: &tariffaf1 0.0869847
