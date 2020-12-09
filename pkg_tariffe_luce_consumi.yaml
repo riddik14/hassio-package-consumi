@@ -521,7 +521,6 @@ input_select:
       - 2
       - 3
     initial: 3
-input_select:
   fatturazione:
     name: fatturazione
     options:
