@@ -76,7 +76,8 @@ contatti: 'riddik14 - github - telegram @riddik14 - e - robertopiumatti - github
 
 
 
-aprire il file  lovelace-dash.txt e copiare il contenuto in una card manuale dalla dashbord del tuo assistente alla riga 8 della card mettere il sensore volt alla riga 31 il proprio sensore watt, infine salvare la card.
+aprire il file  lovelace-dash.txt o lovelace-dash-light.txt e copiarne il contenuto in una card manuale dalla dashbord del tuo assistente.
+Alla riga 8 della card mettere il sensore volt alla riga 32 il proprio sensore watt, infine salvare la card.
 
 ____________________________________
 
