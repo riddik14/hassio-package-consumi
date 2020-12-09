@@ -1,5 +1,5 @@
 ### homeassistant-package-consumi ###
-<img src="https://github.com/riddik14/hassio-package-consumi/blob/main/output_DrKr3V.gif">
+<img src="https://github.com/riddik14/hassio-package-consumi/blob/main/output_DrKr3V.gif"> | 
 <img src="https://github.com/riddik14/hassio-package-consumi/blob/main/image_.png">
 
 ---------------------------
