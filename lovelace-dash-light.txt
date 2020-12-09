@@ -1,0 +1,308 @@
+type: 'custom:vertical-stack-in-card'
+cards:
+  - type: horizontal-stack
+    cards:
+      - type: 'custom:mini-graph-card'
+        entities:
+          - entity: sensor.ripostiglio_energy_voltage
+        line_width: 10
+        font_size: 150
+        hours_to_show: 24
+        aggregate_func: max
+        name: VOLT
+        fill: true
+        average: true
+        extrema: true
+        animate: true
+        name_adaptive_color: true
+        color_thresholds:
+          - value: 225
+            color: orange
+          - value: 230
+            color: green
+          - value: 240
+            color: red
+        show:
+          graph: bar
+          icon: false
+          name: false
+      - type: 'custom:mini-graph-card'
+        entities:
+          - entity: sensor.ripostiglio_energy_power
+        line_width: 10
+        font_size: 150
+        hours_to_show: 24
+        aggregate_func: max
+        name: watt
+        fill: true
+        average: true
+        extrema: true
+        name_adaptive_color: true
+        color_thresholds:
+          - value: 600
+            color: green
+          - value: 1500
+            color: yellow
+          - value: 3000
+            color: red
+        show:
+          graph: bar
+          icon: false
+          name: false
+  - type: entities
+    theme: ios-dark-mode
+    entities:
+      - buttons:
+          - icon: 'mdi:close-box'
+            tap_action:
+              action: navigate
+              navigation_path: '#setting-off2'
+          - icon: 'mdi:cog'
+            tap_action:
+              action: navigate
+              navigation_path: '#imposta-tariffa'
+          - icon: 'mdi:counter'
+            tap_action:
+              action: navigate
+              navigation_path: '#dettagli'
+          - icon: 'mdi:alpha-g-box-outline'
+            tap_action:
+              action: navigate
+              navigation_path: '#giorno'
+          - icon: 'mdi:alpha-m-box-outline'
+            tap_action:
+              action: navigate
+              navigation_path: '#mese'
+          - icon: 'mdi:alpha-a-box-outline'
+            tap_action:
+              action: navigate
+              navigation_path: '#anno'
+        type: 'custom:paper-buttons-row'
+      - type: 'custom:state-switch'
+        entity: hash
+        default: settings-off
+        states:
+          setting-off:
+            type: null
+          imposta-tariffa:
+            type: vertical-stack
+            cards:
+              - type: vertical-stack
+                cards:
+                  - type: entities
+                    state_color: false
+                    show_header_toggle: false
+                    entities:
+                      - input_datetime.f1_ora_inizio
+                      - input_datetime.f2_ora_inizio_mattino
+                      - input_datetime.f2_ora_inizio_sera
+                      - input_datetime.f3_ora_inizio
+          dettagli:
+            type: vertical-stack
+            cards:
+              - type: vertical-stack
+                cards:
+                  - type: glance
+                    entities:
+                      - sensor.bolletta_energia
+                      - sensor.bolletta_trasporto
+                      - sensor.bolletta_oneri_di_sistema
+                      - sensor.bolletta_iva
+          giorno:
+            type: vertical-stack
+            cards:
+              - type: vertical-stack
+                cards:
+                  - animation:
+                      speed: '5'
+                      state: 'on'
+                    entities:
+                      - animation:
+                          speed: '5'
+                          state: 'on'
+                        direction: right
+                        name: ' '
+                        icon: 'mdi:keyboard-f1'
+                        positions:
+                          icon: inside
+                        entity: sensor.consumo_giornaliero_f1
+                      - animation:
+                          speed: '5'
+                          state: 'on'
+                        direction: right
+                        name: ' '
+                        icon: 'mdi:keyboard-f2'
+                        positions:
+                          icon: inside
+                        entity: sensor.consumo_giornaliero_f2
+                      - animation:
+                          speed: '5'
+                          state: 'on'
+                        direction: right
+                        name: ' '
+                        icon: 'mdi:keyboard-f3'
+                        positions:
+                          icon: inside
+                        entity: sensor.consumo_giornaliero_f3
+                      - animation:
+                          speed: '5'
+                          state: 'on'
+                        direction: right
+                        name: ' '
+                        positions:
+                          icon: inside
+                        entity: sensor.costo_consumo_oggi_totale
+                      - animation:
+                          speed: '5'
+                          state: 'on'
+                        direction: right
+                        name: Totale
+                        positions:
+                          icon: inside
+                        entity: sensor.consumo_totale_oggi
+                    positions:
+                      icon: inside
+                      indicator: inside
+                      minmax: 'off'
+                      name: inside
+                    title: Consumo Oggi
+                    type: 'custom:bar-card'
+                    direction: up
+                    columns: '3'
+                    entity_row: true
+                    color: green
+                    max: 15
+          mese:
+            type: vertical-stack
+            cards:
+              - type: vertical-stack
+                cards:
+                  - animation:
+                      speed: '5'
+                      state: 'on'
+                    entities:
+                      - animation:
+                          speed: '5'
+                          state: 'on'
+                        direction: right
+                        name: ' '
+                        icon: 'mdi:keyboard-f1'
+                        positions:
+                          icon: inside
+                        entity: sensor.consumo_mensile_f1
+                      - animation:
+                          speed: '5'
+                          state: 'on'
+                        direction: right
+                        name: ' '
+                        icon: 'mdi:keyboard-f2'
+                        positions:
+                          icon: inside
+                        entity: sensor.consumo_mensile_f2
+                      - animation:
+                          speed: '5'
+                          state: 'on'
+                        direction: right
+                        name: ' '
+                        icon: 'mdi:keyboard-f3'
+                        positions:
+                          icon: inside
+                        entity: sensor.consumo_mensile_f3
+                      - animation:
+                          speed: '5'
+                          state: 'on'
+                        direction: right
+                        name: ' '
+                        positions:
+                          icon: inside
+                        entity: sensor.costo_consumo_mensile_totale
+                      - animation:
+                          speed: '5'
+                          state: 'on'
+                        direction: right
+                        name: Totale
+                        positions:
+                          icon: inside
+                        entity: sensor.consumo_totale_mensile
+                    positions:
+                      icon: inside
+                      indicator: inside
+                      minmax: 'off'
+                      name: inside
+                    title: Consumo Mensile
+                    type: 'custom:bar-card'
+                    direction: up
+                    columns: '3'
+                    entity_row: true
+                    color: red
+                    max: 100
+          anno:
+            type: vertical-stack
+            cards:
+              - type: vertical-stack
+                cards:
+                  - animation:
+                      speed: '5'
+                      state: 'on'
+                    entities:
+                      - animation:
+                          speed: '5'
+                          state: 'on'
+                        direction: right
+                        name: ' '
+                        icon: 'mdi:keyboard-f1'
+                        positions:
+                          icon: inside
+                        entity: sensor.consumo_annuale_f1
+                      - animation:
+                          speed: '5'
+                          state: 'on'
+                        direction: right
+                        name: ' '
+                        icon: 'mdi:keyboard-f2'
+                        positions:
+                          icon: inside
+                        entity: sensor.consumo_annuale_f2
+                      - animation:
+                          speed: '5'
+                          state: 'on'
+                        direction: right
+                        name: ' '
+                        icon: 'mdi:keyboard-f3'
+                        positions:
+                          icon: inside
+                        entity: sensor.consumo_annuale_f3
+                      - animation:
+                          speed: '5'
+                          state: 'on'
+                        direction: right
+                        name: ' '
+                        positions:
+                          icon: inside
+                        entity: sensor.costo_consumo_annuale_totale
+                      - animation:
+                          speed: '5'
+                          state: 'on'
+                        direction: right
+                        name: Totale
+                        positions:
+                          icon: inside
+                        entity: sensor.consumo_totale_annuale
+                    positions:
+                      icon: inside
+                      indicator: inside
+                      minmax: 'off'
+                      name: inside
+                    title: Consumo Annuale
+                    type: 'custom:bar-card'
+                    direction: up
+                    columns: '3'
+                    max: 4000
+                    entity_row: true
+                    color: orange
+      - type: 'custom:vertical-stack-in-card'
+        cards:
+          - type: glance
+            entities:
+              - sensor.bolletta_tot
+              - sensor.bolletta_tot_anno
