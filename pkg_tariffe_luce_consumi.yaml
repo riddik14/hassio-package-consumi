@@ -6,8 +6,8 @@ homeassistant:
         author: ' Domenico Ceccarelli, Roberto Piumatti e Mauro Cimino'
         reference: 'riddik14 - github- telegram @riddik14 ----- robertopiumatti - github -'
   customize_glob:
-    "sensor.energia_kwh":
-      <<: *customize
+    #"sensor.energia_kwh":
+    #  <<: *customize
     "utility_meter.consumo_giornaliero":
       <<: *customize
     "utility_meter.consumo_mensile":
@@ -86,8 +86,8 @@ sensor:
   #   name: energia_kwh
   #   unit_prefix: k
   #   round: 2
-  - platform: template
-    sensors:
+   - platform: template
+     sensors:
       costo_consumo_oggi_f1:
         friendly_name_template: "Costo Consumo Oggi fascia 1"
         icon_template: mdi:currency-eur
