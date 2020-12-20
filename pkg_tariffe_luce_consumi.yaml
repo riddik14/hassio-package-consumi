@@ -2,18 +2,22 @@ homeassistant:
   customize:
     package.node_anchors:
       customize: &customize
-        package: 'tariffe luce consumi'
-        author: ' Domenico Ceccarelli, Roberto Piumatti e Mauro Cimino'
-        reference: 'riddik14 - github- telegram @riddik14 ----- robertopiumatti - github -'
+        package: "consumi_tariffe"
+        author: "Domenico Ceccarelli"
+        icon: "mdi:counter"
+        entity_picture: "https://avatars1.githubusercontent.com/u/37450907?s=400&u=c6397fc94ead7e4c469bfd3c6fa6c50c599f1ea8&v=4"
+        reference: "riddik14 - github telegram @riddik14"
   customize_glob:
-    #"sensor.energia_kwh":
-    #  <<: *customize
-    "utility_meter.consumo_giornaliero":
+    sensor.bolletta_tot:
       <<: *customize
-    "utility_meter.consumo_mensile":
-      <<: *customize
-    "utility_meter.consumo_annuale":
-      <<: *customize
+#    sensor.energia_kwh:
+#      <<: *customize
+#    utility_meter.consumo_giornaliero:
+#      <<: *customize
+#    utility_meter.consumo_mensile:
+#      <<: *customize
+#    utility_meter.consumo_annuale:
+#      <<: *customize
   ##--------------------- IMPOSTAZIONI DEL PACKAGE ---------------------##
   setting:
 
