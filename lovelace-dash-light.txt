@@ -1,4 +1,5 @@
 type: 'custom:vertical-stack-in-card'
+theme: ios-dark-mode-blue-red-alternative
 cards:
   - type: horizontal-stack
     cards:
@@ -57,10 +58,6 @@ cards:
             tap_action:
               action: navigate
               navigation_path: '#setting-off2'
-          - icon: 'mdi:cog'
-            tap_action:
-              action: navigate
-              navigation_path: '#imposta-tariffa'
           - icon: 'mdi:counter'
             tap_action:
               action: navigate
@@ -101,6 +98,7 @@ cards:
             type: vertical-stack
             cards:
               - type: vertical-stack
+                title: Costi Mese
                 cards:
                   - type: glance
                     entities:
@@ -108,6 +106,15 @@ cards:
                       - sensor.bolletta_trasporto
                       - sensor.bolletta_oneri_di_sistema
                       - sensor.bolletta_iva
+              - type: vertical-stack
+                title: Costi Mese Precedente
+                cards:
+                  - type: glance
+                    entities:
+                      - sensor.bolletta_energia_mese_scorso
+                      - sensor.bolletta_trasporto_mese_scorso
+                      - sensor.bolletta_oneri_di_sistema_mese_scorso
+                      - sensor.bolletta_iva_mese_scorso
           giorno:
             type: vertical-stack
             cards:
@@ -229,13 +236,82 @@ cards:
                       indicator: inside
                       minmax: 'off'
                       name: inside
-                    title: Consumo Mensile
+                    title: Consumo Mense Corrente
                     type: 'custom:bar-card'
                     direction: up
                     columns: '3'
                     entity_row: true
                     color: red
                     max: 100
+              - type: vertical-stack
+                cards:
+                  - animation:
+                      speed: '5'
+                      state: 'on'
+                    entities:
+                      - animation:
+                          speed: '5'
+                          state: 'on'
+                        direction: right
+                        name: ' '
+                        icon: 'mdi:keyboard-f1'
+                        positions:
+                          icon: inside
+                        entity: sensor.consumo_mensile_f1
+                        attribute: last_period
+                        max: 100
+                      - animation:
+                          speed: '5'
+                          state: 'on'
+                        direction: right
+                        name: ' '
+                        icon: 'mdi:keyboard-f2'
+                        positions:
+                          icon: inside
+                        entity: sensor.consumo_mensile_f2
+                        attribute: last_period
+                        max: 50
+                      - animation:
+                          speed: '5'
+                          state: 'on'
+                        direction: right
+                        name: ' '
+                        icon: 'mdi:keyboard-f3'
+                        positions:
+                          icon: inside
+                        entity: sensor.consumo_mensile_f3
+                        attribute: last_period
+                        max: 130
+                      - animation:
+                          speed: '5'
+                          state: 'on'
+                        direction: right
+                        name: ' '
+                        positions:
+                          icon: inside
+                        entity: sensor.costo_consumo_mensile_totale
+                        max: 20
+                      - animation:
+                          speed: '5'
+                          state: 'on'
+                        direction: right
+                        name: Totale
+                        positions:
+                          icon: inside
+                        entity: sensor.consumo_totale_mese_scorso
+                        max: 300
+                    positions:
+                      icon: inside
+                      indicator: inside
+                      minmax: 'off'
+                      name: inside
+                    title: Consumo Mese Precedente
+                    type: 'custom:bar-card'
+                    direction: up
+                    columns: '3'
+                    max: 4000
+                    entity_row: true
+                    color: Blue
           anno:
             type: vertical-stack
             cards:
@@ -300,9 +376,15 @@ cards:
                     max: 4000
                     entity_row: true
                     color: orange
+                  - type: 'custom:vertical-stack-in-card'
+                    cards:
+                      - type: glance
+                        entities:
+                          - sensor.bolletta_tot_anno
+
       - type: 'custom:vertical-stack-in-card'
         cards:
           - type: glance
             entities:
               - sensor.bolletta_tot
-              - sensor.bolletta_tot_anno
+              - sensor.bolletta_tot_mese_scorso
