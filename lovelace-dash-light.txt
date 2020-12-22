@@ -416,7 +416,7 @@ cards:
                     https://www.buymeacoffee.com/T1Pqksy
 
 
-                      per installare l'aggiornamneto premi sotto e reinpostare i dati nella sezione setting del package
+                      per installare l'aggiornamneto premi sotto e reinpostare i dati nella sezione setting del package, infine riavviare hassio
 
                       
                       
