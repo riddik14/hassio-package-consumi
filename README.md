@@ -23,7 +23,7 @@ contatti: 'riddik14 - github - telegram @riddik14 - e - robertopiumatti - github
 
 **INSTALLAZIONE**
 
-1. copiare il file pkg_tariffe_luce_consumi.yaml nella cartella "/config/packages" e modificarlo seguendo le istruzioni interne al file.
+1. copiare il file pkg_consumi.yaml e secrets.yaml (se gia esistente copiare l contenuto del vostro sectrets.yaml) nella cartella "/config/packages" e modificarlo seguendo le istruzioni interne al file secrets.yaml.
 
 '
    
@@ -39,25 +39,7 @@ contatti: 'riddik14 - github - telegram @riddik14 - e - robertopiumatti - github
     # 3. decommentare sensore di integrazione (riga 84-88)
     # 4. inserire il nome del sensore di integrazione sensor.energia_kwh nel sensore di energia sopra (riga 21)
 
-    #Sensore_w_to_kwh: &sensore_misura_energia2 sensor.ripostiglio_energy_power
-    
-    # Materia Energia
-    MateriaEnergiaQuotaFissaAnnua: &MateriaEnergiaQuotaFissaAnnua 65.4
-    TariffaF1: &tariffaf1 0.0869847
-    TariffaF2: &tariffaf2 0.0869847
-    TariffaF3: &tariffaf3 0.0869847
-    # Trasporto costi unitari
-    KwContatore: &KwContatore 6
-    TrasportoQuotaFissaAnnua: &TrasportoQuotaFissaAnnua 20.4000
-    TrasportoQuotaPotenzaAnnua: &TrasportoQuotaPotenzaAnnua 20.8800
-    TrasportoQuotaEnergia: &TrasportoQuotaEnergia 0.00833000
-    # Oneri Di Sistema costi unitari 
-    OneriDiSistemaQuotaEnergia: &OneriDiSistemaQuotaEnergia 0.041817
-    # Accisa costi unitari  
-    Accise: &accise 0.0227 
-    #IVA
-    Iva: &iva 10      
-  ##--------------------- IMPOSTAZIONI DEL PACKAGE ---------------------##     
+
     
 '
 
