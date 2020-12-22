@@ -2,54 +2,68 @@ homeassistant:
   customize:
     package.node_anchors:
       customize: &customize
-        package: "consumi_tariffe"
-        author: "Domenico Ceccarelli"
-        icon: "mdi:counter"
-        entity_picture: "https://avatars1.githubusercontent.com/u/37450907?s=400&u=c6397fc94ead7e4c469bfd3c6fa6c50c599f1ea8&v=4"
-        reference: "riddik14 - github telegram @riddik14"
-  customize_glob:
+        Package: 'Consumi'
+        Version: '0.0.7'
+        Author: 'Domenico Ceccarelli'
+        icon: 'mdi:counter'
+        entity_picture: https://avatars1.githubusercontent.com/u/37450907?s=400&u=c6397fc94ead7e4c469bfd3c6fa6c50c599f1ea8&v=4
+        reference: 'riddik14 - github telegram @riddik14'
+      expose: &expose
+        <<: *customize
+        haaska_hidden: false
+        homebridge_hidden: false
+    sensor.energia_kwh:
+      <<: *customize
     sensor.bolletta_tot:
       <<: *customize
-#    sensor.energia_kwh:
-#      <<: *customize
-#    utility_meter.consumo_giornaliero:
-#      <<: *customize
-#    utility_meter.consumo_mensile:
-#      <<: *customize
-#    utility_meter.consumo_annuale:
-#      <<: *customize
+    input_number.costo_f1:
+        <<: *customize
+    input_datetime.f1_ora_inizio:
+        <<: *customize
+  customize_glob:
+    sensor.energia_kwh:
+      <<: *customize
+    sensor.bolletta_tot:
+      <<: *customize
+    input_number.costo_f1:
+        <<: *customize
+    input_number.f1_ora_inizio:
+        <<: *customize
+
+         # 0. se gia presente nel configuration.yaml commentare le due righe (riga 78-79):
   ##--------------------- IMPOSTAZIONI DEL PACKAGE ---------------------##
-  setting:
-
-    # nel caso si disponga di un sensore di energia (kWh) inserirlo qua
-    Sensore: &sensore_misura_energia sensor.pzem_energy_today #sensor.energia_kwh
-
-    # SOLO NEL CASO NON SI DISPONGA DI UN SENSORE DI ENERGIA, ma solo del sensore di potenza instantanea:
-    # 1. decommentare le riga sotto (riga 29)
-    # 2. inserire il nome del sensore di potenza instantanea (W)
-    # 3. decommentare sensore di integrazione (riga 84-88)
-    # 4. inserire il nome del sensore di integrazione sensor.energia_kwh nel sensore di energia sopra (riga 21)
-
-    #Sensore_w_to_kwh: &sensore_misura_energia2 sensor.ripostiglio_energy_power
-     
-    # Materia Energia
-    MateriaEnergiaQuotaFissaAnnua: &MateriaEnergiaQuotaFissaAnnua 65.4
-    TariffaF1: &tariffaf1 0.0869847
-    TariffaF2: &tariffaf2 0.0869847
-    TariffaF3: &tariffaf3 0.0869847
-    # Trasporto costi unitari
-    KwContatore: &KwContatore 6
-    TrasportoQuotaFissaAnnua: &TrasportoQuotaFissaAnnua 20.4000
-    TrasportoQuotaPotenzaAnnua: &TrasportoQuotaPotenzaAnnua 20.8800
-    TrasportoQuotaEnergia: &TrasportoQuotaEnergia 0.00833000
-    # Oneri Di Sistema costi unitari 
-    OneriDiSistemaQuotaEnergia: &OneriDiSistemaQuotaEnergia 0.041817
-    # Accisa costi unitari  
-    Accise: &accise 0.0227 
-    #IVA
-    Iva: &iva 10      
-##--------------------- IMPOSTAZIONI DEL PACKAGE ---------------------##     
+    setting:
     
+        # nel caso si disponga di un sensore di energia (kWh) inserirlo qua
+        Sensore: &sensore_misura_energia sensor.ripostiglio_energy_today #sensor.energia_kwh
+        
+        # SOLO NEL CASO NON SI DISPONGA DI UN SENSORE DI ENERGIA, ma solo del sensore di potenza instantanea:
+        # 1. decommentare le riga sotto (riga 46)
+        # 2. inserire il nome del sensore di potenza instantanea (W)
+        # 3. decommentare sensore di integrazione (riga 104-108)
+        # 4. inserire il nome del sensore di integrazione sensor.energia_kwh nel sensore di energia sopra (riga 38) cancellando il mio sensore pzem "sensor.ripostiglio_energy_today"
+
+        Sensore_w_to_kwh: &sensore_misura_energia2 sensor.ripostiglio_energy_power
+    
+        # Materia Energia
+        MateriaEnergiaQuotaFissaAnnua: &MateriaEnergiaQuotaFissaAnnua 65.4
+        NumeroTariffe: &ntariffa 3
+        Fatturazione: &fatturazione mensile #bimestrale #trimestrale
+        TariffaF1: &tariffaf1 0.0869847
+        TariffaF2: &tariffaf2 0.0869847
+        TariffaF3: &tariffaf3 0.0869847
+        # Trasporto costi unitari
+        KwContatore: &KwContatore 3
+        TrasportoQuotaFissaAnnua: &TrasportoQuotaFissaAnnua 20.4000
+        TrasportoQuotaPotenzaAnnua: &TrasportoQuotaPotenzaAnnua 20.8800
+        TrasportoQuotaEnergia: &TrasportoQuotaEnergia 0.00833000
+        # Oneri Di Sistema costi unitari 
+        OneriDiSistemaQuotaEnergia: &OneriDiSistemaQuotaEnergia 0.041817
+        # Accisa costi unitari  
+        Accise: &accise 0.0227 
+        #IVA
+        Iva: &iva 10      
+##--------------------- IMPOSTAZIONI DEL PACKAGE ---------------------##     
     
     
 ##-------------------------------VARIE--------------------------------##               
@@ -60,8 +74,10 @@ homeassistant:
 # entity_id: sensor.consumo_annuale_f1     usare i sensori consumi e non le entità suggerite
 # value: 1000                              esempio per impostare il contatore annuale f1 a 1000kwh
         
-        
-##-------------------------------VARIE--------------------------------##             
+        ##-------------------------------VARIE--------------------------------##    
+downloader:
+  download_dir: packages    
+
 utility_meter:
   consumo_giornaliero:
     source: *sensore_misura_energia
@@ -85,11 +101,24 @@ utility_meter:
       - f2
       - f3
 sensor:
-  # - platform: integration
-  #   source: *sensore_misura_energia2 
-  #   name: energia_kwh
-  #   unit_prefix: k
-  #   round: 2
+   - platform: integration
+     source: *sensore_misura_energia2 
+     name: energia_kwh
+     unit_prefix: k
+     round: 2
+
+   - platform: rest
+     resource: https://raw.githubusercontent.com/riddik14/hassio-package-consumi/master/versione.json
+     name: Versione pk consumi
+     value_template: '{{ value_json.versione }}'
+
+   - platform: rest
+     resource: https://raw.githubusercontent.com/riddik14/hassio-package-consumi/master/versione.json
+     name: tipo aggiornamento pk consumi
+     value_template: '{{ value_json.cosa_aggiornare }}'
+
+
+
    - platform: template
      sensors:
       costo_consumo_oggi_f1:
@@ -224,6 +253,7 @@ sensor:
             {{ (energia + trasporto + oneri + accise + iva ) | round(2) * 3}}
           {% endif %}
         unit_of_measurement: '€'
+
       bolletta_energia:
         friendly_name_template: "Quota Energia"
         icon_template: mdi:currency-eur
@@ -383,10 +413,38 @@ sensor:
 
 
 
-
-
 ##--------------------AUTOMAZIONI PER CAMBIO FASCIA---------------------##      
 automation:
+#####################controllo aggiornamenti############################
+  - alias: controllo versione pkconsumi
+    trigger:
+    - platform: time
+      at: '18:00'
+    - event: start
+      platform: homeassistant
+    condition:
+      - condition: template
+        value_template: "{{ states('sensor.versione_pk_consumi') > (state_attr('input_number.costo_f1', 'Version')) }}"
+    action:
+    - service: input_boolean.turn_on
+      data:
+        entity_id: input_boolean.versione_pkconsumi
+
+  - alias: controllo versione reset pkconsumi
+    trigger:
+    - platform: time
+      at: '18:05'
+    - event: start
+      platform: homeassistant
+    condition:
+      - condition: template
+        value_template: "{{ states('sensor.versione_pk_consumi') == (state_attr('input_number.costo_f1', 'Version')) }}"
+    action:
+    - service: input_boolean.turn_off
+      data:
+        entity_id: input_boolean.versione_pkconsumi
+#####################controllo aggiornamenti############################
+
   - alias: Cambio Tariffa F1
     initial_state: on
     trigger:
@@ -632,11 +690,25 @@ input_select:
       - 1
       - 2
       - 3
-    initial: 3
+    initial: *ntariffa
   fatturazione:
     name: fatturazione
     options:
       - mensile
       - bimestrale
       - trimestrale
+    initial: *fatturazione
     icon: mdi:checkbox-marked-outline
+input_boolean:
+  versione_pkconsumi:
+
+  
+script:
+  scarica_pkg:
+    sequence:
+      - service: downloader.download_file
+        data:
+          url: 'https://raw.githubusercontent.com/riddik14/hassio-package-consumi/master/pkg_tariffe_luce_consumi.yaml'
+          overwrite: true
+#downloader:
+#  download_dir: packages
