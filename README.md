@@ -25,25 +25,6 @@ contatti: 'riddik14 - github - telegram @riddik14 - e - robertopiumatti - github
 
 1. copiare il file pkg_consumi.yaml e secrets.yaml (se gia esistente copiare l contenuto del vostro sectrets.yaml) nella cartella "/config/packages" e modificarlo seguendo le istruzioni interne al file secrets.yaml.
 
-'
-   
-  ##--------------------- IMPOSTAZIONI DEL PACKAGE ---------------------##
-  setting:
-
-    # nel caso si disponga di un sensore di energia (kWh) inserirlo qua
-    Sensore: &sensore_misura_energia sensor.pzem_energy_today #sensor.energia_kwh
-
-    # SOLO NEL CASO NON SI DISPONGA DI UN SENSORE DI ENERGIA, ma solo del sensore di potenza instantanea:
-    # 1. decommentare le riga sotto (riga 29)
-    # 2. inserire il nome del sensore di potenza instantanea (W)
-    # 3. decommentare sensore di integrazione (riga 84-88)
-    # 4. inserire il nome del sensore di integrazione sensor.energia_kwh nel sensore di energia sopra (riga 21)
-
-
-    
-'
-
-
 2. installare dal menu frontend di hacs i seguenti:
 
 - vertical-stack-in-card
