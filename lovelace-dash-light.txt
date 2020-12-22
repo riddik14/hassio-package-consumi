@@ -381,10 +381,55 @@ cards:
                       - type: glance
                         entities:
                           - sensor.bolletta_tot_anno
-
       - type: 'custom:vertical-stack-in-card'
         cards:
           - type: glance
             entities:
               - sensor.bolletta_tot
               - sensor.bolletta_tot_mese_scorso
+      - type: 'custom:vertical-stack-in-card'
+        theme: ios-dark-mode-blue-red-alternative
+        cards:
+          - type: conditional
+            conditions:
+              - entity: input_boolean.versione_pkconsumi
+                state: 'on'
+            card:
+              type: 'custom:vertical-stack-in-card'
+              cards:
+                - type: markdown
+                  title: Aggiornamento Disponibile
+                  content: >-
+
+                    Versione Installata  {{
+                    states.input_datetime.f1_ora_inizio.attributes.Version }}
+
+                    Versione Disponibile {{
+                    states.sensor.versione_pk_consumi.state }}
+
+
+                    info: {{ states.sensor.tipo_aggiornamento_pk_consumi.state
+                    }}
+
+
+                    https://github.com/riddik14/hassio-package-consumi
+                    https://www.buymeacoffee.com/T1Pqksy
+
+
+                      per installare l'aggiornamneto premi sotto e reinpostare i dati nella sezione setting del package
+
+                      
+                      
+                - type: button
+                  tap_action:
+                    action: toggle
+                  entity: script.scarica_pkg
+                  name: Download in cartella Package
+                  icon: 'mdi:download'
+                  show_icon: true
+                  show_name: true
+                  show_state: false
+                  icon_height: 50px
+                  hold_action:
+                    action: navigate
+                    navigation_path: 'https://github.com/riddik14/hassio-package-consumi'
