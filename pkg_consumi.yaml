@@ -3,7 +3,7 @@ homeassistant:
     package.node_anchors:
       customize: &customize
         Package: 'Consumi'
-        Version: '0.0.9'
+        Version: '0.1.0'
         Author: 'Domenico Ceccarelli'
         icon: 'mdi:counter'
         entity_picture: https://avatars1.githubusercontent.com/u/37450907?s=400&u=c6397fc94ead7e4c469bfd3c6fa6c50c599f1ea8&v=4
@@ -20,6 +20,24 @@ homeassistant:
         <<: *customize
     input_datetime.f1_ora_inizio:
         <<: *customize
+    sensor.consumo_giornaliero_f1:
+        <<: *customize
+    sensor.consumo_giornaliero_f2:
+        <<: *customize
+    sensor.consumo_giornaliero_f3:
+        <<: *customize
+    sensor.consumo_mensile_f1:
+        <<: *customize
+    sensor.consumo_mensile_f2:
+        <<: *customize
+    sensor.consumo_mensile_f3:
+        <<: *customize
+    sensor.consumo_annuale_f1:
+        <<: *customize
+    sensor.consumo_annuale_f2:
+        <<: *customize
+    sensor.consumo_annuale_f3:
+        <<: *customize
         
         
   customize_glob:
@@ -29,7 +47,24 @@ homeassistant:
         <<: *customize
     input_number.f1_ora_inizio:
         <<: *customize
-
+    sensor.consumo_giornaliero_f1:
+        <<: *customize
+    sensor.consumo_giornaliero_f2:
+        <<: *customize
+    sensor.consumo_giornaliero_f3:
+        <<: *customize
+    sensor.consumo_mensile_f1:
+        <<: *customize
+    sensor.consumo_mensile_f2:
+        <<: *customize
+    sensor.consumo_mensile_f3:
+        <<: *customize
+    sensor.consumo_annuale_f1:
+        <<: *customize
+    sensor.consumo_annuale_f2:
+        <<: *customize
+    sensor.consumo_annuale_f3:
+        <<: *customize
 
 
 
