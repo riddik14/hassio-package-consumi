@@ -703,3 +703,4 @@ script:
         data:
           url: 'https://raw.githubusercontent.com/riddik14/hassio-package-consumi/master/pkg_consumi.yaml'
           overwrite: true
+      - service: homeassistant.restart
