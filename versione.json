@@ -1,4 +1,4 @@
 {
-   "versione": "0.1.0",
+   "versione": "0.1.1",
    "cosa_aggiornare": "aggiornamento solo package. dopo premuto il tasto aggiornamento basta ricaricare le personalizazioni e script. Da questo aggiornamento la funzione download scaricherà il pacchetto e poi riavvierà in automatico hassio core"
 }
