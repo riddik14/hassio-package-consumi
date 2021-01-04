@@ -815,8 +815,6 @@ script:
       - service: input_number.reload
       - delay: 1
       - service: input_select.reload
-      - delay: 1
-      - service: input_select.reload
       - delay: 5
       - service: script.reload
       - delay: 1
