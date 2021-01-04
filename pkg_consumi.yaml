@@ -803,5 +803,5 @@ script:
         data:
           url: 'https://raw.githubusercontent.com/riddik14/hassio-package-consumi/master/lovelace-dash-light.txt'
           overwrite: true
-      - delay: 5
-      - service: homeassistant.restart
+    #  - delay: 5
+    #  - service: homeassistant.restart
