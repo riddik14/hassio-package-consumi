@@ -3,7 +3,7 @@ homeassistant:
     package.node_anchors:
       customize: &customize
         Package: 'Consumi'
-        Version: '0.1.1'
+        Version: '0.1.2'
         Author: 'Domenico Ceccarelli'
         icon: 'mdi:counter'
         entity_picture: https://avatars1.githubusercontent.com/u/37450907?s=400&u=c6397fc94ead7e4c469bfd3c6fa6c50c599f1ea8&v=4
@@ -302,6 +302,39 @@ sensor:
           {{ (accise + iva) | round(2) }}
         unit_of_measurement: '€'  
 
+
+#------------------calcoli ieri-----------------------------------------##
+      costo_consumo_ieri_f1:
+        friendly_name_template: "Costo Consumo Ieri fascia 1"
+        icon_template: mdi:currency-eur
+        value_template: "{{((states.sensor.consumo_giornaliero_f1.attributes.last_period  | float) * (states.input_number.costo_f1.state| float)) | round(2) }}"
+        unit_of_measurement: '€'
+      costo_consumo_ieri_f2:
+        friendly_name_template: "Costo Consumo Ieri fascia 2"
+        icon_template: mdi:currency-eur
+        value_template: "{{((states.sensor.consumo_giornaliero_f2.attributes.last_period  | float) * (states.input_number.costo_f2.state| float)) | round(2) }}"
+        unit_of_measurement: '€'
+      costo_consumo_ieri_f3:
+        friendly_name_template: "Costo Consumo Ieri fascia 3"
+        icon_template: mdi:currency-eur
+        value_template: "{{((states.sensor.consumo_giornaliero_f3.attributes.last_period  | float) * (states.input_number.costo_f3.state| float)) | round(2) }}"
+        unit_of_measurement: '€'
+
+      consumo_totale_ieri:
+        friendly_name_template: " Consumo Ieri "
+        icon_template: mdi:counter
+        value_template: "{{((states.sensor.consumo_giornaliero_f1.attributes.last_period | float) + (states.sensor.consumo_giornaliero_f2.attributes.last_period | float) + (states.sensor.consumo_giornaliero_f3.attributes.last_period| float)) | round(3) }}"
+        unit_of_measurement: 'KWh'
+
+      costo_consumo_ieri_totale:
+        friendly_name_template: "Costo Consumo Ieri"
+        icon_template: mdi:currency-eur
+        value_template: "{{((states.sensor.costo_consumo_ieri_f1.state | float) + (states.sensor.costo_consumo_ieri_f2.state| float) + (states.sensor.costo_consumo_ieri_f3.state| float)) | round(2) }}"
+        unit_of_measurement: '€'
+
+
+
+
 ##------------------calcoli-mese-scorso---------------------------------##
 
       costo_consumo_mese_scorso_f1:
@@ -406,6 +439,61 @@ sensor:
   
 
 
+
+
+##----------------calcoli anno precedente
+      costo_consumo_anno_precedente_f1:
+        friendly_name_template: "Costo Consumo Anno Precedente fascia 1"
+        icon_template: mdi:currency-eur
+        value_template: "{{((states.sensor.consumo_annuale_f1.attributes.last_period | float) * (states.input_number.costo_f1.state| float)) | round(2) }}"
+        unit_of_measurement: '€'
+
+
+      costo_consumo_anno_precedente_f2:
+        friendly_name_template: "Costo Consumo Anno Precedente fascia 2"
+        icon_template: mdi:currency-eur
+        value_template: "{{((states.sensor.consumo_annuale_f2.attributes.last_period | float) * (states.input_number.costo_f2.state| float)) | round(2) }}"
+        unit_of_measurement: '€'
+
+      costo_consumo_anno_precedente_f3:
+        friendly_name_template: "Costo Consumo Anno Precedente fascia 3"
+        icon_template: mdi:currency-eur
+        value_template: "{{((states.sensor.consumo_annuale_f3.attributes.last_period | float) * (states.input_number.costo_f3.state| float)) | round(2) }}"
+        unit_of_measurement: '€'
+
+      consumo_totale_anno_precedente:
+        friendly_name_template: "Consumo Anno Precedente"
+        icon_template: mdi:counter
+        value_template: "{{((states.sensor.consumo_annuale_f1.attributes.last_period  | float) + (states.sensor.consumo_annuale_f2.attributes.last_period  | float) + (states.sensor.consumo_annuale_f3.attributes.last_period  | float)) | round(3) }}"
+        unit_of_measurement: 'KWh'
+
+      # Costi bolletta anno_precedente #
+      costo_consumo_anno_precedente_totale:
+        friendly_name_template: "Costo Consumo Anno Precedente"
+        icon_template: mdi:currency-eur
+        value_template: "{{((states.sensor.costo_consumo_anno_precedente_f1.state | float) + (states.sensor.costo_consumo_anno_precedente_f2.state| float) + (states.sensor.costo_consumo_anno_precedente_f3.state| float)) | round(2) }}"
+        unit_of_measurement: '€'
+
+      bolletta_tot_anno_precedente:
+        friendly_name_template: "Stima Costo Anno Precedente"
+        icon_template: mdi:currency-eur
+        value_template: >- 
+          {% set energiaConsumo = states('sensor.costo_consumo_anno_precedente_totale') | float %}
+          {% set energiaFissa = (states('input_number.materia_energia_quota_fissa_annua') | float) | round(2) %}
+          {% set energia = energiaConsumo + energiaFissa %}
+           
+          {% set trasportoConsumo = ((states('sensor.consumo_totale_anno_precedente') | float) * (states('input_number.trasporto_quota_energia') | float)) |round (2) %}
+          {% set trasportoFissa = (states('input_number.trasporto_quota_fissa_annua') | float) | round(2) %}
+          {% set trasportoPotenza =  ((states('input_number.trasporto_quota_potenza_annua') | float) * (states('input_number.kw_contatore') | float)) | round(2) %}
+          {% set trasporto = trasportoConsumo + trasportoFissa + trasportoPotenza %}
+          
+          {% set oneri = ((states('sensor.consumo_totale_anno_precedente') | float) * (states('input_number.oneri_di_sistema_quota_energia') | float)) |round (2) %}
+
+          {%set accise = ((states('sensor.consumo_totale_anno_precedente') | float) * (states('input_number.accise') | float)) %}
+          {%set iva = ((energia + trasporto + oneri + accise) * (states('input_number.iva') | float) / 100) %}
+
+          {{ (energia + trasporto + oneri + accise + iva ) | round(2) }}
+        unit_of_measurement: '€'
 
 
 ##--------------------AUTOMAZIONI PER CAMBIO FASCIA---------------------##      
@@ -709,4 +797,4 @@ script:
           url: 'https://raw.githubusercontent.com/riddik14/hassio-package-consumi/master/lovelace-dash-light.txt'
           overwrite: true
       - delay: 5
-      - service: homeassistant.restart
+      - service: template.reload
