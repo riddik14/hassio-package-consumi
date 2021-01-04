@@ -794,6 +794,9 @@ input_boolean:
 script:
   scarica_pkg:
     sequence:
+      - service: notify.persistent_notification
+        data:
+          message: 'Aggiorno il pacchetto... attendere'
       - service: downloader.download_file
         data:
           url: 'https://raw.githubusercontent.com/riddik14/hassio-package-consumi/master/pkg_consumi.yaml'
@@ -803,5 +806,23 @@ script:
         data:
           url: 'https://raw.githubusercontent.com/riddik14/hassio-package-consumi/master/lovelace-dash-light.txt'
           overwrite: true
-    #  - delay: 5
-    #  - service: homeassistant.restart
+      - delay: 5
+      #- service: homeassistant.restart
+      - delay: 5
+      - service: notify.notify
+        data:
+          message: 'package consumi aggiornato. Ricarico i servizi'
+      - delay: 10  
+     # - service: homeassistant.restart
+      - service: script.reload
+      - service: automation.reload
+      - service: input_boolean.reload
+      - service: input_select.reload
+      - service: input_number.reload
+      - service: input_datetime.reload
+      - service: template.reload.reload
+      - service: notify.notify
+        data:
+          message: 'Servizi Ricaricati. ricarico in ultimo gli script'
+      - service: script.reload
+
