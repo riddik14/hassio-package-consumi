@@ -3,7 +3,7 @@ homeassistant:
     package.node_anchors:
       customize: &customize
         Package: 'Consumi'
-        Version: '0.1.1'
+        Version: '0.1.2'
         Author: 'Domenico Ceccarelli'
         icon: 'mdi:counter'
         entity_picture: https://avatars1.githubusercontent.com/u/37450907?s=400&u=c6397fc94ead7e4c469bfd3c6fa6c50c599f1ea8&v=4
@@ -809,20 +809,22 @@ script:
       - delay: 5
       #- service: homeassistant.restart
       - delay: 5
-      - service: notify.notify
+      - service: notify.persistent_notification
         data:
-          message: 'package consumi aggiornato. Ricarico i servizi'
-      - delay: 10  
+          message: 'Package Consumi Aggiornato. Ricarico i servizi'
+      - delay: 1  
      # - service: homeassistant.restart
-      - service: script.reload
       - service: automation.reload
       - service: input_boolean.reload
       - service: input_select.reload
       - service: input_number.reload
       - service: input_datetime.reload
-      - service: template.reload.reload
-      - service: notify.notify
+      - service: template.reload
+      - service: notify.persistent_notification
         data:
           message: 'Servizi Ricaricati. ricarico in ultimo gli script'
       - service: script.reload
+      - service: notify.persistent_notification
+        data:
+          message: 'Fatto'
 
