@@ -1,5 +1,4 @@
 type: 'custom:vertical-stack-in-card'
-theme: ios-dark-mode-blue-red-alternative
 cards:
   - type: horizontal-stack
     cards:
@@ -179,6 +178,75 @@ cards:
                     entity_row: true
                     color: green
                     max: 15
+              - type: vertical-stack
+                cards:
+                  - animation:
+                      speed: '5'
+                      state: 'on'
+                    entities:
+                      - animation:
+                          speed: '5'
+                          state: 'on'
+                        direction: right
+                        name: ' '
+                        icon: 'mdi:keyboard-f1'
+                        positions:
+                          icon: inside
+                        entity: sensor.consumo_giornaliero_f1
+                        attribute: last_period
+                        max: 100
+                      - animation:
+                          speed: '5'
+                          state: 'on'
+                        direction: right
+                        name: ' '
+                        icon: 'mdi:keyboard-f2'
+                        positions:
+                          icon: inside
+                        entity: sensor.consumo_giornaliero_f2
+                        attribute: last_period
+                        max: 50
+                      - animation:
+                          speed: '5'
+                          state: 'on'
+                        direction: right
+                        name: ' '
+                        icon: 'mdi:keyboard-f3'
+                        positions:
+                          icon: inside
+                        entity: sensor.consumo_giornaliero_f3
+                        attribute: last_period
+                        max: 130
+                      - animation:
+                          speed: '5'
+                          state: 'on'
+                        direction: right
+                        name: ' '
+                        positions:
+                          icon: inside
+                        entity: sensor.costo_consumo_ieri_totale
+                        max: 20
+                      - animation:
+                          speed: '5'
+                          state: 'on'
+                        direction: right
+                        name: Totale
+                        positions:
+                          icon: inside
+                        entity: sensor.consumo_totale_ieri
+                        max: 300
+                    positions:
+                      icon: inside
+                      indicator: inside
+                      minmax: 'off'
+                      name: inside
+                    title: Consumo Ieri
+                    type: 'custom:bar-card'
+                    direction: up
+                    columns: '3'
+                    max: 4000
+                    entity_row: true
+                    color: Blue
           mese:
             type: vertical-stack
             cards:
@@ -369,18 +437,88 @@ cards:
                       indicator: inside
                       minmax: 'off'
                       name: inside
-                    title: Consumo Annuale
+                    title: Consumo Anno Corrente
                     type: 'custom:bar-card'
                     direction: up
                     columns: '3'
                     max: 4000
                     entity_row: true
                     color: orange
+              - type: vertical-stack
+                cards:
+                  - animation:
+                      speed: '5'
+                      state: 'on'
+                    entities:
+                      - animation:
+                          speed: '5'
+                          state: 'on'
+                        direction: right
+                        name: ' '
+                        icon: 'mdi:keyboard-f1'
+                        positions:
+                          icon: inside
+                        entity: sensor.consumo_annuale_f1
+                        attribute: last_period
+                        max: 1500
+                      - animation:
+                          speed: '5'
+                          state: 'on'
+                        direction: right
+                        name: ' '
+                        icon: 'mdi:keyboard-f2'
+                        positions:
+                          icon: inside
+                        entity: sensor.consumo_annuale_f2
+                        attribute: last_period
+                        max: 1000
+                      - animation:
+                          speed: '5'
+                          state: 'on'
+                        direction: right
+                        name: ' '
+                        icon: 'mdi:keyboard-f3'
+                        positions:
+                          icon: inside
+                        entity: sensor.consumo_annuale_f3
+                        attribute: last_period
+                        max: 1450
+                      - animation:
+                          speed: '5'
+                          state: 'on'
+                        direction: right
+                        name: ' '
+                        positions:
+                          icon: inside
+                        entity: sensor.costo_consumo_anno_precedente_totale
+                        max: 450
+                      - animation:
+                          speed: '5'
+                          state: 'on'
+                        direction: right
+                        name: Totale
+                        positions:
+                          icon: inside
+                        entity: sensor.consumo_totale_anno_precedente
+                        max: 3800
+                    positions:
+                      icon: inside
+                      indicator: inside
+                      minmax: 'off'
+                      name: inside
+                    title: Consumo Anno Precedente
+                    type: 'custom:bar-card'
+                    direction: up
+                    columns: '3'
+                    max: 4000
+                    entity_row: true
+                    color: Blue
                   - type: 'custom:vertical-stack-in-card'
                     cards:
                       - type: glance
                         entities:
                           - sensor.bolletta_tot_anno
+                          - sensor.bolletta_tot_anno_precedente
       - type: 'custom:vertical-stack-in-card'
         cards:
           - type: glance
@@ -416,7 +554,15 @@ cards:
                     https://www.buymeacoffee.com/T1Pqksy
 
 
-                      per installare l'aggiornamneto premi sotto e riavviare hassio
+                      per installare l'aggiornamneto premi sotto e da opzioni di homeassistant ricaricare:
+                      - script
+                      - template
+                      - automazioni 
+                      - input_boolean
+                      - input_datetime
+                      - input_number
+                      - input_select
+                      dalla prossima release questa operazione sarà automatica.
 
                       
                       
@@ -424,7 +570,7 @@ cards:
                   tap_action:
                     action: toggle
                   entity: script.scarica_pkg
-                  name: Download in cartella Package
+                  name: Aggiorna
                   icon: 'mdi:download'
                   show_icon: true
                   show_name: true
