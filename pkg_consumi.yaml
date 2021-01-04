@@ -70,7 +70,14 @@ homeassistant:
 
 
 
-
+history:
+  include:
+    entities:
+      - sensor.energia_kwh
+recorder:
+  include:
+    entities:
+      - sensor.energia_kwh
 downloader:
   download_dir: packages    
 utility_meter:
@@ -798,3 +805,21 @@ script:
           overwrite: true
       - delay: 5
       - service: template.reload
+      - delay: 1
+      - service: automation.reload
+      - delay: 1
+      - service: input_boolean.reload
+      - delay: 1
+      - service: input_datetime.reload
+      - delay: 1
+      - service: input_number.reload
+      - delay: 1
+      - service: input_select.reload
+      - delay: 1
+      - service: input_select.reload
+      - delay: 5
+      - service: script.reload
+      - delay: 1
+      - service: notify.notify
+          message: Package consumi aggiornato
+          title: Package Consumi - Update
