@@ -3,11 +3,11 @@ homeassistant:
     package.node_anchors:
       customize: &customize
         Package: 'Consumi'
-        Version: '0.1.3'
+        Version: '0.1.4'
         Author: 'Domenico Ceccarelli'
         icon: 'mdi:counter'
         entity_picture: https://avatars1.githubusercontent.com/u/37450907?s=400&u=c6397fc94ead7e4c469bfd3c6fa6c50c599f1ea8&v=4
-        reference: 'riddik14 - github telegram @riddik14'
+        reference: 'riddik14 - github chat telegram https://t.me/joinchat/SEeT4Ibmj0O29irI'
       expose: &expose
         <<: *customize
         haaska_hidden: false
