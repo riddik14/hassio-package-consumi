@@ -1,4 +1,4 @@
 {
    "versione": "0.1.4",
-   "cosa_aggiornare": "Dopo aver premuto il tasto aggiornamento ricaricare gli script e le entita template, copiare a mano la nuova versione lovelace light "
+   "cosa_aggiornare": "aggiorna con il tasto sotto, non dimenticare di aggiungere al secret queste righe Servizio_Notifica_Consumi_Telegram: notify.telegram_consumi #tuo servizio notifica-io ho usato telegram e invio a un gruppo specifico Servizio_Notifica_Consumi_tts_google: tts.google_translate_say Media_Player_google: media_player.soggiorno "
 }
