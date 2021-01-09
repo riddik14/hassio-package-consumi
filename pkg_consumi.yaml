@@ -3,7 +3,7 @@ homeassistant:
     package.node_anchors:
       customize: &customize
         Package: 'Consumi'
-        Version: '0.1.4'
+        Version: '0.1.5'
         Author: 'Domenico Ceccarelli'
         icon: 'mdi:counter'
         entity_picture: https://avatars1.githubusercontent.com/u/37450907?s=400&u=c6397fc94ead7e4c469bfd3c6fa6c50c599f1ea8&v=4
@@ -502,7 +502,20 @@ sensor:
           {{ (energia + trasporto + oneri + accise + iva ) | round(2) }}
         unit_of_measurement: '€'
 
-
+      mese_precedente:
+        friendly_name_template: "Mese precedente"
+        icon_template: mdi:calendar-today
+        value_template: >
+          {% set mo = now().strftime('%m') | int %}
+          {% set months = ["Gennaio","Febbraio", "Marzo", "Aprile", "Maggio", "Giugno", "Luglio", "Agosto", "Settembre", "Ottobre", "Novembre", "Dicembre"] %}
+          {{months[mo -2]}}
+      mese_corrente:
+        friendly_name_template: "Mese corrente"
+        icon_template: mdi:calendar-today
+        value_template: >
+          {% set mo = now().strftime('%m') | int %}
+          {% set months = ["Gennaio","Febbraio", "Marzo", "Aprile", "Maggio", "Giugno", "Luglio", "Agosto", "Settembre", "Ottobre", "Novembre", "Dicembre"] %}
+          {{months[mo -1]}}
 ##--------------------AUTOMAZIONI PER CAMBIO FASCIA---------------------##      
 automation:
 #####################controllo aggiornamenti############################
@@ -650,6 +663,62 @@ automation:
         entity_id: utility_meter.consumo_annuale
         tariff: f3
 
+#invio messaggio storico
+  - alias: messaggio_consumi_telegram
+    trigger:
+    - at: '23:59'
+      platform: time
+    condition:
+    - condition: state
+      entity_id: binary_sensor.ultimo_giorno_mese
+      state: 'on'
+    action:
+    - service: notify.persistent_notification
+      data:
+        message: >-
+           Nel mese di {{ states.sensor.mese_corrente.state }} hai consumato {{ states.sensor.consumo_totale_mensile.state }} kwh
+           
+           Energia                 {{ states.sensor.bolletta_energia.state }} €
+           
+           Trasporto               {{ states.sensor.bolletta_trasporto.state }} €
+           
+           Oneri di sistema    {{ states.sensor.bolletta_oneri_di_sistema.state }} €
+           
+           Iva                           {{ states.sensor.bolletta_iva.state }} €
+           
+           Totale                   {{ states.sensor.bolletta_tot.state }} €
+    - service: !secret Servizio_Notifica_Consumi_Telegram
+      data:
+        title: Consumi
+        message: >-
+           Nel mese di {{ states.sensor.mese_corrente.state }} hai consumato {{ states.sensor.consumo_totale_mensile.state }} kwh
+           
+           Energia                 {{ states.sensor.bolletta_energia.state }} €
+           
+           Trasporto               {{ states.sensor.bolletta_trasporto.state }} €
+           
+           Oneri di sistema    {{ states.sensor.bolletta_oneri_di_sistema.state }} €
+           
+           Iva                           {{ states.sensor.bolletta_iva.state }} €
+           
+           Totale                   {{ states.sensor.bolletta_tot.state }} €
+  - alias: messaggio_consumi_google_d1 #avviso via google 1 del mese ore 12.00
+    trigger:
+    - at: '12:00'
+      platform: time
+    condition:
+    - condition: state
+      entity_id: binary_sensor.ultimo_giorno_mese
+      state: 'on'
+    action:
+    - data:
+        entity_id: !secret Media_Player_google
+        message: >-
+           Nel mese di {{ states.sensor.mese_precedente.state }} hai consumato {{ states.sensor.consumo_totale_mese_scorso.state }} kilo watt ora
+           
+           avarai una bolletta di circa {{ states.sensor.bolletta_tot_mese_scorso.state }} € per il solo mese di {{ states.sensor.mese_precedente.state }} 
+      service: !secret Servizio_Notifica_Consumi_tts_google
+      
 binary_sensor:
   - platform: workday
     country: IT
@@ -659,6 +728,21 @@ binary_sensor:
     country: IT
     workdays: [sat]
     name: sabato
+#last Day of the month Sensor
+  - platform: template
+    sensors:
+      ultimo_giorno_mese:
+        friendly_name: 'ultimo_giorno_mese'
+        entity_id: sensor.date
+        icon_template: "mdi:calendar"
+        value_template: "{{ (as_timestamp(now()) + 86400)|timestamp_custom('%d', true) | int == 1 }}"
+  - platform: template
+    sensors:
+      primo_giorno_mese:
+        friendly_name: 'primo_giorno_mese'
+        entity_id: sensor.date
+        icon_template: "mdi:calendar"
+        value_template: "{{ (as_timestamp(now()) )|timestamp_custom('%d', true) | int == 1 }}"
 input_datetime:
   f1_ora_inizio:
     name: "Orario Inizio Fascia 1"
@@ -824,7 +908,7 @@ script:
         data:
           message: 'Servizi Ricaricati. ricarico in ultimo gli script'
       - service: script.reload
-      - service: notify.persistent_notification
+      - service: notify.notify
         data:
-          message: 'Fatto'
+          message: 'Aggiornamento Pk Conumi Fatto, se vuoi puoi offrire un caffe al creatore del pacchetto a questo link '
 
