@@ -910,5 +910,5 @@ script:
       - service: script.reload
       - service: notify.notify
         data:
-          message: 'Aggiornamento Pk Conumi Fatto, se vuoi puoi offrire un caffe al creatore del pacchetto a questo link '
+          message: 'Aggiornamento Pk Conumi Fatto, se vuoi puoi offrire un caffe al creatore del pacchetto a questo link https://www.buymeacoffee.com/T1Pqksy'
 
