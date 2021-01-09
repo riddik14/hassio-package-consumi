@@ -1,4 +1,4 @@
 {
    "versione": "0.1.5",
-   "cosa_aggiornare": "aggiorna con il tasto sotto, non dimenticare di aggiungere al secret queste righe Servizio_Notifica_Consumi_Telegram: notify.telegram_consumi #tuo servizio notifica-io ho usato telegram e invio a un gruppo specifico Servizio_Notifica_Consumi_tts_google: tts.google_translate_say Media_Player_google: media_player.soggiorno "
+   "cosa_aggiornare": "aggiungi al secret Servizio_Notifica_Consumi_Telegram: notify.telegram_consumi Servizio_Notifica_Consumi_tts_google: tts.google_translate_say Media_Player_google: media_player.soggiorno"
 }
