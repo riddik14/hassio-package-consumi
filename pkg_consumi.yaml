@@ -70,14 +70,14 @@ homeassistant:
 
 
 
-history:
-  include:
-    entities:
-      - sensor.energia_kwh
-recorder:
-  include:
-    entities:
-      - sensor.energia_kwh
+#history:
+#  include:
+#    entities:
+#      - sensor.energia_kwh
+#recorder:
+#  include:
+#    entities:
+#      - sensor.energia_kwh
 downloader:
   download_dir: packages    
 utility_meter:
