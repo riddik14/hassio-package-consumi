@@ -718,7 +718,23 @@ automation:
            
            avarai una bolletta di circa {{ states.sensor.bolletta_tot_mese_scorso.state }} € per il solo mese di {{ states.sensor.mese_precedente.state }} 
       service: !secret Servizio_Notifica_Consumi_tts_google
-      
+  - alias: messaggio_consumi_alexa #avviso via alexa del mese ore 12.00 integrazione by radeon79
+    trigger:
+    - at: '12:00'
+      platform: time
+    condition:
+    - condition: state
+      entity_id: binary_sensor.ultimo_giorno_mese
+      state: 'on'
+    action:
+    - data:
+        target: !secret Media_Player_alexa
+        data:
+          type: tts
+        message: >-
+           Nel mese di {{ states.sensor.mese_precedente.state }} hai consumato {{ states.sensor.consumo_totale_mese_scorso.state }} kilo watt ora
+           avrai una bolletta di circa {{ states.sensor.bolletta_tot_mese_scorso.state }} € per il solo mese di {{ states.sensor.mese_precedente.state }} 
+      service: notify.alexa_media      
 binary_sensor:
   - platform: workday
     country: IT
