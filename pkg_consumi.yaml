@@ -70,14 +70,14 @@ homeassistant:
 
 
 
-#history:
-#  include:
-#    entities:
-#      - sensor.energia_kwh
-#recorder:
-#  include:
-#    entities:
-#      - sensor.energia_kwh
+history:
+  include:
+    entities:
+      - sensor.energia_kwh
+recorder:
+  include:
+    entities:
+      - sensor.energia_kwh
 downloader:
   download_dir: packages    
 utility_meter:
@@ -371,7 +371,7 @@ sensor:
       costo_consumo_mese_scorso_totale:
         friendly_name_template: "Costo Consumo mese scorso"
         icon_template: mdi:currency-eur
-        value_template: "{{((states.sensor.costo_consumo_mese_scorso_f1.state | float) + (states.sensor.costo_consumo_mensile_f2.state  | float) + (states.sensor.costo_consumo_mensile_f3.state  | float)) | round(2) }}"
+        value_template: "{{((states.sensor.costo_consumo_mese_scorso_f1.state | float) + (states.sensor.costo_consumo_mese_scorso_f2.state  | float) + (states.sensor.costo_consumo_mese_scorso_f3.state  | float)) | round(2) }}"
         unit_of_measurement: '€'
 
       bolletta_tot_mese_scorso:
@@ -381,7 +381,7 @@ sensor:
           {% set energiaConsumo_ms = states('sensor.costo_consumo_mese_scorso_totale') | float %}
           {% set energiaFissa_ms = ((states('input_number.materia_energia_quota_fissa_annua') | float) / 12) | round(2) %}
           {% set energia_ms = energiaConsumo_ms + energiaFissa_ms %}
-          {% set trasportoConsumo_ms = ((states('sensor.consumo_totale_mensile') | float) * (states('input_number.trasporto_quota_energia') | float)) |round (2) %}
+          {% set trasportoConsumo_ms = ((states('sensor.consumo_totale_mese_scorso') | float) * (states('input_number.trasporto_quota_energia') | float)) |round (2) %}
           {% set trasportoFissa_ms = ((states('input_number.trasporto_quota_fissa_annua') | float) / 12) | round(2) %}
           {% set trasportoPotenza_ms =  (((states('input_number.trasporto_quota_potenza_annua') | float) * (states('input_number.kw_contatore') | float)) / 12) | round(2) %}
           {% set trasporto_ms = trasportoConsumo_ms + trasportoFissa_ms + trasportoPotenza_ms %}
@@ -926,5 +926,5 @@ script:
       - service: script.reload
       - service: notify.notify
         data:
-          message: 'Aggiornamento Pk Conumi Fatto, se vuoi puoi offrire un caffe al creatore del pacchetto a questo link https://www.buymeacoffee.com/T1Pqksy'
+          message: 'Aggiornamento Pk Consumi Fatto, se vuoi puoi offrire un caffe al creatore del pacchetto a questo link https://www.buymeacoffee.com/T1Pqksy'
 
