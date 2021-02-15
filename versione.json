@@ -1,4 +1,4 @@
 {
-   "versione": "0.1.5",
-   "cosa_aggiornare": "aggiungi al secret Servizio_Notifica_Consumi_Telegram: notify.telegram_consumi Servizio_Notifica_Consumi_tts_google: tts.google_translate_say Media_Player_google: media_player.soggiorno"
+   "versione": "0.1.6",
+   "cosa_aggiornare": "correzioni varie al package e alla lovelace light scaricabile da qui https://github.com/riddik14/hassio-package-consumi/blob/main/lovelace-dash-light.txt"
 }
