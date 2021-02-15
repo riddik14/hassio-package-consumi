@@ -1,4 +1,5 @@
 type: 'custom:vertical-stack-in-card'
+theme: ios-dark-mode-blue-red-alternative
 cards:
   - type: horizontal-stack
     cards:
@@ -357,7 +358,7 @@ cards:
                         name: ' '
                         positions:
                           icon: inside
-                        entity: sensor.costo_consumo_mensile_totale
+                        entity: sensor.costo_consumo_mese_scorso_totale
                         max: 20
                       - animation:
                           speed: '5'
@@ -373,7 +374,7 @@ cards:
                       indicator: inside
                       minmax: 'off'
                       name: inside
-                    title: Consumo Mese Precedente
+                    title: Consumo Mese Precedente (energia)
                     type: 'custom:bar-card'
                     direction: up
                     columns: '3'
@@ -554,15 +555,8 @@ cards:
                     https://www.buymeacoffee.com/T1Pqksy
 
 
-                      per installare l'aggiornamneto premi sotto e da opzioni di homeassistant ricaricare:
-                      - script
-                      - template
-                      - automazioni 
-                      - input_boolean
-                      - input_datetime
-                      - input_number
-                      - input_select
-                      dalla prossima release questa operazione sarà automatica.
+                      per installare l'aggiornamneto premi sotto e 
+                      da opzioni hassio ricaricare gli script, i template, automazioni  e tutti gli input
 
                       
                       
