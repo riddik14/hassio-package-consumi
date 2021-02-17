@@ -68,16 +68,16 @@ homeassistant:
 
 
 
+ 
 
-
-history:
-  include:
-    entities:
-      - sensor.energia_kwh
-recorder:
-  include:
-    entities:
-      - sensor.energia_kwh
+#history:
+#  include:
+#    entities:
+#      - sensor.energia_kwh
+#recorder:
+#  include:
+#    entities:
+#      - sensor.energia_kwh
 downloader:
   download_dir: packages    
 utility_meter:
@@ -522,7 +522,7 @@ automation:
   - alias: controllo versione pkconsumi
     trigger:
     - platform: time
-      at: '18:00'
+      at: '18:00:00'
     - event: start
       platform: homeassistant
     condition:
@@ -556,7 +556,7 @@ automation:
         to: '1'
       - platform: template
         value_template: >-
-          {{ states('sensor.time') == (states.input_datetime.f1_ora_inizio.attributes.timestamp | int | timestamp_custom('%H:%M', False)) }}
+          {{ states('sensor.time') == (states.input_datetime.f1_ora_inizio.attributes.timestamp | int | timestamp_custom('%H:%M:%S', False)) }}
     condition:
       condition: or
       conditions:
@@ -585,7 +585,7 @@ automation:
     trigger:
       - platform: template
         value_template: >-
-          {{ states('sensor.time') == (states.input_datetime.f2_ora_inizio_sera.attributes.timestamp | int | timestamp_custom('%H:%M', False)) }}
+          {{ states('sensor.time') == (states.input_datetime.f2_ora_inizio_sera.attributes.timestamp | int | timestamp_custom('%H:%M:%S', False)) }}
     condition:
       - condition: state
         entity_id: input_select.numero_di_fasce
@@ -609,10 +609,10 @@ automation:
     trigger:
       - platform: template
         value_template: >-
-          {{ states('sensor.time') == (states.input_datetime.f2_ora_inizio_mattino.attributes.timestamp | int | timestamp_custom('%H:%M', False)) }}
+          {{ states('sensor.time') == (states.input_datetime.f2_ora_inizio_mattino.attributes.timestamp | int | timestamp_custom('%H:%M:%S', False)) }}
       - platform: template
         value_template: >-
-          {{ states('sensor.time') == (states.input_datetime.f2_ora_inizio_sera.attributes.timestamp | int | timestamp_custom('%H:%M', False)) }}
+          {{ states('sensor.time') == (states.input_datetime.f2_ora_inizio_sera.attributes.timestamp | int | timestamp_custom('%H:%M:%S', False)) }}
     condition:
       - condition: state
         entity_id: input_select.numero_di_fasce
@@ -644,7 +644,7 @@ automation:
     trigger:
       platform: template
       value_template: >-
-        {{ states('sensor.time') == (states.input_datetime.f3_ora_inizio.attributes.timestamp | int | timestamp_custom('%H:%M', False)) }}
+        {{ states('sensor.time') == (states.input_datetime.f3_ora_inizio.attributes.timestamp | int | timestamp_custom('%H:%M:%S', False)) }}
     condition:
       - condition: state
         entity_id: input_select.numero_di_fasce
@@ -666,7 +666,7 @@ automation:
 #invio messaggio storico
   - alias: messaggio_consumi_telegram
     trigger:
-    - at: '23:59'
+    - at: '23:59:00'
       platform: time
     condition:
     - condition: state
@@ -704,7 +704,7 @@ automation:
            Totale                   {{ states.sensor.bolletta_tot.state }} €
   - alias: messaggio_consumi_google_d1 #avviso via google 1 del mese ore 12.00
     trigger:
-    - at: '12:00'
+    - at: '12:00:00'
       platform: time
     condition:
     - condition: state
@@ -720,7 +720,7 @@ automation:
       service: !secret Servizio_Notifica_Consumi_tts_google
   - alias: messaggio_consumi_alexa #avviso via alexa del mese ore 12.00 integrazione by radeon79
     trigger:
-    - at: '12:00'
+    - at: '12:00:00'
       platform: time
     condition:
     - condition: state
@@ -764,22 +764,22 @@ input_datetime:
     name: "Orario Inizio Fascia 1"
     has_date: false
     has_time: true
-    initial: '08:00'
+    initial: '08:00:00'
   f2_ora_inizio_mattino:
     name: "Orario Inizio Fascia 2 - Mattino"
     has_date: false
     has_time: true
-    initial: '07:00'
+    initial: '07:00:00'
   f2_ora_inizio_sera:
     name: "Orario Inizio Fascia 2 - Sera"
     has_date: false
     has_time: true
-    initial: '19:00'
+    initial: '19:00:00'
   f3_ora_inizio:
     name: "Orario Inizio Fascia 3"
     has_date: false
     has_time: true
-    initial: '23:00'
+    initial: '23:00:00'
 input_number: 
   # Materia Energia
   materia_energia_quota_fissa_annua:
