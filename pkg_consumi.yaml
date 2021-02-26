@@ -6,7 +6,7 @@ homeassistant:
         Version: '0.1.7'
         Author: 'Domenico Ceccarelli'
         icon: 'mdi:counter'
-        entity_picture: https://avatars1.githubusercontent.com/u/37450907?s=400&u=c6397fc94ead7e4c469bfd3c6fa6c50c599f1ea8&v=4
+        #entity_picture: https://avatars1.githubusercontent.com/u/37450907?s=400&u=c6397fc94ead7e4c469bfd3c6fa6c50c599f1ea8&v=4
         reference: 'riddik14 - github chat telegram https://t.me/joinchat/Fanqz1jiL42Y0Hzd'
       expose: &expose
         <<: *customize
@@ -70,14 +70,7 @@ homeassistant:
 
  
 
-#history:
-#  include:
-#    entities:
-#      - sensor.energia_kwh
-#recorder:
-#  include:
-#    entities:
-#      - sensor.energia_kwh
+
 downloader:
   download_dir: packages    
 utility_meter:
