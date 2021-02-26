@@ -555,9 +555,7 @@ cards:
                     https://www.buymeacoffee.com/T1Pqksy
 
 
-                      per installare l'aggiornamneto premi sotto e 
-                      da opzioni hassio ricaricare gli script, i template, automazioni  e tutti gli input
-
+                      per installare premi sotto
                       
                       
                 - type: button
