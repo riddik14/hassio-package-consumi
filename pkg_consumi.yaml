@@ -3,7 +3,7 @@ homeassistant:
     package.node_anchors:
       customize: &customize
         Package: 'Consumi'
-        Version: '0.1.6'
+        Version: '0.1.7'
         Author: 'Domenico Ceccarelli'
         icon: 'mdi:counter'
         entity_picture: https://avatars1.githubusercontent.com/u/37450907?s=400&u=c6397fc94ead7e4c469bfd3c6fa6c50c599f1ea8&v=4
@@ -522,7 +522,7 @@ automation:
   - alias: controllo versione pkconsumi
     trigger:
     - platform: time
-      at: '18:00:00'
+      at: '18:00'
     - event: start
       platform: homeassistant
     condition:
@@ -556,7 +556,7 @@ automation:
         to: '1'
       - platform: template
         value_template: >-
-          {{ states('sensor.time') == (states.input_datetime.f1_ora_inizio.attributes.timestamp | int | timestamp_custom('%H:%M:%S', False)) }}
+          {{ states('sensor.time') == (states.input_datetime.f1_ora_inizio.attributes.timestamp | int | timestamp_custom('%H:%M', False)) }}
     condition:
       condition: or
       conditions:
@@ -585,7 +585,7 @@ automation:
     trigger:
       - platform: template
         value_template: >-
-          {{ states('sensor.time') == (states.input_datetime.f2_ora_inizio_sera.attributes.timestamp | int | timestamp_custom('%H:%M:%S', False)) }}
+          {{ states('sensor.time') == (states.input_datetime.f2_ora_inizio_sera.attributes.timestamp | int | timestamp_custom('%H:%M', False)) }}
     condition:
       - condition: state
         entity_id: input_select.numero_di_fasce
@@ -609,10 +609,10 @@ automation:
     trigger:
       - platform: template
         value_template: >-
-          {{ states('sensor.time') == (states.input_datetime.f2_ora_inizio_mattino.attributes.timestamp | int | timestamp_custom('%H:%M:%S', False)) }}
+          {{ states('sensor.time') == (states.input_datetime.f2_ora_inizio_mattino.attributes.timestamp | int | timestamp_custom('%H:%M', False)) }}
       - platform: template
         value_template: >-
-          {{ states('sensor.time') == (states.input_datetime.f2_ora_inizio_sera.attributes.timestamp | int | timestamp_custom('%H:%M:%S', False)) }}
+          {{ states('sensor.time') == (states.input_datetime.f2_ora_inizio_sera.attributes.timestamp | int | timestamp_custom('%H:%M', False)) }}
     condition:
       - condition: state
         entity_id: input_select.numero_di_fasce
@@ -644,7 +644,7 @@ automation:
     trigger:
       platform: template
       value_template: >-
-        {{ states('sensor.time') == (states.input_datetime.f3_ora_inizio.attributes.timestamp | int | timestamp_custom('%H:%M:%S', False)) }}
+        {{ states('sensor.time') == (states.input_datetime.f3_ora_inizio.attributes.timestamp | int | timestamp_custom('%H:%M', False)) }}
     condition:
       - condition: state
         entity_id: input_select.numero_di_fasce
@@ -666,7 +666,7 @@ automation:
 #invio messaggio storico
   - alias: messaggio_consumi_telegram
     trigger:
-    - at: '23:59:00'
+    - at: '23:59'
       platform: time
     condition:
     - condition: state
