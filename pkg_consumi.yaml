@@ -3,7 +3,7 @@ homeassistant:
     package.node_anchors:
       customize: &customize
         Package: 'Consumi'
-        Version: '0.1.7'
+        Version: '0.2.0'
         Author: 'Domenico Ceccarelli'
         icon: 'mdi:counter'
         #entity_picture: https://avatars1.githubusercontent.com/u/37450907?s=400&u=c6397fc94ead7e4c469bfd3c6fa6c50c599f1ea8&v=4
@@ -742,14 +742,14 @@ binary_sensor:
     sensors:
       ultimo_giorno_mese:
         friendly_name: 'ultimo_giorno_mese'
-        entity_id: sensor.date
+        #entity_id: sensor.date
         icon_template: "mdi:calendar"
         value_template: "{{ (as_timestamp(now()) + 86400)|timestamp_custom('%d', true) | int == 1 }}"
   - platform: template
     sensors:
       primo_giorno_mese:
         friendly_name: 'primo_giorno_mese'
-        entity_id: sensor.date
+        #entity_id: sensor.date
         icon_template: "mdi:calendar"
         value_template: "{{ (as_timestamp(now()) )|timestamp_custom('%d', true) | int == 1 }}"
 input_datetime:
