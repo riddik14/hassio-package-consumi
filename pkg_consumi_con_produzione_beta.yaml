@@ -113,17 +113,17 @@ sensor:
       ricavo_produzione_oggi:    #############BETA_NON_TESTATA#############
         friendly_name_template: "Ricavo Produzione giornaliera" 
         icon_template: mdi:currency-eur
-        value_template: "{{((states.sensor.produzione_giornaliera.state | float) * (states.input_number.ricavo_produzione.state| float)) | round(2) }}"
+        value_template: "{{((states.sensor.produzione_giornaliera.state | float(0)) * (states.input_number.ricavo_produzione.state| float(0))) | round(2) }}"
         unit_of_measurement: '€'
       ricavo_produzione_mensile: #############BETA_NON_TESTATA#############
         friendly_name_template: "Ricavo Produzione mensile"
         icon_template: mdi:currency-eur
-        value_template: "{{((states.sensor.produzione_mensile.state | float) * (states.input_number.ricavo_produzione.state| float)) | round(2) }}"
+        value_template: "{{((states.sensor.produzione_mensile.state | float(0)) * (states.input_number.ricavo_produzione.state| float(0))) | round(2) }}"
         unit_of_measurement: '€'
       ricavo_produzione_annuale: #############BETA_NON_TESTATA#############
         friendly_name_template: "Ricavo Produzione annuale"
         icon_template: mdi:currency-eur
-        value_template: "{{((states.sensor.produzione_mensile.state | float) * (states.input_number.ricavo_produzione.state| float)) | round(2) }}"
+        value_template: "{{((states.sensor.produzione_mensile.state | float(0)) * (states.input_number.ricavo_produzione.state| float(0))) | round(2) }}"
         unit_of_measurement: '€'
         
   - platform: template
@@ -131,109 +131,109 @@ sensor:
       costo_consumo_oggi_f1:
         friendly_name_template: "Costo Consumo Oggi fascia 1"
         icon_template: mdi:currency-eur
-        value_template: "{{((states.sensor.consumo_giornaliero_f1.state | float) * (states.input_number.costo_f1.state| float)) | round(2) }}"
+        value_template: "{{((states.sensor.consumo_giornaliero_f1.state | float(0)) * (states.input_number.costo_f1.state| float(0))) | round(2) }}"
         unit_of_measurement: '€'
       costo_consumo_oggi_f2:
         friendly_name_template: "Costo Consumo Oggi fascia 2"
         icon_template: mdi:currency-eur
-        value_template: "{{((states.sensor.consumo_giornaliero_f2.state | float) * (states.input_number.costo_f2.state| float)) | round(2) }}"
+        value_template: "{{((states.sensor.consumo_giornaliero_f2.state | float(0)) * (states.input_number.costo_f2.state| float(0))) | round(2) }}"
         unit_of_measurement: '€'
       costo_consumo_oggi_f3:
         friendly_name_template: "Costo Consumo Oggi fascia 3"
         icon_template: mdi:currency-eur
-        value_template: "{{((states.sensor.consumo_giornaliero_f3.state | float) * (states.input_number.costo_f3.state| float)) | round(2) }}"
+        value_template: "{{((states.sensor.consumo_giornaliero_f3.state | float(0)) * (states.input_number.costo_f3.state| float(0))) | round(2) }}"
         unit_of_measurement: '€'
 
       consumo_totale_oggi:
         friendly_name_template: " Consumo Oggi "
         icon_template: mdi:counter
-        value_template: "{{((states.sensor.consumo_giornaliero_f1.state | float) + (states.sensor.consumo_giornaliero_f2.state | float) + (states.sensor.consumo_giornaliero_f3.state | float)) | round(3) }}"
+        value_template: "{{((states.sensor.consumo_giornaliero_f1.state | float(0)) + (states.sensor.consumo_giornaliero_f2.state | float(0)) + (states.sensor.consumo_giornaliero_f3.state | float(0))) | round(3) }}"
         unit_of_measurement: 'KWh'
 
       costo_consumo_oggi_totale:
         friendly_name_template: "Costo Consumo Oggi"
         icon_template: mdi:currency-eur
-        value_template: "{{((states.sensor.costo_consumo_oggi_f1.state | float) + (states.sensor.costo_consumo_oggi_f2.state| float) + (states.sensor.costo_consumo_oggi_f3.state| float)) | round(2) }}"
+        value_template: "{{((states.sensor.costo_consumo_oggi_f1.state | float(0)) + (states.sensor.costo_consumo_oggi_f2.state| float(0)) + (states.sensor.costo_consumo_oggi_f3.state| float(0))) | round(2) }}"
         unit_of_measurement: '€'
       costo_consumo_mensile_f1:
         friendly_name_template: "Costo Consumo mensile fascia 1"
         icon_template: mdi:currency-eur
-        value_template: "{{((states.sensor.consumo_mensile_f1.state | float) * (states.input_number.costo_f1.state| float)) | round(2) }}"
+        value_template: "{{((states.sensor.consumo_mensile_f1.state | float(0)) * (states.input_number.costo_f1.state| float(0))) | round(2) }}"
         unit_of_measurement: '€'
 
       costo_consumo_mensile_f2:
         friendly_name_template: "Costo Consumo mensile fascia 2"
         icon_template: mdi:currency-eur
-        value_template: "{{((states.sensor.consumo_mensile_f2.state | float) * (states.input_number.costo_f2.state| float)) | round(2) }}"
+        value_template: "{{((states.sensor.consumo_mensile_f2.state | float(0)) * (states.input_number.costo_f2.state| float(0))) | round(2) }}"
         unit_of_measurement: '€'
 
       costo_consumo_mensile_f3:
         friendly_name_template: "Costo Consumo mensile fascia 3"
         icon_template: mdi:currency-eur
-        value_template: "{{((states.sensor.consumo_mensile_f3.state | float) * (states.input_number.costo_f3.state| float)) | round(2) }}"
+        value_template: "{{((states.sensor.consumo_mensile_f3.state | float(0)) * (states.input_number.costo_f3.state| float(0))) | round(2) }}"
         unit_of_measurement: '€'
 
       consumo_totale_mensile:
         friendly_name_template: "Consumo mensile"
         icon_template: mdi:counter
-        value_template: "{{((states.sensor.consumo_mensile_f1.state | float) + (states.sensor.consumo_mensile_f2.state | float) + (states.sensor.consumo_mensile_f3.state | float)) | round(3) }}"
+        value_template: "{{((states.sensor.consumo_mensile_f1.state | float(0)) + (states.sensor.consumo_mensile_f2.state | float(0)) + (states.sensor.consumo_mensile_f3.state | float(0))) | round(3) }}"
         unit_of_measurement: 'KWh'
 
       costo_consumo_mensile_totale:
         friendly_name_template: "Costo Consumo mensile"
         icon_template: mdi:currency-eur
-        value_template: "{{((states.sensor.costo_consumo_mensile_f1.state | float) + (states.sensor.costo_consumo_mensile_f2.state| float) + (states.sensor.costo_consumo_mensile_f3.state| float)) | round(2) }}"
+        value_template: "{{((states.sensor.costo_consumo_mensile_f1.state | float(0)) + (states.sensor.costo_consumo_mensile_f2.state| float(0)) + (states.sensor.costo_consumo_mensile_f3.state| float(0))) | round(2) }}"
         unit_of_measurement: '€'
 
       costo_consumo_annuale_f1:
         friendly_name_template: "Costo Consumo annuale fascia 1"
         icon_template: mdi:currency-eur
-        value_template: "{{((states.sensor.consumo_annuale_f1.state | float) * (states.input_number.costo_f1.state| float)) | round(2) }}"
+        value_template: "{{((states.sensor.consumo_annuale_f1.state | float(0)) * (states.input_number.costo_f1.state| float(0))) | round(2) }}"
         unit_of_measurement: '€'
 
 
       costo_consumo_annuale_f2:
         friendly_name_template: "Costo Consumo annuale fascia 2"
         icon_template: mdi:currency-eur
-        value_template: "{{((states.sensor.consumo_annuale_f2.state | float) * (states.input_number.costo_f2.state| float)) | round(2) }}"
+        value_template: "{{((states.sensor.consumo_annuale_f2.state | float(0)) * (states.input_number.costo_f2.state| float(0))) | round(2) }}"
         unit_of_measurement: '€'
 
       costo_consumo_annuale_f3:
         friendly_name_template: "Costo Consumo annuale fascia 3"
         icon_template: mdi:currency-eur
-        value_template: "{{((states.sensor.consumo_annuale_f3.state | float) * (states.input_number.costo_f3.state| float)) | round(2) }}"
+        value_template: "{{((states.sensor.consumo_annuale_f3.state | float(0)) * (states.input_number.costo_f3.state| float(0))) | round(2) }}"
         unit_of_measurement: '€'
 
       consumo_totale_annuale:
         friendly_name_template: "Consumo annuale"
         icon_template: mdi:counter
-        value_template: "{{((states.sensor.consumo_annuale_f1.state | float) + (states.sensor.consumo_annuale_f2.state | float) + (states.sensor.consumo_annuale_f3.state | float)) | round(3) }}"
+        value_template: "{{((states.sensor.consumo_annuale_f1.state | float(0)) + (states.sensor.consumo_annuale_f2.state | float(0)) + (states.sensor.consumo_annuale_f3.state | float(0))) | round(3) }}"
         unit_of_measurement: 'KWh'
 
       # Costi bolletta #
       costo_consumo_annuale_totale:
         friendly_name_template: "Costo Consumo annuale"
         icon_template: mdi:currency-eur
-        value_template: "{{((states.sensor.costo_consumo_annuale_f1.state | float) + (states.sensor.costo_consumo_annuale_f2.state| float) + (states.sensor.costo_consumo_annuale_f3.state| float)) | round(2) }}"
+        value_template: "{{((states.sensor.costo_consumo_annuale_f1.state | float(0)) + (states.sensor.costo_consumo_annuale_f2.state| float(0)) + (states.sensor.costo_consumo_annuale_f3.state| float(0))) | round(2) }}"
         unit_of_measurement: '€'
 
       bolletta_tot_anno:
         friendly_name_template: "Stima Costo Annuale"
         icon_template: mdi:currency-eur
         value_template: >- 
-          {% set energiaConsumo = states('sensor.costo_consumo_annuale_totale') | float %}
-          {% set energiaFissa = (states('input_number.materia_energia_quota_fissa_annua') | float) | round(2) %}
+          {% set energiaConsumo = states('sensor.costo_consumo_annuale_totale') | float(0) %}
+          {% set energiaFissa = (states('input_number.materia_energia_quota_fissa_annua') | float(0)) | round(2) %}
           {% set energia = energiaConsumo + energiaFissa %}
            
-          {% set trasportoConsumo = ((states('sensor.consumo_totale_annuale') | float) * (states('input_number.trasporto_quota_energia') | float)) |round (2) %}
-          {% set trasportoFissa = (states('input_number.trasporto_quota_fissa_annua') | float) | round(2) %}
-          {% set trasportoPotenza =  ((states('input_number.trasporto_quota_potenza_annua') | float) * (states('input_number.kw_contatore') | float)) | round(2) %}
+          {% set trasportoConsumo = ((states('sensor.consumo_totale_annuale') | float(0)) * (states('input_number.trasporto_quota_energia') | float(0))) |round (2) %}
+          {% set trasportoFissa = (states('input_number.trasporto_quota_fissa_annua') | float(0)) | round(2) %}
+          {% set trasportoPotenza =  ((states('input_number.trasporto_quota_potenza_annua') | float(0)) * (states('input_number.kw_contatore') | float(0))) | round(2) %}
           {% set trasporto = trasportoConsumo + trasportoFissa + trasportoPotenza %}
           
-          {% set oneri = ((states('sensor.consumo_totale_annuale') | float) * (states('input_number.oneri_di_sistema_quota_energia') | float)) |round (2) %}
+          {% set oneri = ((states('sensor.consumo_totale_annuale') | float(0)) * (states('input_number.oneri_di_sistema_quota_energia') | float(0))) |round (2) %}
 
-          {%set accise = ((states('sensor.consumo_totale_annuale') | float) * (states('input_number.accise') | float)) %}
-          {%set iva = ((energia + trasporto + oneri + accise) * (states('input_number.iva') | float) / 100) %}
+          {%set accise = ((states('sensor.consumo_totale_annuale') | float(0)) * (states('input_number.accise') | float(0))) %}
+          {%set iva = ((energia + trasporto + oneri + accise) * (states('input_number.iva') | float(0)) / 100) %}
 
           {{ (energia + trasporto + oneri + accise + iva ) | round(2) }}
         unit_of_measurement: '€'
@@ -242,16 +242,16 @@ sensor:
         friendly_name_template: "Bolletta Stimata"
         icon_template: mdi:currency-eur
         value_template: >- 
-          {% set energiaConsumo = states('sensor.costo_consumo_mensile_totale') | float %}
-          {% set energiaFissa = ((states('input_number.materia_energia_quota_fissa_annua') | float) / 12) | round(2) %}
+          {% set energiaConsumo = states('sensor.costo_consumo_mensile_totale') | float(0) %}
+          {% set energiaFissa = ((states('input_number.materia_energia_quota_fissa_annua') | float(0)) / 12) | round(2) %}
           {% set energia = energiaConsumo + energiaFissa %}
-          {% set trasportoConsumo = ((states('sensor.consumo_totale_mensile') | float) * (states('input_number.trasporto_quota_energia') | float)) |round (2) %}
-          {% set trasportoFissa = ((states('input_number.trasporto_quota_fissa_annua') | float) / 12) | round(2) %}
-          {% set trasportoPotenza =  (((states('input_number.trasporto_quota_potenza_annua') | float) * (states('input_number.kw_contatore') | float)) / 12) | round(2) %}
+          {% set trasportoConsumo = ((states('sensor.consumo_totale_mensile') | float(0)) * (states('input_number.trasporto_quota_energia') | float(0))) |round (2) %}
+          {% set trasportoFissa = ((states('input_number.trasporto_quota_fissa_annua') | float(0)) / 12) | round(2) %}
+          {% set trasportoPotenza =  (((states('input_number.trasporto_quota_potenza_annua') | float(0)) * (states('input_number.kw_contatore') | float(0))) / 12) | round(2) %}
           {% set trasporto = trasportoConsumo + trasportoFissa + trasportoPotenza %}
-          {% set oneri = ((states('sensor.consumo_totale_mensile') | float) * (states('input_number.oneri_di_sistema_quota_energia') | float)) |round (2) %}
-          {% set accise = ((states('sensor.consumo_totale_mensile') | float) * (states('input_number.accise') | float)) %}
-          {% set iva = ((energia + trasporto + oneri + accise) * (states('input_number.iva') | float) / 100) %}
+          {% set oneri = ((states('sensor.consumo_totale_mensile') | float(0)) * (states('input_number.oneri_di_sistema_quota_energia') | float(0))) |round (2) %}
+          {% set accise = ((states('sensor.consumo_totale_mensile') | float(0)) * (states('input_number.accise') | float(0))) %}
+          {% set iva = ((energia + trasporto + oneri + accise) * (states('input_number.iva') | float(0)) / 100) %}
           {% if is_state('input_select.fatturazione', 'mensile') %}
             {{ (energia + trasporto + oneri + accise + iva ) | round(2) }}
           {% elif is_state('input_select.fatturazione', 'bimestrale') %}
@@ -264,8 +264,8 @@ sensor:
         friendly_name_template: "Quota Energia"
         icon_template: mdi:currency-eur
         value_template: >- 
-          {% set energiaConsumo = states('sensor.costo_consumo_mensile_totale') | float %}
-          {% set energiaFissa = ((states('input_number.materia_energia_quota_fissa_annua') | float) / 12) | round(2) %}
+          {% set energiaConsumo = states('sensor.costo_consumo_mensile_totale') | float(0) %}
+          {% set energiaFissa = ((states('input_number.materia_energia_quota_fissa_annua') | float(0)) / 12) | round(2) %}
           {% set energia = energiaConsumo + energiaFissa %}
 
           {{ energia | round(2) }}
@@ -275,9 +275,9 @@ sensor:
         friendly_name_template: "Trasporto"
         icon_template: mdi:currency-eur
         value_template: >- 
-          {% set trasportoConsumo = ((states('sensor.consumo_totale_mensile') | float) * (states('input_number.trasporto_quota_energia') | float)) |round (2) %}
-          {% set trasportoFissa = ((states('input_number.trasporto_quota_fissa_annua') | float) / 12) | round(2) %}
-          {% set trasportoPotenza =  (((states('input_number.trasporto_quota_potenza_annua') | float) * (states('input_number.kw_contatore') | float)) / 12) | round(2) %}
+          {% set trasportoConsumo = ((states('sensor.consumo_totale_mensile') | float(0)) * (states('input_number.trasporto_quota_energia') | float(0))) |round (2) %}
+          {% set trasportoFissa = ((states('input_number.trasporto_quota_fissa_annua') | float(0)) / 12) | round(2) %}
+          {% set trasportoPotenza =  (((states('input_number.trasporto_quota_potenza_annua') | float(0)) * (states('input_number.kw_contatore') | float(0))) / 12) | round(2) %}
           {% set trasporto = trasportoConsumo + trasportoFissa + trasportoPotenza %}
              
           {{ trasporto | round(2) }}
@@ -287,7 +287,7 @@ sensor:
         friendly_name_template: "Oneri"
         icon_template: mdi:currency-eur
         value_template: >- 
-          {% set oneri = ((states('sensor.consumo_totale_mensile') | float) * (states('input_number.oneri_di_sistema_quota_energia') | float)) |round (2) %}
+          {% set oneri = ((states('sensor.consumo_totale_mensile') | float(0)) * (states('input_number.oneri_di_sistema_quota_energia') | float(0))) |round (2) %}
 
           {{ oneri | round(2) }}
         unit_of_measurement: '€'    
@@ -296,19 +296,19 @@ sensor:
         friendly_name_template: "IVA"
         icon_template: mdi:currency-eur
         value_template: >- 
-          {% set energiaConsumo = states('sensor.costo_consumo_mensile_totale') | float %}
-          {% set energiaFissa = ((states('input_number.materia_energia_quota_fissa_annua') | float) / 12) | round(2) %}
+          {% set energiaConsumo = states('sensor.costo_consumo_mensile_totale') | float(0) %}
+          {% set energiaFissa = ((states('input_number.materia_energia_quota_fissa_annua') | float(0)) / 12) | round(2) %}
           {% set energia = energiaConsumo + energiaFissa %}
            
-          {% set trasportoConsumo = ((states('sensor.consumo_totale_mensile') | float) * (states('input_number.trasporto_quota_energia') | float)) |round (2) %}
-          {% set trasportoFissa = ((states('input_number.trasporto_quota_fissa_annua') | float) / 12) | round(2) %}
-          {% set trasportoPotenza =  (((states('input_number.trasporto_quota_potenza_annua') | float) * (states('input_number.kw_contatore') | float)) / 12) | round(2) %}
+          {% set trasportoConsumo = ((states('sensor.consumo_totale_mensile') | float(0)) * (states('input_number.trasporto_quota_energia') | float(0))) |round (2) %}
+          {% set trasportoFissa = ((states('input_number.trasporto_quota_fissa_annua') | float(0)) / 12) | round(2) %}
+          {% set trasportoPotenza =  (((states('input_number.trasporto_quota_potenza_annua') | float(0)) * (states('input_number.kw_contatore') | float(0))) / 12) | round(2) %}
           {% set trasporto = trasportoConsumo + trasportoFissa + trasportoPotenza %}
           
-          {% set oneri = ((states('sensor.consumo_totale_mensile') | float) * (states('input_number.oneri_di_sistema_quota_energia') | float)) |round (2) %}
+          {% set oneri = ((states('sensor.consumo_totale_mensile') | float(0)) * (states('input_number.oneri_di_sistema_quota_energia') | float(0))) |round (2) %}
 
-          {%set accise = ((states('sensor.consumo_totale_mensile') | float) * (states('input_number.accise') | float)) %}
-          {%set iva = ((energia + trasporto + oneri + accise) * (states('input_number.iva') | float) / 100) %}
+          {%set accise = ((states('sensor.consumo_totale_mensile') | float(0)) * (states('input_number.accise') | float(0))) %}
+          {%set iva = ((energia + trasporto + oneri + accise) * (states('input_number.iva') | float(0)) / 100) %}
 
           {{ (accise + iva) | round(2) }}
         unit_of_measurement: '€'  
