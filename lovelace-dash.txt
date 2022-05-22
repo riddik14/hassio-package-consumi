@@ -1,11 +1,33 @@
 type: 'custom:vertical-stack-in-card'
 theme: default
 cards:
+  - type: markdown
+    content: >
+
+      <center><b></ha-icon>&nbsp; PANNELLO CONSUMI  </center> {% if
+      is_state('utility_meter.consumo_giornaliero', 'f3') %} <center><b><ha-icon
+      icon="mdi:flash"></ha-icon>&nbsp; TARIFFAZIONE ATTUALE F3 <ha-icon
+      icon="mdi:flash"></ha-icon> {% elif
+      is_state('utility_meter.consumo_giornaliero', 'f2') %} <center><b><ha-icon
+      icon="mdi:flash"></ha-icon>&nbsp; TARIFFAZIONE ATTUALE F2 <ha-icon
+      icon="mdi:flash"></ha-icon> {% else %} <center><b><ha-icon
+      icon="mdi:flash"></ha-icon>&nbsp; TARIFFAZIONE ATTUALE F1 <ha-icon
+      icon="mdi:flash"></ha-icon> {% endif %}
+        {% set watt = states('sensor.tuo_sensore_watt') | float %}
+        {% if watt >= 3300 %}
+        SUPERO LIMITI
+        {% elif watt >= 2500 %}
+        CONSUMO ELEVATO
+        {% elif watt >= 1000 %}
+        CONSUMO MEDIO
+        {% else %}
+        CONSUMO NELLA NORMA
+        {% endif %}
   - type: horizontal-stack
     cards:
       - type: 'custom:mini-graph-card'
         entities:
-          - entity: sensor.ripostiglio_energy_voltage
+          - entity: sensor.tuo_sensore_volt
         line_width: 10
         font_size: 150
         hours_to_show: 24
@@ -29,7 +51,7 @@ cards:
           name: false
       - type: 'custom:mini-graph-card'
         entities:
-          - entity: sensor.ripostiglio_energy_power
+          - entity: sensor.tuo_sensore_watt
         line_width: 10
         font_size: 150
         hours_to_show: 24
