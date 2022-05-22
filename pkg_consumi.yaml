@@ -560,18 +560,21 @@ automation:
           entity_id: binary_sensor.giorni_feriali
           state: 'on'
     action:
-    - service: utility_meter.select_tariff
-      data:
-        entity_id: utility_meter.consumo_giornaliero
-        tariff: f1
-    - service: utility_meter.select_tariff
-      data:
-        entity_id: utility_meter.consumo_mensile
-        tariff: f1
-    - service: utility_meter.select_tariff
-      data:
-        entity_id: utility_meter.consumo_annuale
-        tariff: f1 
+      - service: select.select_option
+        target:
+          entity_id: select.consumo_giornaliero
+          data:
+            option: f1
+      - service: select.select_option
+        target:
+          entity_id: select.consumo_mensile
+          data:
+            option: f1
+      - service: select.select_option
+        target:
+          entity_id: select.consumo_annuale
+          data:
+            option: f1
 
   - alias: Cambio Tariffa F2 - 2 fascie
     initial_state: on
@@ -584,19 +587,21 @@ automation:
         entity_id: input_select.numero_di_fasce
         state: '2'
     action:
-      - service: utility_meter.select_tariff
-        data:
-          entity_id: utility_meter.consumo_giornaliero
-          tariff: f2
-      - service: utility_meter.select_tariff
-        data:
-          entity_id: utility_meter.consumo_mensile
-          tariff: f2
-      - service: utility_meter.select_tariff
-        data:
-          entity_id: utility_meter.consumo_annuale
-          tariff: f2
-
+      - service: select.select_option
+        target:
+          entity_id: select.consumo_giornaliero
+          data:
+            option: f2
+      - service: select.select_option
+        target:
+          entity_id: select.consumo_mensile
+          data:
+            option: f2
+      - service: select.select_option
+        target:
+          entity_id: select.consumo_annuale
+          data:
+            option: f2
   - alias: Cambio Tariffa F2 - 3 fascie
     initial_state: on
     trigger:
@@ -619,18 +624,21 @@ automation:
             entity_id: binary_sensor.giorni_feriali
             state: 'on'
     action:
-      - service: utility_meter.select_tariff
-        data:
-          entity_id: utility_meter.consumo_giornaliero
-          tariff: f2
-      - service: utility_meter.select_tariff
-        data:
-          entity_id: utility_meter.consumo_mensile
-          tariff: f2
-      - service: utility_meter.select_tariff
-        data:
-          entity_id: utility_meter.consumo_annuale
-          tariff: f2
+      - service: select.select_option
+        target:
+          entity_id: select.consumo_giornaliero
+          data:
+            option: f2
+      - service: select.select_option
+        target:
+          entity_id: select.consumo_mensile
+          data:
+            option: f2
+      - service: select.select_option
+        target:
+          entity_id: select.consumo_annuale
+          data:
+            option: f2
 
   - alias: Cambio Tariffa F3
     initial_state: on
@@ -643,18 +651,21 @@ automation:
         entity_id: input_select.numero_di_fasce
         state: '3'
     action:
-    - service: utility_meter.select_tariff
-      data:
-        entity_id: utility_meter.consumo_giornaliero
-        tariff: f3
-    - service: utility_meter.select_tariff
-      data:
-        entity_id: utility_meter.consumo_mensile
-        tariff: f3
-    - service: utility_meter.select_tariff
-      data:
-        entity_id: utility_meter.consumo_annuale
-        tariff: f3
+      - service: select.select_option
+        target:
+          entity_id: select.consumo_giornaliero
+          data:
+            option: f3
+      - service: select.select_option
+        target:
+          entity_id: select.consumo_mensile
+          data:
+            option: f3
+      - service: select.select_option
+        target:
+          entity_id: select.consumo_annuale
+          data:
+            option: f3
 
 #invio messaggio storico
   - alias: messaggio_consumi_telegram
