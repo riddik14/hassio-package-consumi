@@ -563,18 +563,18 @@ automation:
       - service: select.select_option
         target:
           entity_id: select.consumo_giornaliero
-          data:
-            option: f1
+        data:
+          option: f1
       - service: select.select_option
         target:
           entity_id: select.consumo_mensile
-          data:
-            option: f1
+        data:
+          option: f1
       - service: select.select_option
         target:
           entity_id: select.consumo_annuale
-          data:
-            option: f1
+        data:
+          option: f1
 
   - alias: Cambio Tariffa F2 - 2 fascie
     initial_state: on
@@ -590,18 +590,18 @@ automation:
       - service: select.select_option
         target:
           entity_id: select.consumo_giornaliero
-          data:
-            option: f2
+        data:
+          option: f2
       - service: select.select_option
         target:
           entity_id: select.consumo_mensile
-          data:
-            option: f2
+        data:
+          option: f2
       - service: select.select_option
         target:
           entity_id: select.consumo_annuale
-          data:
-            option: f2
+        data:
+          option: f2
   - alias: Cambio Tariffa F2 - 3 fascie
     initial_state: on
     trigger:
@@ -627,18 +627,18 @@ automation:
       - service: select.select_option
         target:
           entity_id: select.consumo_giornaliero
-          data:
-            option: f2
+        data:
+          option: f2
       - service: select.select_option
         target:
           entity_id: select.consumo_mensile
-          data:
-            option: f2
+        data:
+          option: f2
       - service: select.select_option
         target:
           entity_id: select.consumo_annuale
-          data:
-            option: f2
+        data:
+          option: f2
 
   - alias: Cambio Tariffa F3
     initial_state: on
@@ -654,18 +654,18 @@ automation:
       - service: select.select_option
         target:
           entity_id: select.consumo_giornaliero
-          data:
-            option: f3
+        data:
+          option: f3
       - service: select.select_option
         target:
           entity_id: select.consumo_mensile
-          data:
-            option: f3
+        data:
+          option: f3
       - service: select.select_option
         target:
           entity_id: select.consumo_annuale
-          data:
-            option: f3
+        data:
+          option: f3
 
 #invio messaggio storico
   - alias: messaggio_consumi_telegram
