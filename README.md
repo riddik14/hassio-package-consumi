@@ -25,7 +25,7 @@ contatti: 'riddik14 - github - chat telegram https://t.me/joinchat/Fanqz1jiL42Y0
 
 1. copiare il file pkg_consumi.yaml e secrets.yaml (se gia esistente copiare l contenuto del vostro sectrets.yaml) nella cartella "/config/packages" e modificarlo seguendo le istruzioni interne al file secrets.yaml.
 
-2. installare dal menu frontend di hacs i seguenti:
+2. installare dal menu frontend di hacs i seguenti, alcuni sono allegati se non disponibili su hacs:
 
 - vertical-stack-in-card
 
