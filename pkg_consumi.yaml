@@ -70,10 +70,11 @@ homeassistant:
 
  
 
-
+ 
 downloader:
   download_dir: packages    
 utility_meter:
+
   consumo_giornaliero:
     source: !secret Sensore
     cycle: daily 
@@ -101,6 +102,7 @@ sensor:
      name: energia_kwh
      unit_prefix: k
      round: 2
+
 
    - platform: rest
      resource: https://raw.githubusercontent.com/riddik14/hassio-package-consumi/master/versione.json
@@ -564,17 +566,24 @@ automation:
         target:
           entity_id: select.consumo_giornaliero
         data:
-          option: f1
+            option: f1
       - service: select.select_option
         target:
           entity_id: select.consumo_mensile
         data:
-          option: f1
+            option: f1
       - service: select.select_option
         target:
           entity_id: select.consumo_annuale
         data:
-          option: f1
+            option: f1
+      - service: notify.mobile_app_nspanel_pro
+        data:
+          message: TTS
+          data:
+            tts_text: >- 
+              la tariffa elettrica è passata in {{ states('select.consumo_giornaliero') }} tariffa media
+      
 
   - alias: Cambio Tariffa F2 - 2 fascie
     initial_state: on
@@ -602,6 +611,15 @@ automation:
           entity_id: select.consumo_annuale
         data:
           option: f2
+      - service: notify.mobile_app_nspanel_pro
+        data:
+          message: TTS
+          data:
+            tts_text: >- 
+              la tariffa elettrica è passata in {{ states('select.consumo_giornaliero') }} tariffa alta
+      
+
+
   - alias: Cambio Tariffa F2 - 3 fascie
     initial_state: on
     trigger:
@@ -639,6 +657,14 @@ automation:
           entity_id: select.consumo_annuale
         data:
           option: f2
+      - service: notify.mobile_app_nspanel_pro
+        data:
+          message: TTS
+          data:
+            tts_text: >- 
+              la tariffa elettrica è passata in {{ states('select.consumo_giornaliero') }} tariffa ALTA
+      
+
 
   - alias: Cambio Tariffa F3
     initial_state: on
@@ -666,6 +692,13 @@ automation:
           entity_id: select.consumo_annuale
         data:
           option: f3
+      - service: notify.mobile_app_nspanel_pro
+        data:
+          message: TTS
+          data:
+            tts_text: >- 
+              la tariffa elettrica è passata in {{ states('select.consumo_giornaliero') }} tariffa BASSA
+      
 
 #invio messaggio storico
   - alias: messaggio_consumi_telegram
@@ -732,7 +765,8 @@ automation:
       state: 'on'
     action:
     - data:
-        target: !secret Media_Player_alexa
+        target: 
+          - !secret Media_Player_alexa
         data:
           type: tts
         message: >-
