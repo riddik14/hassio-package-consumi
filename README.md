@@ -37,6 +37,8 @@ contatti: 'riddik14 - github - chat telegram https://t.me/joinchat/Fanqz1jiL42Y0
 
 - state-switch
 
+- bar-card
+
 
 
 aprire il file  lovelace-dash.txt o lovelace-dash-light.txt e copiarne il contenuto in una card manuale dalla dashbord del tuo assistente.
