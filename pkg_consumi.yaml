@@ -926,7 +926,7 @@ script:
         data:
           message: 'Package Consumi Aggiornato. Ricarico i servizi'
       - delay: 1  
-     # - service: homeassistant.restart
+#      - service: homeassistant.restart
       - service: automation.reload
       - service: input_boolean.reload
       - service: input_select.reload
@@ -939,4 +939,4 @@ script:
       - service: script.reload
       - service: notify.notify
         data:
-          message: 'Aggiornamento Pk Consumi Fatto, se vuoi puoi offrire un caffe al creatore del pacchetto a questo link https://www.buymeacoffee.com/T1Pqksy'
+          message: 'Aggiornamento Pk Consumi Fatto, se vuoi puoi offrire un caffè al creatore del pacchetto a questo link https://www.buymeacoffee.com/T1Pqksy'
