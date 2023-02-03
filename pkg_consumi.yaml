@@ -3,7 +3,7 @@ homeassistant:
     package.node_anchors:
       customize: &customize
         Package: 'Consumi'
-        Version: '2022.01.01'
+        Version: '2023.01.01'
         Author: 'Domenico Ceccarelli'
         icon: 'mdi:counter'
         #entity_picture: https://avatars1.githubusercontent.com/u/37450907?s=400&u=c6397fc94ead7e4c469bfd3c6fa6c50c599f1ea8&v=4
@@ -577,12 +577,6 @@ automation:
           entity_id: select.consumo_annuale
         data:
             option: f1
-      - service: notify.mobile_app_nspanel_pro
-        data:
-          message: TTS
-          data:
-            tts_text: >- 
-              la tariffa elettrica è passata in {{ states('select.consumo_giornaliero') }} tariffa media
       
 
   - alias: Cambio Tariffa F2 - 2 fascie
@@ -611,12 +605,6 @@ automation:
           entity_id: select.consumo_annuale
         data:
           option: f2
-      - service: notify.mobile_app_nspanel_pro
-        data:
-          message: TTS
-          data:
-            tts_text: >- 
-              la tariffa elettrica è passata in {{ states('select.consumo_giornaliero') }} tariffa alta
       
 
 
@@ -657,12 +645,6 @@ automation:
           entity_id: select.consumo_annuale
         data:
           option: f2
-      - service: notify.mobile_app_nspanel_pro
-        data:
-          message: TTS
-          data:
-            tts_text: >- 
-              la tariffa elettrica è passata in {{ states('select.consumo_giornaliero') }} tariffa ALTA
       
 
 
@@ -692,13 +674,6 @@ automation:
           entity_id: select.consumo_annuale
         data:
           option: f3
-      - service: notify.mobile_app_nspanel_pro
-        data:
-          message: TTS
-          data:
-            tts_text: >- 
-              la tariffa elettrica è passata in {{ states('select.consumo_giornaliero') }} tariffa BASSA
-      
 
 #invio messaggio storico
   - alias: messaggio_consumi_telegram
