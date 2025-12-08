@@ -562,8 +562,8 @@ automation:
         entity_id: input_select.numero_di_fasce
         to: '1'
       - platform: template
-        value_template: >-
-          {{ states('sensor.time') == (states.input_datetime.f1_ora_inizio.attributes.timestamp | int | timestamp_custom('%H:%M', False)) }}
+        value_template: "{{ states('sensor.time')[0:5] == states('input_datetime.f1_ora_inizio')[0:5] }}"
+    
     condition:
       condition: or
       conditions:
@@ -595,8 +595,7 @@ automation:
     initial_state: on
     trigger:
       - platform: template
-        value_template: >-
-          {{ states('sensor.time') == (states.input_datetime.f2_ora_inizio_sera.attributes.timestamp | int | timestamp_custom('%H:%M', False)) }}
+        value_template: "{{ states('sensor.time')[0:5] == states('input_datetime.f2_ora_inizio_sera')[0:5] }}"
     condition:
       - condition: state
         entity_id: input_select.numero_di_fasce
@@ -624,11 +623,10 @@ automation:
     initial_state: on
     trigger:
       - platform: template
-        value_template: >-
-          {{ states('sensor.time') == (states.input_datetime.f2_ora_inizio_mattino.attributes.timestamp | int | timestamp_custom('%H:%M', False)) }}
+        value_template: "{{ states('sensor.time')[0:5] == states('input_datetime.f2_ora_inizio_mattino')[0:5] }}"
       - platform: template
-        value_template: >-
-          {{ states('sensor.time') == (states.input_datetime.f2_ora_inizio_sera.attributes.timestamp | int | timestamp_custom('%H:%M', False)) }}
+        value_template: "{{ states('sensor.time')[0:5] == states('input_datetime.f2_ora_inizio_sera')[0:5] }}"
+    
     condition:
       - condition: state
         entity_id: input_select.numero_di_fasce
@@ -663,9 +661,9 @@ automation:
   - alias: Cambio Tariffa F3
     initial_state: on
     trigger:
-      platform: template
-      value_template: >-
-        {{ states('sensor.time') == (states.input_datetime.f3_ora_inizio.attributes.timestamp | int | timestamp_custom('%H:%M', False)) }}
+      - platform: template
+        value_template: "{{ states('sensor.time')[0:5] == states('input_datetime.f3_ora_inizio')[0:5] }}"
+    
     condition:
       - condition: state
         entity_id: input_select.numero_di_fasce
@@ -686,6 +684,8 @@ automation:
           entity_id: select.consumo_annuale
         data:
           option: f3
+
+
 
 #invio messaggio storico
   - alias: messaggio_consumi_telegram
